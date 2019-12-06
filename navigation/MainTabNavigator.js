@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
+import HikeScreen from '../screens/HikeScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -84,11 +85,28 @@ LoginStack.navigationOptions = {
 
 LoginStack.path = '';
 
+const HikeStack = createStackNavigator(
+  {
+    Hike: HikeScreen,
+  },
+  config
+);
+
+HikeStack.navigationOptions = {
+  tabBarLabel: 'Hike',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+  ),
+};
+
+HikeStack.path = '';
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   SignUpStack,
   SettingsStack,
   LoginStack,
+  HikeStack,
 });
 
 tabNavigator.path = '';
