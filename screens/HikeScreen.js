@@ -2,20 +2,17 @@ import * as WebBrowser from 'expo-web-browser';
 import React, { useState } from 'react';
 import {
   Image,
-  Platform,
   View,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  TextInput,
   Button
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
 
-export default function LoginScreen(props) {
+export default function HikeScreen(props) {
 
     // props to be passed in:
     // name
@@ -59,7 +56,7 @@ export default function LoginScreen(props) {
     );
 }
 
-LoginScreen.navigationOptions = {
+HikeScreen.navigationOptions = {
   header: null,
 };
 
