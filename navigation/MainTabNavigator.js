@@ -4,8 +4,11 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import LoginScreen from '../screens/LoginScreen';
+import HikesScreen from '../screens/HikesScreen';
+import HikeScreen from '../screens/HikeScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -35,21 +38,21 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const SignUpStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    SignUp: SignUpScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+SignUpStack.navigationOptions = {
+  tabBarLabel: 'SignUp',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+SignUpStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -67,10 +70,61 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+const LoginStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+  },
+  config
+);
+
+LoginStack.navigationOptions = {
+  tabBarLabel: 'Login',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+  ),
+};
+
+LoginStack.path = '';
+
+const HikeStack = createStackNavigator(
+  {
+    Hike: HikeScreen,
+  },
+  config
+);
+
+HikeStack.navigationOptions = {
+  tabBarLabel: 'Hike',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+  ),
+};
+
+HikeStack.path = '';
+
+const HikesStack = createStackNavigator(
+  {
+    Hikes: HikesScreen,
+  },
+  config
+);
+
+HikesStack.navigationOptions = {
+  tabBarLabel: 'Hikes',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+  ),
+};
+
+HikesStack.path = '';
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  SignUpStack,
   SettingsStack,
+  LoginStack,
+  HikesStack,
+  HikeStack,
 });
 
 tabNavigator.path = '';
