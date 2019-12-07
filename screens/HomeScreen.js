@@ -1,7 +1,7 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
+import { Image } from '../constants';
 import {
-  Image,
   Platform,
   ScrollView,
   StyleSheet,
@@ -28,6 +28,10 @@ export default function HomeScreen() {
             style={styles.welcomeImage}
           />
         </View>
+        <ImageBackground
+          source={Images.ProfileBackground}
+          style={styles.profileContainer}
+          imageStyle={styles.profileBackground} ></ImageBackground>
 
         <View style={styles.getStartedContainer}>
           <DevelopmentModeNotice />
