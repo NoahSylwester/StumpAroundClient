@@ -12,7 +12,7 @@ import {
   Button
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
+
 
 export default function LoginScreen() {
 
@@ -28,7 +28,7 @@ export default function LoginScreen() {
     )
 
     return (
-      <ImageBackground source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')} style={{width: '100%', height: '100%'}}>
+      <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')}>
         <View style={styles.container}>
             <ScrollView
             keyboardShouldPersistTaps='never'
