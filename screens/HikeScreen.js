@@ -35,7 +35,7 @@ export default function HikeScreen(props) {
             style={styles.body}
             contentContainerStyle={styles.contentContainer}>
                 {/* eventually source will be props.photo */}
-                <Image source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')} style={{width: '100%', height: '50%'}} />
+                <Image source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')} style={{width: '100%', height: 300, resizeMode: 'cover'}} />
                 <Text style={styles.title}>
                     NAME OF HIKE {props.name}
                 </Text>
