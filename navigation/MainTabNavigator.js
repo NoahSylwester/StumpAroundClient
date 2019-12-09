@@ -86,27 +86,28 @@ SettingsStack.path = '';
 
 // LoginStack.path = '';
 
-const HikeStack = createStackNavigator(
-  {
-    Hike: HikeScreen,
-  },
-  config
-);
+// const HikeStack = createStackNavigator(
+//   {
+//     Hike: HikeScreen,
+//   },
+//   config
+// );
 
-HikeStack.navigationOptions = {
-  tabBarLabel: 'Hike',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
+// HikeStack.navigationOptions = {
+//   tabBarLabel: 'Hike',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+//   ),
+// };
 
-HikeStack.path = '';
+// HikeStack.path = '';
 
 const HikesStack = createStackNavigator(
   {
     Hikes: HikesScreen,
+    Hike: HikeScreen
   },
-  config
+  config,
 );
 
 HikesStack.navigationOptions = {
@@ -118,13 +119,13 @@ HikesStack.navigationOptions = {
 
 HikesStack.path = '';
 
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   // SignUpStack,
   SettingsStack,
   // LoginStack,
   HikesStack,
-  HikeStack,
 });
 
 tabNavigator.path = '';

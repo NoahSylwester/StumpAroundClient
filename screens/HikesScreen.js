@@ -32,7 +32,7 @@ export default function HikesScreen(props) {
 
     useEffect(() => {
       fetch('https://stump-around.herokuapp.com/hikes', {
-        method: 'GEt',
+        method: 'GET',
       })
       .then((response) => response.json())
       .then((responseJson) => {
@@ -45,111 +45,6 @@ export default function HikesScreen(props) {
       });
     }, [dataState])
     
-    // dummy props object for testing
-    const dummyProps = {
-        hikes: [
-            {
-                name: 'first',
-                photo: '',
-                length: 5,
-            },
-            {
-                name: 'second',
-                photo: '',
-                length: 5,
-            },
-            {
-                name: 'third',
-                photo: '',
-                length: 5,
-            },
-            {
-              name: 'third',
-              photo: '',
-              length: 5,
-          },
-          {
-            name: 'third',
-            photo: '',
-            length: 5,
-        },
-        {
-          name: 'third',
-          photo: '',
-          length: 5,
-      },
-      {
-        name: 'third',
-        photo: '',
-        length: 5,
-    },
-    {
-      name: 'third',
-      photo: '',
-      length: 5,
-  },
-  {
-    name: 'third',
-    photo: '',
-    length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-{
-  name: 'third',
-  photo: '',
-  length: 5,
-},
-        ]
-    }
 
     return (
                 <View style={styles.container}>
@@ -164,9 +59,11 @@ export default function HikesScreen(props) {
                             <View style={styles.hikeContainer} key={i}>
                                 <Image source={{uri: hike.photo}} style={{ width: '100%', height: 200 }} />
                                 <View style={styles.hikeTag}>
-                                  <Text style={styles.title}>
+                                  <TouchableOpacity onPress={() => props.navigation.navigate('Hike', { hike: hike })}>
+                                    <Text style={styles.title}>
                                       {hike.name}
-                                  </Text>
+                                    </Text>
+                                  </TouchableOpacity>
                                   <Text style={styles.section}>
                                       Length: {hike.length}
                                   </Text>
