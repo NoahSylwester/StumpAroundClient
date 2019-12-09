@@ -12,7 +12,7 @@ import {
 
 import { MonoText } from '../components/StyledText';
 
-export default function LoginScreen() {
+export default function LoginScreen(props) {
 
     const [textState, setTextState] = useState({
         username: '',
@@ -22,7 +22,7 @@ export default function LoginScreen() {
       })
 
     const signUpButton = (
-        <Text onPress={() => alert('pressed')} style={{ color: 'blue' }}>
+        <Text onPress={() => props.navigation.navigate("Login")} style={{ color: 'blue' }}>
             Sign up
         </Text>
     )
@@ -83,7 +83,7 @@ export default function LoginScreen() {
                     placeholder={'Confirm password'}
                     value={textState.confirm}
                 />
-                <Button title="Sign up" onPress={() => alert('pressed')} color="blue" />
+                <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="blue" />
             </ScrollView>
         </View>
         </ImageBackground>
