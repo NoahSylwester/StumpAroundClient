@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   Platform,
@@ -26,9 +26,24 @@ export default function HikesScreen(props) {
     // comments
     // ****eventually location?
 
-    const [textState, setTextState] = useState({
-        text: '',
+    const [dataState, setDataState] = useState({
+        hikes: [],
       })
+
+    useEffect(() => {
+      fetch('https://stump-around.herokuapp.com/hikes', {
+        method: 'GEt',
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setDataState({
+          hikes: responseJson,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }, [dataState])
     
     // dummy props object for testing
     const dummyProps = {
@@ -145,15 +160,18 @@ export default function HikesScreen(props) {
                         <Text style={styles.pageTitle}>
                           Hikes
                         </Text>
-                        {dummyProps.hikes.map((hike, i) => (
+                        {dataState.hikes.map((hike, i) => (
                             <View style={styles.hikeContainer} key={i}>
-                                <Image source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')} style={{ width: '100%', height: 200 }} />
+                                <Image source={{uri: hike.photo}} style={{ width: '100%', height: 200 }} />
                                 <View style={styles.hikeTag}>
                                   <Text style={styles.title}>
                                       {hike.name}
                                   </Text>
                                   <Text style={styles.section}>
                                       Length: {hike.length}
+                                  </Text>
+                                  <Text style={styles.section}>
+                                      {hike.location}
                                   </Text>
                                 </View>
                             </View>
