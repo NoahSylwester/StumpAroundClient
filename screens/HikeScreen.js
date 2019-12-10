@@ -39,7 +39,7 @@ export default function HikeScreen(props) {
             contentContainerStyle={styles.contentContainer}>
                 {/* eventually source will be props.photo */}
                 <Image source={{ uri: hike.photo }} style={{width: '100%', height: 300, resizeMode: 'cover'}} />
-                <Text style={styles.title}>
+                <Text style={styles.hikeTitle}>
                     {hike.name}
                 </Text>
                 <Text style={styles.section}>
@@ -49,10 +49,27 @@ export default function HikeScreen(props) {
                 <Text style={styles.summary}>
                     {hike.summary}
                 </Text>
-                <View>
-                    <Text style={styles.comments}>
-                        [comments] {hike.commments}
-                    </Text>
+                <View style={styles.commentsContainer}>
+                  <Text style={styles.commentsTitle}>
+                    Comments
+                  </Text>
+                  <View style={styles.comment}>
+                    <View style={styles.commentHeader}>
+                      <Text>
+                        [comment header] {hike.commments}
+                      </Text>
+                    </View>
+                    <View style={styles.commentBody}>
+                      <Text>
+                        [comment body] {hike.commments}
+                      </Text>
+                    </View>
+                  </View>
+                  <Button 
+                    title="New Comment" 
+                    onPress={() => alert('pressed')}
+                    style={styles.commentButton}
+                  ></Button>
                 </View>
             </ScrollView>
         </View>
@@ -77,7 +94,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     justifyContent: 'space-between'
   },
-  title: {
+  hikeTitle: {
+    padding: 10,
     fontSize: 30,
     textAlign: 'center',
   },
@@ -88,7 +106,35 @@ const styles = StyleSheet.create({
       marginRight: '15%',
       marginLeft: '15%',
   },
-  comments: {
+  commentsContainer: {
+    padding: 20,
+    paddingTop: 0,
+    paddingBottom: 0,
+    margin: 20,
+    borderColor: 'black',
+    borderWidth: 0.5,
+    borderRadius: 5,
+  },
+  comment: {
+    padding: 5,
+    borderColor: 'black',
+    borderWidth: 0.5,
+    borderRadius: 3,
+  },
+  commentHeader: {
+    padding: 2,
+    borderBottomColor: 'black',
+    borderBottomWidth: 0.5,
+  },
+  commentBody: {
+    padding: 2,
+  },
+  commentsTitle: {
     textAlign: 'center',
-}
+    padding: 10,
+    fontSize: 20,
+  },
+  commentButton: {
+    margin: 20,
+  }
 });
