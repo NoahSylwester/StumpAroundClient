@@ -14,7 +14,7 @@ import {
 
 
 
-export default function LoginScreen() {
+export default function LoginScreen(props) {
 
     const [textState, setTextState] = useState({
         username: '',
@@ -22,7 +22,7 @@ export default function LoginScreen() {
       })
 
     const signUpButton = (
-        <Text onPress={() => alert('pressed')} style={{ color: 'blue' }}>
+        <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: 'blue' }}>
             Sign up
         </Text>
     )
@@ -58,7 +58,7 @@ export default function LoginScreen() {
                     placeholder={'Password'}
                     value={textState.password}
                 />
-                <Button title="Sign in" onPress={() => alert('pressed')} color="blue" />
+                <Button title="Sign in" onPress={() => props.navigation.navigate("Main")} color="blue" />
                 <Text style={{ 
                         fontSize: 8,
                         textAlign: 'center',

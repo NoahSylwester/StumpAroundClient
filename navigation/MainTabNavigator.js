@@ -4,9 +4,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import SignUpScreen from '../screens/SignUpScreen';
+// import SignUpScreen from '../screens/SignUpScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import LoginScreen from '../screens/LoginScreen';
+// import LoginScreen from '../screens/LoginScreen';
 import HikesScreen from '../screens/HikesScreen';
 import HikeScreen from '../screens/HikeScreen';
 
@@ -38,21 +38,21 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const SignUpStack = createStackNavigator(
-  {
-    SignUp: SignUpScreen,
-  },
-  config
-);
+// const SignUpStack = createStackNavigator(
+//   {
+//     SignUp: SignUpScreen,
+//   },
+//   config
+// );
 
-SignUpStack.navigationOptions = {
-  tabBarLabel: 'SignUp',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
+// SignUpStack.navigationOptions = {
+//   tabBarLabel: 'SignUp',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+//   ),
+// };
 
-SignUpStack.path = '';
+// SignUpStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -70,43 +70,44 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
-const LoginStack = createStackNavigator(
-  {
-    Login: LoginScreen,
-  },
-  config
-);
+// const LoginStack = createStackNavigator(
+//   {
+//     Login: LoginScreen,
+//   },
+//   config
+// );
 
-LoginStack.navigationOptions = {
-  tabBarLabel: 'Login',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
+// LoginStack.navigationOptions = {
+//   tabBarLabel: 'Login',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+//   ),
+// };
 
-LoginStack.path = '';
+// LoginStack.path = '';
 
-const HikeStack = createStackNavigator(
-  {
-    Hike: HikeScreen,
-  },
-  config
-);
+// const HikeStack = createStackNavigator(
+//   {
+//     Hike: HikeScreen,
+//   },
+//   config
+// );
 
-HikeStack.navigationOptions = {
-  tabBarLabel: 'Hike',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
+// HikeStack.navigationOptions = {
+//   tabBarLabel: 'Hike',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+//   ),
+// };
 
-HikeStack.path = '';
+// HikeStack.path = '';
 
 const HikesStack = createStackNavigator(
   {
     Hikes: HikesScreen,
+    Hike: HikeScreen
   },
-  config
+  config,
 );
 
 HikesStack.navigationOptions = {
@@ -118,13 +119,13 @@ HikesStack.navigationOptions = {
 
 HikesStack.path = '';
 
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  SignUpStack,
+  // SignUpStack,
   SettingsStack,
-  LoginStack,
+  // LoginStack,
   HikesStack,
-  HikeStack,
 });
 
 tabNavigator.path = '';
