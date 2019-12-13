@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Image,
   Platform,
@@ -9,24 +9,69 @@ import {
   TouchableOpacity,
   View,
   Button,
+  AsyncStorage,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
+
 export default function ProfileScreen() {
+
+  const [usernameState, setUsernameState] = useState('');
+  const [userState, setUserState] = useState({});
+  const isPastInitialRender = useRef(false);
+
+  const _retrieveId = async () => {
+    try {
+      const username = await AsyncStorage.getItem('username');
+      if (username !== null) {
+        setUsernameState(username);
+        return;
+      }
+      else {
+        console.log('No async storage for "username"');
+      }
+    } catch (error) {
+      // Error retrieving data
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    _retrieveId();
+  }, []);
+
+  useEffect(() => {
+    if (isPastInitialRender.current === true) {
+      fetch(`https://stump-around.herokuapp.com/user/${usernameState}`, {
+        method: 'GET',
+      })
+      .then((response) => response.json())
+      .then((responseJson) => setUserState({
+          ...responseJson,
+        })
+      )
+      .catch((error) => {
+        console.error(error);
+      });
+    }
+    isPastInitialRender.current = true;
+  }, [usernameState]);
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.profileContainer}>
-          <Image source={{ uri: "https://image.businessinsider.com/5a8c83d342e1cc57810ba9ee?width=1100&format=jpeg&auto=webp"}} style={styles.photo} />
+          {/* <Image source={{ uri: "https://image.businessinsider.com/5a8c83d342e1cc57810ba9ee?width=1100&format=jpeg&auto=webp"}} style={styles.photo} /> */}
+          <Image source={{ uri: userState.photo }} style={styles.photo} />
           <Text style={styles.username}>
-            Bigfoot
+            {userState.name}
           </Text>
           <Text>
-            User since [date_created]
+            User since {userState.date_created}
           </Text>
           <Text style={styles.bio}>
-            I love hiking, snowshoeing, and wilderness survival.
+            {userState.bio}
           </Text>
           <View style={styles.hikesContainer}>
               <Text style={styles.hikesTitle}>
