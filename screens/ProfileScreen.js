@@ -57,6 +57,11 @@ export default function ProfileScreen() {
                 onPress={() => alert('pressed')}
                 style={styles.commentButton}
               ></Button>
+               <Button 
+                title="Logout" 
+                onPress={() => alert('pressed')}
+                style={styles.commentButton}
+              ></Button>
           </View>
         </View>
       </ScrollView>

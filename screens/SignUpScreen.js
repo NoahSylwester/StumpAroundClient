@@ -20,13 +20,21 @@ export default function LoginScreen(props) {
         password: '',
         confirm: '',
       })
-
-    const signUpButton = (
-        <Text onPress={() => props.navigation.navigate("Login")} style={{ color: 'blue' }}>
-            Sign up
-        </Text>
-    )
-
+      const handleSignUpPress = function() {
+        fetch("https://stumparound.herokuapp.com/login", {
+          method:"POST",
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: textState.username,
+            email: textState.email,
+            password: textState.password,
+            confirm: textState.confirm
+          }),
+        }).then(response => response.json()).then(responseJson => console.log(responseJson));
+        }
     return (
       <ImageBackground source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')} style={{width: '100%', height: '100%'}}>
         <View style={styles.container}>
@@ -83,7 +91,7 @@ export default function LoginScreen(props) {
                     placeholder={'Confirm password'}
                     value={textState.confirm}
                 />
-                <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="blue" />
+                <Button title="Sign up" onPress={ () => handleSignUpPress()} color="blue" />
             </ScrollView>
         </View>
         </ImageBackground>

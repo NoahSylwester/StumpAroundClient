@@ -21,6 +21,20 @@ export default function LoginScreen(props) {
         password: '',
       })
 
+     const handleSignInPress = function() {
+      fetch("https://stumparound.herokuapp.com/login", {
+        method:"POST",
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: textState.username,
+          password: textState.password,
+        }),
+      }).then(response => response.json()).then(responseJson => console.log(responseJson));
+      }
+
     const signUpButton = (
         <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: 'blue' }}>
             Sign up
@@ -58,7 +72,7 @@ export default function LoginScreen(props) {
                     placeholder={'Password'}
                     value={textState.password}
                 />
-                <Button title="Sign in" onPress={() => props.navigation.navigate("Main")} color="blue" />
+                <Button title="Sign in" onPress={ () => handleSignInPress()} color="blue" />
                 <Text style={{ 
                         fontSize: 8,
                         textAlign: 'center',
