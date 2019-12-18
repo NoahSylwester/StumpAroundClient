@@ -10,9 +10,12 @@ import {
   View,
   Button,
   AsyncStorage,
+  Modal,
+  TextInput,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 
 export default function ProfileScreen() {
@@ -47,9 +50,12 @@ export default function ProfileScreen() {
         method: 'GET',
       })
       .then((response) => response.json())
-      .then((responseJson) => setUserState({
+      .then((responseJson) => {
+        setUserState({
           ...responseJson,
-        })
+        });
+        setEditBioState(responseJson.bio);
+        }
       )
       .catch((error) => {
         console.error(error);
@@ -58,12 +64,88 @@ export default function ProfileScreen() {
     isPastInitialRender.current = true;
   }, [usernameState]);
 
+  const photoPUT = (data) => {
+    fetch(`https://stump-around.herokuapp.com/photo`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(data),
+      })
+      .then((response) => response.json())
+      .then((responseJson) => console.log(responseJSON))
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const bioPUT = (data) => {
+    fetch(`https://stump-around.herokuapp.com/bio`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(data),
+      })
+      .then((response) => response.json())
+      .then((responseJson) => console.log(responseJson))
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const [modalVisibleState, setModalVisibleState] = useState(false);
+  const [editBioState, setEditBioState] = useState(userState.bio);
+
   return (
     <View style={styles.container}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisibleState}
+        onRequestClose={() => {
+          alert('Modal has been closed.');
+        }}>
+        <TouchableOpacity activeOpacity={1} style={{marginTop: 22, height: "100%", backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => {
+                setModalVisibleState(false);
+              }}>
+          <View style={{backgroundColor: 'white', borderRadius: 5, padding: 20, width: '90%', margin: 20}}>
+            <Text style={{textAlign: 'center'}}>Edit Bio:</Text>
+            <TextInput
+              style={{
+                padding: 10,
+                marginTop: 20,
+                textAlign: 'center',
+              }}
+              onChangeText={bio => setEditBioState(bio)}
+              value={editBioState}
+            />
+            <Button
+              title="Update"
+              onPress={() => {
+                bioPUT({ name: userState.name, bio: editBioState });
+                setModalVisibleState(!modalVisibleState);
+              }}></Button>
+            <Button
+              title="Cancel"
+              onPress={() => {
+                setModalVisibleState(!modalVisibleState);
+              }}>
+            </Button>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.profileContainer}>
           {/* <Image source={{ uri: "https://image.businessinsider.com/5a8c83d342e1cc57810ba9ee?width=1100&format=jpeg&auto=webp"}} style={styles.photo} /> */}
           <Image source={{ uri: userState.photo }} style={styles.photo} />
+          <Button 
+            title="Change photo" 
+            onPress={() => alert('pressed')}
+            style={styles.commentButton}
+          ></Button>
           <Text style={styles.username}>
             {userState.name}
           </Text>
@@ -73,6 +155,11 @@ export default function ProfileScreen() {
           <Text style={styles.bio}>
             {userState.bio}
           </Text>
+          <Button 
+            title="Edit bio" 
+            onPress={() => setModalVisibleState(true)}
+            style={styles.commentButton}
+          ></Button>
           <View style={styles.hikesContainer}>
               <Text style={styles.hikesTitle}>
                 Favorite Hikes
