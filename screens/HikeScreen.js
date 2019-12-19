@@ -1,12 +1,16 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   View,
   ScrollView,
+  TouchableOpacity,
   StyleSheet,
+  AsyncStorage,
   Text,
-  Button
+  Button,
+  TextInput,
+  Modal,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
@@ -25,14 +29,89 @@ export default function HikeScreen(props) {
     const [textState, setTextState] = useState({
         text: '',
       })
-    
-    const hike = props.navigation.getParam('hike',{});   
 
+    const [hike, setHike] = useState(props.navigation.getParam('hike',{}));
 
-    const dummyText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pellentesque sed eros eu gravida. In sit amet tortor dapibus, blandit arcu id, fringilla arcu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin consectetur rutrum leo sit amet semper. Mauris lobortis libero et ante sagittis, ac efficitur magna commodo. Aliquam neque lorem, convallis quis accumsan ut, commodo ac neque. Cras ut elit ut nibh tempus elementum et eget urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut justo ex, iaculis ac iaculis id, cursus non purus. Vivamus eu dapibus elit. Aenean porta quam at scelerisque finibus. Nam in nunc at leo fermentum aliquet. Phasellus congue arcu quis tellus condimentum, sagittis pharetra diam luctus. Ut iaculis ultricies tellus sed ultrices. Morbi ac scelerisque ex.';
+    const [modalVisibleState, setModalVisibleState] = useState(false);
+    const [commentState, setCommentState] = useState('');
+
+    useEffect(() => {_updateHike()}, []);
+
+    const commentPOST = async (data) => {
+      const userId = await AsyncStorage.getItem('id');
+      const newData = { ...data, user: userId };
+      console.log(newData);
+      fetch(`https://stump-around.herokuapp.com/comment`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: JSON.stringify(newData),
+        })
+        .then((response) => response.json())
+        .then((responseJson) => console.log(responseJson))
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    const _updateHike = async () => {
+      console.log('id', hike._id);
+      fetch(`https://stump-around.herokuapp.com/hike/${hike._id}`, {
+          method: 'GET',
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            setHike(responseJson);
+            console.log('res', responseJson)
+          }
+        )
+        .catch((error) => {
+          console.error(error);
+        });
+    }
 
     return (
         <View style={styles.container}>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modalVisibleState}
+            onRequestClose={() => {
+              alert('Modal has been closed.');
+            }}>
+            <TouchableOpacity activeOpacity={1} style={{marginTop: 22, height: "100%", backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => {
+                    setModalVisibleState(false);
+                  }}>
+              <View style={{backgroundColor: 'white', borderRadius: 5, padding: 20, width: '90%', margin: 20}}>
+                <Text style={{textAlign: 'center'}}>Comment:</Text>
+                <TextInput
+                  style={{
+                    padding: 10,
+                    marginTop: 20,
+                    textAlign: 'center',
+                  }}
+                  onChangeText={comment => setCommentState(comment)}
+                  value={commentState}
+                />
+                <Button
+                  title="Post"
+                  onPress={() => {
+                    commentPOST({ content: commentState, hike: hike._id })
+                    .then(() => _updateHike());
+                    setModalVisibleState(!modalVisibleState);
+                  }}></Button>
+                <Button
+                  title="Cancel"
+                  onPress={() => {
+                    setModalVisibleState(!modalVisibleState);
+                  }}>
+                </Button>
+              </View>
+            </TouchableOpacity>
+          </Modal>
+
             <ScrollView
             keyboardShouldPersistTaps='never'
             style={styles.body}
@@ -53,21 +132,26 @@ export default function HikeScreen(props) {
                   <Text style={styles.commentsTitle}>
                     Comments
                   </Text>
-                  <View style={styles.comment}>
-                    <View style={styles.commentHeader}>
-                      <Text>
-                        [comment header] {hike.commments}
-                      </Text>
-                    </View>
-                    <View style={styles.commentBody}>
-                      <Text>
-                        [comment body] {hike.commments}
-                      </Text>
-                    </View>
-                  </View>
+                  {hike.comments.map((element, i) => {
+                    console.log(element);
+                    return (
+                      <View style={styles.comment} key={i}>
+                        <View style={styles.commentHeader}>
+                          <Text>
+                            ~ {element.user}
+                          </Text>
+                        </View>
+                        <View style={styles.commentBody}>
+                          <Text>
+                            {element.content}
+                          </Text>
+                        </View>
+                      </View>
+                    )
+                  })}
                   <Button 
                     title="New Comment" 
-                    onPress={() => alert('pressed')}
+                    onPress={() => setModalVisibleState(true)}
                     style={styles.commentButton}
                   ></Button>
                 </View>

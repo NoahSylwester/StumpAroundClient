@@ -40,6 +40,15 @@ export default function ProfileScreen() {
     }
   };
 
+  const _storeData = async (id) => {
+    try {
+      await AsyncStorage.setItem('id', id);
+    } catch (error) {
+      console.log(error);
+      // Error saving data
+    }
+  };
+
   const _updateUser = async () => {
     fetch(`https://stump-around.herokuapp.com/user/${usernameState}`, {
         method: 'GET',
@@ -49,7 +58,9 @@ export default function ProfileScreen() {
         setUserState({
           ...responseJson,
         });
+        _storeData(responseJson._id);
         setEditBioState(responseJson.bio);
+
         }
       )
       .catch((error) => {
