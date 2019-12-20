@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Image,
   View,
@@ -34,6 +34,7 @@ export default function HikeScreen(props) {
 
     const [modalVisibleState, setModalVisibleState] = useState(false);
     const [commentState, setCommentState] = useState('');
+    const isPastInitialRender = useRef(false);
 
     useEffect(() => {_updateHike()}, []);
 
@@ -57,6 +58,7 @@ export default function HikeScreen(props) {
     };
 
     const _updateHike = async () => {
+      isPastInitialRender.current = true;
       console.log('id', hike._id);
       fetch(`https://stump-around.herokuapp.com/hike/${hike._id}`, {
           method: 'GET',
@@ -64,7 +66,7 @@ export default function HikeScreen(props) {
         .then((response) => response.json())
         .then((responseJson) => {
             setHike(responseJson);
-            console.log('res', responseJson)
+            console.log('res', responseJson);
           }
         )
         .catch((error) => {
@@ -132,13 +134,12 @@ export default function HikeScreen(props) {
                   <Text style={styles.commentsTitle}>
                     Comments
                   </Text>
-                  {hike.comments.map((element, i) => {
-                    console.log(element);
+                  {!isPastInitialRender.current ? <View /> : hike.comments.map((element, i) => {
                     return (
                       <View style={styles.comment} key={i}>
                         <View style={styles.commentHeader}>
                           <Text>
-                            ~ {element.user}
+                            {element.user.name} -- {element.date_created}
                           </Text>
                         </View>
                         <View style={styles.commentBody}>
