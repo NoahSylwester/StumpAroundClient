@@ -43,7 +43,7 @@ export default function HikesScreen(props) {
       .catch((error) => {
         console.error(error);
       });
-    }, [dataState])
+    }, [])
     
 
     return (

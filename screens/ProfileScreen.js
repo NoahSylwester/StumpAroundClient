@@ -40,13 +40,17 @@ export default function ProfileScreen() {
     }
   };
 
-  useEffect(() => {
-    _retrieveId();
-  }, []);
+  const _storeData = async (id) => {
+    try {
+      await AsyncStorage.setItem('id', id);
+    } catch (error) {
+      console.log(error);
+      // Error saving data
+    }
+  };
 
-  useEffect(() => {
-    if (isPastInitialRender.current === true) {
-      fetch(`https://stump-around.herokuapp.com/user/${usernameState}`, {
+  const _updateUser = async () => {
+    fetch(`https://stump-around.herokuapp.com/user/${usernameState}`, {
         method: 'GET',
       })
       .then((response) => response.json())
@@ -54,17 +58,28 @@ export default function ProfileScreen() {
         setUserState({
           ...responseJson,
         });
+        _storeData(responseJson._id);
         setEditBioState(responseJson.bio);
+
         }
       )
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  useEffect(() => {
+    _retrieveId();
+  }, []);
+
+  useEffect(() => {
+    if (isPastInitialRender.current === true) {
+      _updateUser();
     }
     isPastInitialRender.current = true;
   }, [usernameState]);
 
-  const photoPUT = (data) => {
+  const photoPUT = async (data) => {
     fetch(`https://stump-around.herokuapp.com/photo`, {
         method: 'PUT',
         headers: {
@@ -79,7 +94,7 @@ export default function ProfileScreen() {
         console.error(error);
       });
   };
-  const bioPUT = (data) => {
+  const bioPUT = async (data) => {
     fetch(`https://stump-around.herokuapp.com/bio`, {
         method: 'PUT',
         headers: {
@@ -101,7 +116,7 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisibleState}
         onRequestClose={() => {
@@ -124,7 +139,8 @@ export default function ProfileScreen() {
             <Button
               title="Update"
               onPress={() => {
-                bioPUT({ name: userState.name, bio: editBioState });
+                bioPUT({ name: userState.name, bio: editBioState })
+                .then(() => _updateUser());
                 setModalVisibleState(!modalVisibleState);
               }}></Button>
             <Button
