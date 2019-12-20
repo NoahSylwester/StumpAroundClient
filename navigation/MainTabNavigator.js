@@ -9,6 +9,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 // import LoginScreen from '../screens/LoginScreen';
 import HikesScreen from '../screens/HikesScreen';
 import HikeScreen from '../screens/HikeScreen';
+import camerascreen from '../screens/camerascreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -17,7 +18,7 @@ const config = Platform.select({
 
 const ProfileStack = createStackNavigator(
   {
-    Profile: ProfileScreen,
+    Profile: ProfileScreen, Camera: camerascreen
   },
   config
 );

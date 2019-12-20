@@ -1,5 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import React, { useState, useEffect, useRef } from 'react';
+import Camera from "./camerascreen";
 import {
   Image,
   Platform,
@@ -16,7 +17,6 @@ import {
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-
 
 export default function ProfileScreen() {
 
@@ -159,7 +159,7 @@ export default function ProfileScreen() {
           <Image source={{ uri: userState.photo }} style={styles.photo} />
           <Button 
             title="Change photo" 
-            onPress={() => alert('pressed')}
+            onPress={() => props.navigation.navigate("Camera")}
             style={styles.commentButton}
           ></Button>
           <Text style={styles.username}>
