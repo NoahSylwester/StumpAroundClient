@@ -134,18 +134,21 @@ export default function HikeScreen(props) {
                   <Text style={styles.commentsTitle}>
                     Comments
                   </Text>
-                  {!isPastInitialRender.current ? <View /> : hike.comments.map((element, i) => {
+                  {!isPastInitialRender.current ? <View /> : hike.comments.slice().reverse().map((element, i) => {
                     return (
                       <View style={styles.comment} key={i}>
                         <View style={styles.commentHeader}>
-                          <TouchableOpacity onPress={() => props.navigation.navigate('ClickedProfile', { user: element.user })}>
-                            <Text>
-                              {element.user.name}
+                          <Image source={{ uri: element.user.photo }} style={styles.photo} />
+                          <View>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('ClickedProfile', { user: element.user })}>
+                              <Text style={styles.userLink}>
+                                {element.user.name}
+                              </Text>
+                            </TouchableOpacity>
+                            <Text style={styles.commentDate}>
+                              {element.date_created}
                             </Text>
-                          </TouchableOpacity>
-                          <Text>
-                            {element.date_created}
-                          </Text>
+                          </View>
                         </View>
                         <View style={styles.commentBody}>
                           <Text>
@@ -212,6 +215,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   commentHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 2,
     borderBottomColor: 'black',
     borderBottomWidth: 0.5,
@@ -224,7 +229,20 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
   },
+  photo: {
+    marginRight: 5,
+    marginBottom: 5,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+  },
+  userLink: {
+    color: 'green',
+  },
   commentButton: {
     margin: 20,
+  },
+  commentDate: {
+    fontSize: 10,
   }
 });
