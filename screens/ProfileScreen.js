@@ -136,19 +136,21 @@ export default function ProfileScreen() {
               onChangeText={bio => setEditBioState(bio)}
               value={editBioState}
             />
-            <Button
-              title="Update"
-              onPress={() => {
-                bioPUT({ name: userState.name, bio: editBioState })
-                .then(() => _updateUser());
-                setModalVisibleState(!modalVisibleState);
-              }}></Button>
-            <Button
-              title="Cancel"
-              onPress={() => {
-                setModalVisibleState(!modalVisibleState);
-              }}>
-            </Button>
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+              <Button
+                title="Update"
+                onPress={() => {
+                  bioPUT({ name: userState.name, bio: editBioState })
+                  .then(() => _updateUser());
+                  setModalVisibleState(!modalVisibleState);
+                }}></Button>
+              <Button
+                title="Cancel"
+                onPress={() => {
+                  setModalVisibleState(!modalVisibleState);
+                }}>
+              </Button>
+            </View>
           </View>
         </TouchableOpacity>
       </Modal>
