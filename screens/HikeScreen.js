@@ -97,19 +97,21 @@ export default function HikeScreen(props) {
                   onChangeText={comment => setCommentState(comment)}
                   value={commentState}
                 />
-                <Button
-                  title="Post"
-                  onPress={() => {
-                    commentPOST({ content: commentState, hike: hike._id })
-                    .then(() => _updateHike());
-                    setModalVisibleState(!modalVisibleState);
-                  }}></Button>
-                <Button
-                  title="Cancel"
-                  onPress={() => {
-                    setModalVisibleState(!modalVisibleState);
-                  }}>
-                </Button>
+                <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                  <Button
+                    title="Post"
+                    onPress={() => {
+                      commentPOST({ content: commentState, hike: hike._id })
+                      .then(() => _updateHike());
+                      setModalVisibleState(!modalVisibleState);
+                    }}></Button>
+                  <Button
+                    title="Cancel"
+                    onPress={() => {
+                      setModalVisibleState(!modalVisibleState);
+                    }}>
+                  </Button>
+                </View>
               </View>
             </TouchableOpacity>
           </Modal>
