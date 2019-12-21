@@ -138,8 +138,13 @@ export default function HikeScreen(props) {
                     return (
                       <View style={styles.comment} key={i}>
                         <View style={styles.commentHeader}>
+                          <TouchableOpacity onPress={() => props.navigation.navigate('ClickedProfile', { user: element.user })}>
+                            <Text>
+                              {element.user.name}
+                            </Text>
+                          </TouchableOpacity>
                           <Text>
-                            {element.user.name} -- {element.date_created}
+                            {element.date_created}
                           </Text>
                         </View>
                         <View style={styles.commentBody}>
