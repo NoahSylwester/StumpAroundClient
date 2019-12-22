@@ -10,6 +10,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import HikesScreen from '../screens/HikesScreen';
 import HikeScreen from '../screens/HikeScreen';
 import CameraScreen from '../screens/camerascreen';
+import ClickedProfileScreen from '../screens/ClickedProfileScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -120,7 +121,8 @@ SettingsStack.path = '';
 const HikesStack = createStackNavigator(
   {
     Hikes: HikesScreen,
-    Hike: HikeScreen
+    Hike: HikeScreen,
+    ClickedProfile: ClickedProfileScreen,
   },
   config,
 );
@@ -131,8 +133,6 @@ HikesStack.navigationOptions = {
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
-
-HikesStack.path = '';
 
 
 const tabNavigator = createBottomTabNavigator({
