@@ -23,6 +23,8 @@ export default function ProfileScreen() {
   const [usernameState, setUsernameState] = useState('');
   const [userState, setUserState] = useState({});
   const isPastInitialRender = useRef(false);
+  const [modalVisibleState, setModalVisibleState] = useState(false);
+  const [editBioState, setEditBioState] = useState(userState.bio);
 
   const _retrieveId = async () => {
     try {
@@ -109,9 +111,6 @@ export default function ProfileScreen() {
         console.error(error);
       });
   };
-
-  const [modalVisibleState, setModalVisibleState] = useState(false);
-  const [editBioState, setEditBioState] = useState(userState.bio);
 
   return (
     <View style={styles.container}>

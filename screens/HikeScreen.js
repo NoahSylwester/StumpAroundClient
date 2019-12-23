@@ -26,17 +26,38 @@ export default function HikeScreen(props) {
     // comments
     // ****eventually location?
 
-    const [textState, setTextState] = useState({
-        text: '',
-      })
-
     const [hike, setHike] = useState(props.navigation.getParam('hike',{}));
-
     const [modalVisibleState, setModalVisibleState] = useState(false);
     const [commentState, setCommentState] = useState('');
     const isPastInitialRender = useRef(false);
 
-    useEffect(() => {_updateHike()}, []);
+
+    const addHikeToFavorites = async (hikeId) => {
+      const userId = await AsyncStorage.getItem('id');
+      console.log('here', hikeId, 'there', userId);
+      fetch(`https://stump-around.herokuapp.com/favorites`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({ hikeId, hikeId: userId }),
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+          setHike(responseJson);
+          console.log('res', responseJson);
+          alert('Added to favorites');
+        }
+      )
+      .catch((error) => {
+        console.error(error);
+        alert('Add failed');
+      });
+    }
+
+
+    useEffect(() => _updateHike(), []);
 
     const commentPOST = async (data) => {
       const userId = await AsyncStorage.getItem('id');
@@ -57,7 +78,7 @@ export default function HikeScreen(props) {
         });
     };
 
-    const _updateHike = async () => {
+    const _updateHike = () => {
       isPastInitialRender.current = true;
       console.log('id', hike._id);
       fetch(`https://stump-around.herokuapp.com/hike/${hike._id}`, {
@@ -128,7 +149,7 @@ export default function HikeScreen(props) {
                 <Text style={styles.section}>
                     Length: {hike.length}
                 </Text>
-                <Button title="Add to favorites" onPress={() => alert('pressed')} color="blue" />
+                <Button title="Add to favorites" onPress={() => {addHikeToFavorites(hike._id)}} color="blue" />
                 <Text style={styles.summary}>
                     {hike.summary}
                 </Text>
