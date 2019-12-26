@@ -177,14 +177,34 @@ export default function ProfileScreen() {
             onPress={() => setModalVisibleState(true)}
             style={styles.commentButton}
           ></Button>
-          <View style={styles.hikesContainer}>
-              <Text style={styles.hikesTitle}>
-                Favorite Hikes
-              </Text>
+          <Text style={styles.hikesTitle}>
+            Favorite Hikes
+          </Text>
+          <ScrollView style={styles.hikesContainer}>
+              {userState.hikes && userState.hikes.length !== 0 ? userState.hikes.slice().reverse().map((hike, i) => {
+                return (
+                <View style={styles.hikeContainer} key={i}>
+                  <Image source={{uri: hike.photo}} style={{ width: '100%', height: 200 }} />
+                  <View style={styles.hikeTag}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('Hike', { hike: hike })}>
+                      <Text style={styles.title}>
+                        {hike.name}
+                      </Text>
+                    </TouchableOpacity>
+                    <Text style={styles.section}>
+                        Length: {hike.length}
+                    </Text>
+                    <Text style={styles.section}>
+                        {hike.location}
+                    </Text>
+                  </View>
+              </View>
+                )
+              }) : <Text style={{ textAlign: 'center' }}>No favorites yet.</Text>}
               <View style={styles.hike}>
 
               </View>
-          </View>
+          </ScrollView>
           <View style={styles.commentsContainer}>
               <Text style={styles.commentsTitle}>
                 Comments
@@ -277,6 +297,8 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   hikesContainer: {
+    width: '100%',
+    maxHeight: 300,
     padding: 20,
     paddingTop: 0,
     paddingBottom: 0,
@@ -290,8 +312,32 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
   },
-  hike: {
-
+  hikeContainer: {
+    flex: 1,
+    marginBottom: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+},
+  hikeTag: {
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    position: 'absolute',
+    bottom: 20,
+    width: '100%',
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  section: {
+    color: 'whitesmoke',
+    textAlign: 'center',
+  },
+  title: {
+    color: 'whitesmoke',
+    textShadowColor: 'rgba(255, 255, 255, 1)',
+    textShadowOffset: {width: 0, height: 0},
+    textShadowRadius: 10,
+    fontSize: 30,
+    textAlign: 'center',
   },
   commentsContainer: {
     padding: 20,

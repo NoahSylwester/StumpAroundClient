@@ -43,7 +43,7 @@ export default function LoginScreen(props) {
     }
 
     return (
-      <ImageBackground style={{width: '100%', height: '100%'}} source={{ uri: '../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg'}}>
+      <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')}>
         <View style={styles.container}>
             <ScrollView
             keyboardShouldPersistTaps='never'

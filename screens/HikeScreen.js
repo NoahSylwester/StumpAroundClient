@@ -34,19 +34,18 @@ export default function HikeScreen(props) {
 
     const addHikeToFavorites = async (hikeId) => {
       const userId = await AsyncStorage.getItem('id');
-      console.log('here', hikeId, 'there', userId);
-      fetch(`https://stump-around.herokuapp.com/favorites`, {
+      fetch(`https://stump-around.herokuapp.com/favorite`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({ hikeId, hikeId: userId }),
+        body: JSON.stringify({ hikeId, userId }),
       })
       .then((response) => response.json())
       .then((responseJson) => {
-          setHike(responseJson);
-          console.log('res', responseJson);
+          // setHike(responseJson);
+          console.log('res2', responseJson);
           alert('Added to favorites');
         }
       )
@@ -62,7 +61,7 @@ export default function HikeScreen(props) {
     const commentPOST = async (data) => {
       const userId = await AsyncStorage.getItem('id');
       const newData = { ...data, user: userId };
-      console.log(newData);
+      // console.log(newData);
       fetch(`https://stump-around.herokuapp.com/comment`, {
           method: 'POST',
           headers: {
@@ -72,7 +71,7 @@ export default function HikeScreen(props) {
           body: JSON.stringify(newData),
         })
         .then((response) => response.json())
-        .then((responseJson) => console.log(responseJson))
+        .then((responseJson) => console.log('responseJson'))
         .catch((error) => {
           console.error(error);
         });
@@ -80,14 +79,14 @@ export default function HikeScreen(props) {
 
     const _updateHike = () => {
       isPastInitialRender.current = true;
-      console.log('id', hike._id);
+      // console.log('id', hike._id);
       fetch(`https://stump-around.herokuapp.com/hike/${hike._id}`, {
           method: 'GET',
         })
         .then((response) => response.json())
         .then((responseJson) => {
             setHike(responseJson);
-            console.log('res', responseJson);
+            // console.log('res1', responseJson);
           }
         )
         .catch((error) => {
