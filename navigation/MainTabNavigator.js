@@ -9,6 +9,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 // import LoginScreen from '../screens/LoginScreen';
 import HikesScreen from '../screens/HikesScreen';
 import HikeScreen from '../screens/HikeScreen';
+import CameraScreen from '../screens/camerascreen';
 import ClickedProfileScreen from '../screens/ClickedProfileScreen';
 
 const config = Platform.select({
@@ -55,6 +56,20 @@ ProfileStack.path = '';
 // };
 
 // SignUpStack.path = '';
+const CameraStack = createStackNavigator({
+  CameraPage: CameraScreen,
+  },
+  config
+);
+
+CameraStack.navigationOptions = {
+  tabBarLabel: 'Camera',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+  ),
+};
+
+CameraStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -127,6 +142,7 @@ const tabNavigator = createBottomTabNavigator({
   SettingsStack,
   // LoginStack,
   HikesStack,
+  CameraStack,
 });
 
 tabNavigator.path = '';
