@@ -11,6 +11,7 @@ import {
   TextInput,
   Button
 } from 'react-native';
+import styles from '../constants/MainStyles';
 
 import { MonoText } from '../components/StyledText';
 
@@ -50,7 +51,7 @@ export default function HikesScreen(props) {
                 <View style={styles.container}>
                     <ScrollView
                         keyboardShouldPersistTaps='never'
-                        style={styles.body}
+                        style={styles.hikePageBody}
                         contentContainerStyle={styles.contentContainer}>
                         <Text style={styles.pageTitle}>
                           Hikes
@@ -83,61 +84,61 @@ HikesScreen.navigationOptions = {
 };
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  hikeContainer: {
-    height: 300,
-    backgroundColor: '#fff',
-  },
-  body: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  contentContainer: {
-    paddingTop: 20,
-    justifyContent: 'space-between'
-  },
-  hikeContainer: {
-      flex: 1,
-      marginBottom: 20,
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'relative',
-  },
-  hikeTag: {
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    position: 'absolute',
-    bottom: 20,
-    width: '100%',
-    paddingTop: 5,
-    paddingBottom: 5,
-  },
-  pageTitle: {
-    marginTop: 50,
-    marginBottom: 50,
-    fontSize: 50,
-    textAlign: 'center',
-  },
-  title: {
-    color: 'whitesmoke',
-    textShadowColor: 'rgba(255, 255, 255, 1)',
-    textShadowOffset: {width: 0, height: 0},
-    textShadowRadius: 10,
-    fontSize: 30,
-    textAlign: 'center',
-  },
-  section: {
-    color: 'whitesmoke',
-    textAlign: 'center',
-  },
-  summary: {
-      marginRight: '15%',
-      marginLeft: '15%',
-  },
-  comments: {
-    textAlign: 'center',
-}
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//   },
+//   hikeContainer: {
+//     height: 300,
+//     backgroundColor: '#fff',
+//   },
+//   body: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//   },
+//   contentContainer: {
+//     paddingTop: 20,
+//     justifyContent: 'space-between'
+//   },
+//   hikeContainer: {
+//       flex: 1,
+//       marginBottom: 20,
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//       position: 'relative',
+//   },
+//   hikeTag: {
+//     backgroundColor: 'rgba(0, 0, 0, 0.4)',
+//     position: 'absolute',
+//     bottom: 20,
+//     width: '100%',
+//     paddingTop: 5,
+//     paddingBottom: 5,
+//   },
+//   pageTitle: {
+//     marginTop: 50,
+//     marginBottom: 50,
+//     fontSize: 50,
+//     textAlign: 'center',
+//   },
+//   title: {
+//     color: 'whitesmoke',
+//     textShadowColor: 'rgba(255, 255, 255, 1)',
+//     textShadowOffset: {width: 0, height: 0},
+//     textShadowRadius: 10,
+//     fontSize: 30,
+//     textAlign: 'center',
+//   },
+//   section: {
+//     color: 'whitesmoke',
+//     textAlign: 'center',
+//   },
+//   summary: {
+//       marginRight: '15%',
+//       marginLeft: '15%',
+//   },
+//   comments: {
+//     textAlign: 'center',
+// }
+// });

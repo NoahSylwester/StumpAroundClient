@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
+import styles from '../constants/AuthStyles';
 
 export default function LoginScreen(props) {
 
@@ -29,42 +30,30 @@ export default function LoginScreen(props) {
 
     return (
       <ImageBackground source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')} style={{width: '100%', height: '100%'}}>
-        <View style={styles.container}>
+        {/* <View style={styles.container}> */}
             <ScrollView
             keyboardShouldPersistTaps='never'
-            style={styles.container}
+            // style={styles.container}
             contentContainerStyle={styles.contentContainer}>
                 <Text style={styles.title}>
                     Sign up
                 </Text>
                 <TextInput
-                    style={{
-                        padding: 10,
-                        marginTop: 20,
-                        textAlign: 'center',
-                    }}
+                    style={styles.textInput}
                     id="username"
                     onChangeText={username => setTextState({...textState, username})}
                     placeholder={'Username'}
                     value={textState.username}
                 />
                 <TextInput
-                    style={{
-                        padding: 10,
-                        marginTop: 20,
-                        textAlign: 'center',
-                    }}
+                    style={styles.textInput}
                     id="email"
                     onChangeText={email => setTextState({...textState, email})}
                     placeholder={'Email'}
                     value={textState.email}
                 />
                 <TextInput
-                    style={{
-                        padding: 10,
-                        margin: 10,
-                        textAlign: 'center',
-                    }}
+                    style={styles.textInput}
                     id="password"
                     secureTextEntry={true}
                     onChangeText={password => setTextState({...textState, password})}
@@ -72,20 +61,16 @@ export default function LoginScreen(props) {
                     value={textState.password}
                 />
                 <TextInput
-                    style={{
-                        padding: 10,
-                        margin: 10,
-                        textAlign: 'center',
-                    }}
+                    style={styles.textInput}
                     id="confirm"
                     secureTextEntry={true}
                     onChangeText={confirm => setTextState({...textState, confirm})}
                     placeholder={'Confirm password'}
                     value={textState.confirm}
                 />
-                <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="blue" />
+                <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="#009933" />
             </ScrollView>
-        </View>
+        {/* </View> */}
         </ImageBackground>
     );
 }
@@ -95,22 +80,22 @@ LoginScreen.navigationOptions = {
 };
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  body: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentContainer: {
-    paddingTop: 200,
-  },
-  title: {
-    fontSize: 30,
-    textAlign: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//   },
+//   body: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   contentContainer: {
+//     paddingTop: 200,
+//   },
+//   title: {
+//     fontSize: 30,
+//     textAlign: 'center',
+//   },
+// });
