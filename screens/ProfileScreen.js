@@ -18,7 +18,7 @@ import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 
-export default function ProfileScreen() {
+export default function ProfileScreen(props) {
 
   const [usernameState, setUsernameState] = useState('');
   const [userState, setUserState] = useState({});

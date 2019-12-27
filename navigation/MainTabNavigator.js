@@ -19,6 +19,7 @@ const config = Platform.select({
 const ProfileStack = createStackNavigator(
   {
     Profile: ProfileScreen,
+    Hike: HikeScreen,
   },
   config
 );

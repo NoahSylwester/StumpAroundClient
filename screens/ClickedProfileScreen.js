@@ -86,7 +86,7 @@ export default function ClickedProfileScreen(props) {
                   </View>
               </View>
                 )
-              }) : <Text>big sad</Text>}
+              }) : <Text style={{ textAlign: 'center' }}>No favorites yet.</Text>}
               <View style={styles.hike}>
 
               </View>
