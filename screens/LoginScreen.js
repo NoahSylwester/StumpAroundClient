@@ -4,15 +4,15 @@ import {
   ImageBackground,
   Platform,
   View,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   TextInput,
+  Image,
   Button,
   AsyncStorage,
 } from 'react-native';
-
+import styles from '../constants/AuthStyles';
 
 
 export default function LoginScreen(props) {
@@ -23,7 +23,7 @@ export default function LoginScreen(props) {
       });
 
     const signUpButton = (
-        <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: 'blue' }}>
+        <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: '#009933', textShadowColor: 'black', textShadowRadius: 5, textShadowOffset: { width: 0, height: 0 } }}>
             Sign up
         </Text>
     );
@@ -43,46 +43,33 @@ export default function LoginScreen(props) {
     }
 
     return (
-      <ImageBackground style={{width: '100%', height: '100%'}} source={{ uri: '../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg'}}>
-        <View style={styles.container}>
-            <ScrollView
+      <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')}>
+            <View
             keyboardShouldPersistTaps='never'
-            style={styles.container}
-            contentContainerStyle={styles.contentContainer}>
+            style={styles.body}
+            // contentContainerStyle={styles.contentContainer}
+            >
                 <Text style={styles.title}>
                     StumpAround
                 </Text>
                 <TextInput
-                    style={{
-                        padding: 10,
-                        marginTop: 20,
-                        textAlign: 'center',
-                    }}
+                    style={styles.textInput}
                     onChangeText={username => setTextState({...textState, username})}
                     placeholder={'Username'}
                     value={textState.username}
                 />
                 <TextInput
-                    style={{
-                        padding: 10,
-                        margin: 10,
-                        textAlign: 'center',
-                    }}
+                    style={styles.textInput}
                     secureTextEntry={true}
                     onChangeText={password => setTextState({...textState, password})}
                     placeholder={'Password'}
                     value={textState.password}
                 />
-                <Button title="Sign in" onPress={() => signIn(textState.username)} color="blue" />
-                <Text style={{ 
-                        fontSize: 8,
-                        textAlign: 'center',
-                        margin: 10,
-                    }}>
+                <Button title="Sign in" onPress={() => signIn(textState.username)} color="#009933" />
+                <Text style={styles.bottomText}>
                     Don't have an account? {signUpButton}
                 </Text>
-            </ScrollView>
-        </View>
+            </View>
         </ImageBackground>
     );
 }
@@ -92,22 +79,22 @@ LoginScreen.navigationOptions = {
 };
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  body: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentContainer: {
-    paddingTop: 230,
-  },
-  title: {
-    fontSize: 30,
-    textAlign: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//   },
+//   body: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   contentContainer: {
+//     paddingTop: 230,
+//   },
+//   appTitle: {
+//     fontSize: 30,
+//     textAlign: 'center',
+//   },
+// });
