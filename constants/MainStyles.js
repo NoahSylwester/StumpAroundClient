@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     hikePageContentContainer: {
-        paddingTop: 20,
+        paddingTop: 50,
         justifyContent: 'space-between'
     },
     contentContainer: {
