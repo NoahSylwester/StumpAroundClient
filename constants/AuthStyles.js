@@ -7,12 +7,12 @@ const styles = StyleSheet.create({
     },
     body: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'rgba(255,255,255,0)',
       justifyContent: 'center',
       alignItems: 'center',
     },
     contentContainer: {
-      paddingTop: 230,
+      // paddingTop: 230,
       justifyContent: 'center',
       alignItems: 'center',
     },

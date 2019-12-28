@@ -4,11 +4,11 @@ import {
   ImageBackground,
   Platform,
   View,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   TextInput,
+  Image,
   Button,
   AsyncStorage,
 } from 'react-native';
@@ -44,10 +44,11 @@ export default function LoginScreen(props) {
 
     return (
       <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')}>
-            <ScrollView
+            <View
             keyboardShouldPersistTaps='never'
-            // style={styles.container}
-            contentContainerStyle={styles.contentContainer}>
+            style={styles.body}
+            // contentContainerStyle={styles.contentContainer}
+            >
                 <Text style={styles.title}>
                     StumpAround
                 </Text>
@@ -68,7 +69,7 @@ export default function LoginScreen(props) {
                 <Text style={styles.bottomText}>
                     Don't have an account? {signUpButton}
                 </Text>
-            </ScrollView>
+            </View>
         </ImageBackground>
     );
 }

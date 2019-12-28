@@ -31,10 +31,11 @@ export default function LoginScreen(props) {
     return (
       <ImageBackground source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')} style={{width: '100%', height: '100%'}}>
         {/* <View style={styles.container}> */}
-            <ScrollView
+            <View
             keyboardShouldPersistTaps='never'
-            // style={styles.container}
-            contentContainerStyle={styles.contentContainer}>
+            style={styles.body}
+            // contentContainerStyle={styles.contentContainer}
+            >
                 <Text style={styles.title}>
                     Sign up
                 </Text>
@@ -69,7 +70,7 @@ export default function LoginScreen(props) {
                     value={textState.confirm}
                 />
                 <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="#009933" />
-            </ScrollView>
+            </View>
         {/* </View> */}
         </ImageBackground>
     );
