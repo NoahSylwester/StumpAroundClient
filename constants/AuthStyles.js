@@ -5,6 +5,32 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
     },
+    loginPageBody: {
+      flex: 1,
+      backgroundColor: 'rgba(255,255,255,0)',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+    },
+    formBox: {
+      height: '50%',
+      width: '60%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative'
+    },
+    logo: {
+      position: 'absolute',
+      top: -150,
+      width: '30%',
+      resizeMode: 'contain'
+    },
+    logoSignUp: {
+      position: 'absolute',
+      top: -180,
+      width: '30%',
+      resizeMode: 'contain'
+    },
     body: {
       flex: 1,
       backgroundColor: 'rgba(255,255,255,0)',
@@ -25,7 +51,7 @@ const styles = StyleSheet.create({
       textShadowOffset: { width: 0, height: 0 }
     },
     textInput: {
-      width: '50%',
+      width: '100%',
       borderRadius: 7,
       backgroundColor: 'rgba(255,255,255,1)',
       color: 'black',
