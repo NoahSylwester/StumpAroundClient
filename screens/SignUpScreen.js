@@ -24,7 +24,7 @@ export default function LoginScreen(props) {
       })
 
     const signUpButton = (
-        <Text onPress={() => props.navigation.navigate("Login")} style={{ color: 'blue' }}>
+        <Text onPress={() => props.navigation.navigate("Login")} style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 5, textShadowOffset: { width: 0, height: 0 } }}>
             Sign up
         </Text>
     )
@@ -71,7 +71,8 @@ export default function LoginScreen(props) {
                         placeholder={'Confirm password'}
                         value={textState.confirm}
                     />
-                    <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="#00B100" />
+                    {signUpButton}
+                    {/* <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="#00B100" /> */}
                 </View>
             </View>
         </ImageBackground>

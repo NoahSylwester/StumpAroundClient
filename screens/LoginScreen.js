@@ -28,6 +28,13 @@ export default function LoginScreen(props) {
         </Text>
     );
 
+    const signInButton = (
+      <Text onPress={() => signIn(textState.username)} style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 5, textShadowOffset: { width: 0, height: 0 } }}>
+          Sign in
+      </Text>
+      // <Button title="Sign in" onPress={() => signIn(textState.username)} color="#00B100" />
+  );
+
     const _storeData = async (username) => {
       try {
         await AsyncStorage.setItem('username', username);
@@ -67,7 +74,8 @@ export default function LoginScreen(props) {
                     placeholder={'Password'}
                     value={textState.password}
                 />
-                <Button title="Sign in" onPress={() => signIn(textState.username)} color="#00B100" />
+                {signInButton}
+                {/* <Button title="Sign in" onPress={() => signIn(textState.username)} color="#00B100" /> */}
                 <Text style={styles.bottomText}>
                     Don't have an account? {signUpButton}
                 </Text>
