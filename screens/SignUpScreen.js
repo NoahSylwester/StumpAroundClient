@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import {
   ImageBackground,
   View,
+  Image,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   Text,
   TextInput,
   Button
@@ -23,55 +25,59 @@ export default function LoginScreen(props) {
       })
 
     const signUpButton = (
-        <Text onPress={() => props.navigation.navigate("Login")} style={{ color: 'blue' }}>
-            Sign up
-        </Text>
+        <TouchableOpacity>
+            <Text onPress={() => props.navigation.navigate("Login")} style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
+                Sign up
+            </Text>
+        </TouchableOpacity>
     )
 
     return (
       <ImageBackground source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')} style={{width: '100%', height: '100%'}}>
-        {/* <View style={styles.container}> */}
             <View
-            keyboardShouldPersistTaps='never'
-            style={styles.body}
+                keyboardShouldPersistTaps='never'
+                style={styles.body}
             // contentContainerStyle={styles.contentContainer}
             >
-                <Text style={styles.title}>
-                    Sign up
-                </Text>
-                <TextInput
-                    style={styles.textInput}
-                    id="username"
-                    onChangeText={username => setTextState({...textState, username})}
-                    placeholder={'Username'}
-                    value={textState.username}
-                />
-                <TextInput
-                    style={styles.textInput}
-                    id="email"
-                    onChangeText={email => setTextState({...textState, email})}
-                    placeholder={'Email'}
-                    value={textState.email}
-                />
-                <TextInput
-                    style={styles.textInput}
-                    id="password"
-                    secureTextEntry={true}
-                    onChangeText={password => setTextState({...textState, password})}
-                    placeholder={'Password'}
-                    value={textState.password}
-                />
-                <TextInput
-                    style={styles.textInput}
-                    id="confirm"
-                    secureTextEntry={true}
-                    onChangeText={confirm => setTextState({...textState, confirm})}
-                    placeholder={'Confirm password'}
-                    value={textState.confirm}
-                />
-                <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="#009933" />
+                <View style={styles.formBox}>
+                <Image source={require('../assets/images/logoalt.png')} style={styles.logoSignUp} />
+                    <Text style={styles.title}>
+                        Sign up
+                    </Text>
+                    <TextInput
+                        style={styles.textInput}
+                        id="username"
+                        onChangeText={username => setTextState({ ...textState, username })}
+                        placeholder={'Username'}
+                        value={textState.username}
+                    />
+                    <TextInput
+                        style={styles.textInput}
+                        id="email"
+                        onChangeText={email => setTextState({ ...textState, email })}
+                        placeholder={'Email'}
+                        value={textState.email}
+                    />
+                    <TextInput
+                        style={styles.textInput}
+                        id="password"
+                        secureTextEntry={true}
+                        onChangeText={password => setTextState({ ...textState, password })}
+                        placeholder={'Password'}
+                        value={textState.password}
+                    />
+                    <TextInput
+                        style={styles.textInput}
+                        id="confirm"
+                        secureTextEntry={true}
+                        onChangeText={confirm => setTextState({ ...textState, confirm })}
+                        placeholder={'Confirm password'}
+                        value={textState.confirm}
+                    />
+                    {signUpButton}
+                    {/* <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="#00B100" /> */}
+                </View>
             </View>
-        {/* </View> */}
         </ImageBackground>
     );
 }

@@ -23,10 +23,19 @@ export default function LoginScreen(props) {
       });
 
     const signUpButton = (
-        <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: '#009933', textShadowColor: 'black', textShadowRadius: 5, textShadowOffset: { width: 0, height: 0 } }}>
+        <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
             Sign up
         </Text>
     );
+
+    const signInButton = (
+      <TouchableOpacity onPress={() => signIn(textState.username)}>
+        <Text style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
+          Sign in
+        </Text>
+      </TouchableOpacity>
+      // <Button title="Sign in" onPress={() => signIn(textState.username)} color="#00B100" />
+  );
 
     const _storeData = async (username) => {
       try {
@@ -46,9 +55,11 @@ export default function LoginScreen(props) {
       <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')}>
             <View
             keyboardShouldPersistTaps='never'
-            style={styles.body}
+            style={styles.loginPageBody}
             // contentContainerStyle={styles.contentContainer}
             >
+              <View style={styles.formBox}>
+                <Image source={require('../assets/images/logoalt.png')} style={styles.logo} />
                 <Text style={styles.title}>
                     StumpAround
                 </Text>
@@ -65,10 +76,12 @@ export default function LoginScreen(props) {
                     placeholder={'Password'}
                     value={textState.password}
                 />
-                <Button title="Sign in" onPress={() => signIn(textState.username)} color="#009933" />
+                {signInButton}
+                {/* <Button title="Sign in" onPress={() => signIn(textState.username)} color="#00B100" /> */}
                 <Text style={styles.bottomText}>
                     Don't have an account? {signUpButton}
                 </Text>
+                </View>
             </View>
         </ImageBackground>
     );
