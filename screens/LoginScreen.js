@@ -23,15 +23,17 @@ export default function LoginScreen(props) {
       });
 
     const signUpButton = (
-        <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: '#00B100', textShadowColor: 'black', textShadowRadius: 5, textShadowOffset: { width: 0, height: 0 } }}>
+        <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
             Sign up
         </Text>
     );
 
     const signInButton = (
-      <Text onPress={() => signIn(textState.username)} style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 5, textShadowOffset: { width: 0, height: 0 } }}>
+      <TouchableOpacity onPress={() => signIn(textState.username)}>
+        <Text style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
           Sign in
-      </Text>
+        </Text>
+      </TouchableOpacity>
       // <Button title="Sign in" onPress={() => signIn(textState.username)} color="#00B100" />
   );
 

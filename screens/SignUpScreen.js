@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   Text,
   TextInput,
   Button
@@ -24,9 +25,11 @@ export default function LoginScreen(props) {
       })
 
     const signUpButton = (
-        <Text onPress={() => props.navigation.navigate("Login")} style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 5, textShadowOffset: { width: 0, height: 0 } }}>
-            Sign up
-        </Text>
+        <TouchableOpacity>
+            <Text onPress={() => props.navigation.navigate("Login")} style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
+                Sign up
+            </Text>
+        </TouchableOpacity>
     )
 
     return (
