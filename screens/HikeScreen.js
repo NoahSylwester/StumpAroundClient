@@ -16,7 +16,7 @@ import styles from '../constants/MainStyles';
 import CommentsBox from '../components/CommentsBox';
 
 import { MonoText } from '../components/StyledText';
-
+// import { NavigationActions } from 'react-navigation';
 
 export default function HikeScreen(props) {
 
@@ -49,6 +49,11 @@ export default function HikeScreen(props) {
           // setHike(responseJson);
           console.log('res2', responseJson);
           alert('Added to favorites');
+          const setParamsAction = NavigationActions.setParams({
+            params: { value: 2 },
+            key: 'Profile',
+          });
+          props.navigation.dispatch(setParamsAction);
         }
       )
       .catch((error) => {

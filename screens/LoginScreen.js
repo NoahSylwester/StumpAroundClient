@@ -46,7 +46,11 @@ export default function LoginScreen(props) {
       }
     };
 
-    const signIn = (username) => {
+    const signIn = (input) => {
+      let username = input;
+      if (username !== undefined) {
+        username = "Bigfoot"
+      }
       _storeData(username);
       props.navigation.navigate("Main")
     }

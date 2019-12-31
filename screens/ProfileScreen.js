@@ -80,9 +80,10 @@ export default function ProfileScreen(props) {
   useEffect(() => {
     if (isPastInitialRender.current === true) {
       _updateUser();
+      console.log('HERE', props.navigation.state.params);
     }
     isPastInitialRender.current = true;
-  }, [usernameState]);
+  }, [usernameState, props.navigation.state.params]);
 
   const photoPUT = async (data) => {
     fetch(`https://stump-around.herokuapp.com/photo`, {
