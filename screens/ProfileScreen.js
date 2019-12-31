@@ -18,6 +18,8 @@ import styles from '../constants/MainStyles';
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import FavoriteHikes from '../components/FavoriteHikes';
+import BioModal from '../components/BioModal';
 
 export default function ProfileScreen(props) {
 
@@ -115,45 +117,7 @@ export default function ProfileScreen(props) {
 
   return (
     <View style={styles.container}>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisibleState}
-        onRequestClose={() => {
-          alert('Modal has been closed.');
-        }}>
-        <TouchableOpacity activeOpacity={1} style={{marginTop: 22, height: "100%", backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => {
-                setModalVisibleState(false);
-              }}>
-          <View style={{backgroundColor: 'white', borderRadius: 5, padding: 20, width: '90%', margin: 20}}>
-            <Text style={{textAlign: 'center'}}>Edit Bio:</Text>
-            <TextInput
-              style={{
-                padding: 10,
-                marginTop: 20,
-                textAlign: 'center',
-              }}
-              onChangeText={bio => setEditBioState(bio)}
-              value={editBioState}
-            />
-            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-              <Button
-                title="Update"
-                onPress={() => {
-                  bioPUT({ name: userState.name, bio: editBioState })
-                  .then(() => _updateUser());
-                  setModalVisibleState(!modalVisibleState);
-                }}></Button>
-              <Button
-                title="Cancel"
-                onPress={() => {
-                  setModalVisibleState(!modalVisibleState);
-                }}>
-              </Button>
-            </View>
-          </View>
-        </TouchableOpacity>
-      </Modal>
+      <BioModal modalVisibleState={modalVisibleState} setModalVisibleState={setModalVisibleState} setEditBioState={setEditBioState} editBioState={editBioState} bioPUT={bioPUT} userState={userState} _updateUser={_updateUser} />
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.profileContainer}>
@@ -179,33 +143,9 @@ export default function ProfileScreen(props) {
             style={styles.commentButton}
           ></Button>
           <Text style={styles.hikesTitle}>
-            Favorite Hikes
+              Favorite Hikes
           </Text>
-          <ScrollView style={styles.hikesContainer}>
-              {userState.hikes && userState.hikes.length !== 0 ? userState.hikes.slice().reverse().map((hike, i) => {
-                return (
-                <View style={styles.hikeContainer} key={i}>
-                  <Image source={{uri: hike.photo}} style={{ width: '100%', height: 200 }} />
-                  <View style={styles.hikeTag}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('Hike', { hike: hike })}>
-                      <Text style={styles.title}>
-                        {hike.name}
-                      </Text>
-                    </TouchableOpacity>
-                    <Text style={styles.section}>
-                        Length: {hike.length}
-                    </Text>
-                    <Text style={styles.section}>
-                        {hike.location}
-                    </Text>
-                  </View>
-              </View>
-                )
-              }) : <Text style={{ textAlign: 'center' }}>No favorites yet.</Text>}
-              <View style={styles.hike}>
-
-              </View>
-          </ScrollView>
+          <FavoriteHikes userState={userState} navigation={props.navigation} />
           <View style={styles.commentsContainer}>
               <Text style={styles.commentsTitle}>
                 Comments

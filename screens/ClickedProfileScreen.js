@@ -17,7 +17,7 @@ import styles from '../constants/MainStyles';
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-
+import FavoriteHikes from '../components/FavoriteHikes';
 
 export default function ClickedProfileScreen(props) {
 
@@ -67,31 +67,7 @@ export default function ClickedProfileScreen(props) {
           <Text style={styles.hikesTitle}>
             Favorite Hikes
           </Text>
-          <ScrollView style={styles.hikesContainer}>
-              {userState.hikes && userState.hikes.length !== 0 ? userState.hikes.slice().reverse().map((hike, i) => {
-                return (
-                <View style={styles.hikeContainer} key={i}>
-                  <Image source={{uri: hike.photo}} style={{ width: '100%', height: 200 }} />
-                  <View style={styles.hikeTag}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('Hike', { hike: hike })}>
-                      <Text style={styles.title}>
-                        {hike.name}
-                      </Text>
-                    </TouchableOpacity>
-                    <Text style={styles.section}>
-                        Length: {hike.length}
-                    </Text>
-                    <Text style={styles.section}>
-                        {hike.location}
-                    </Text>
-                  </View>
-              </View>
-                )
-              }) : <Text style={{ textAlign: 'center' }}>No favorites yet.</Text>}
-              <View style={styles.hike}>
-
-              </View>
-          </ScrollView>
+          <FavoriteHikes userState={userState} navigation={props.navigation} />
           <View style={styles.commentsContainer}>
               <Text style={styles.commentsTitle}>
                 Comments
