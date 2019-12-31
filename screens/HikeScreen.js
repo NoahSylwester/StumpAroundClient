@@ -14,9 +14,8 @@ import {
 } from 'react-native';
 import styles from '../constants/MainStyles';
 import CommentsBox from '../components/CommentsBox';
+import { NavigationActions } from 'react-navigation';
 
-import { MonoText } from '../components/StyledText';
-// import { NavigationActions } from 'react-navigation';
 
 export default function HikeScreen(props) {
 
@@ -32,7 +31,34 @@ export default function HikeScreen(props) {
     const [modalVisibleState, setModalVisibleState] = useState(false);
     const [commentState, setCommentState] = useState('');
     const isPastInitialRender = useRef(false);
+    const [ProfileKey, setProfileKey] = useState('');
 
+    useEffect(() => {
+          console.log('***');
+          console.log(ProfileKey);
+          console.log('***');
+          const setParamsAction = NavigationActions.setParams({
+            params: { value: Math.random() },
+            key: ProfileKey,
+          });
+          props.navigation.dispatch(setParamsAction);
+    }, [ProfileKey])
+
+    const _retrieveKey = async () => {
+      try {
+        const key = await AsyncStorage.getItem('ProfileKey');
+        if (key !== null) {
+          setProfileKey(key);
+          return;
+        }
+        else {
+          console.log('No async storage for "ProfileKey"');
+        }
+      } catch (error) {
+        // Error retrieving data
+        console.log(error);
+      }
+    };
 
     const addHikeToFavorites = async (hikeId) => {
       const userId = await AsyncStorage.getItem('id');
@@ -49,11 +75,7 @@ export default function HikeScreen(props) {
           // setHike(responseJson);
           console.log('res2', responseJson);
           alert('Added to favorites');
-          const setParamsAction = NavigationActions.setParams({
-            params: { value: 2 },
-            key: 'Profile',
-          });
-          props.navigation.dispatch(setParamsAction);
+          _retrieveKey();
         }
       )
       .catch((error) => {
@@ -63,7 +85,7 @@ export default function HikeScreen(props) {
     }
 
 
-    useEffect(() => _updateHike(), []);
+    useEffect(() => {_updateHike();}, []);
 
     const commentPOST = async (data) => {
       const userId = await AsyncStorage.getItem('id');
