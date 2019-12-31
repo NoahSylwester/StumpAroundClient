@@ -60,7 +60,7 @@ export default function BioModal(props) {
               <Button
                 title="Cancel"
                 onPress={() => {
-                  setModalVisibleState(!modalVisibleState);
+                  props.setModalVisibleState(!modalVisibleState);
                 }}>
               </Button>
             </View>
