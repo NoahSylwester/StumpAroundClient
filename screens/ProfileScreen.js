@@ -48,6 +48,7 @@ export default function ProfileScreen(props) {
   const _storeData = async (id) => {
     try {
       await AsyncStorage.setItem('id', id);
+      await AsyncStorage.setItem('ProfileKey', props.navigation.state.key)
     } catch (error) {
       console.log(error);
       // Error saving data
@@ -81,9 +82,10 @@ export default function ProfileScreen(props) {
     if (isPastInitialRender.current === true) {
       _updateUser();
       console.log('HERE', props.navigation.state.params);
+      console.log(props.navigation.state);
     }
     isPastInitialRender.current = true;
-  }, [usernameState, props.navigation.state.params]);
+  }, [usernameState, props.navigation.state]);
 
   const photoPUT = async (data) => {
     fetch(`https://stump-around.herokuapp.com/photo`, {
@@ -101,6 +103,7 @@ export default function ProfileScreen(props) {
       });
   };
   const bioPUT = async (data) => {
+    console.log(props.navigation.state);
     fetch(`https://stump-around.herokuapp.com/bio`, {
         method: 'PUT',
         headers: {
