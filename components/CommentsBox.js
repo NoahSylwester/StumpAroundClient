@@ -20,7 +20,7 @@ export default function CommentsBox(props) {
             <Text style={styles.commentsTitle}>
                 Comments
                   </Text>
-            {!props.isPastInitialRender.current ? <View /> : props.hike.comments.slice().reverse().map((element, i) => {
+            {props.isPastInitialRender.current ? props.hike.comments.slice().reverse().map((element, i) => {
                 return (
                     <View style={styles.comment} key={i}>
                         <View style={styles.commentHeader}>
@@ -43,7 +43,7 @@ export default function CommentsBox(props) {
                         </View>
                     </View>
                 )
-            })}
+            }) : <View />}
             <Button
                 title="New Comment"
                 onPress={() => props.setModalVisibleState(true)}
