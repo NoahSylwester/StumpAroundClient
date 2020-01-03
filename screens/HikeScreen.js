@@ -15,6 +15,7 @@ import {
 import styles from '../constants/MainStyles';
 import CommentsBox from '../components/CommentsBox';
 import { NavigationActions } from 'react-navigation';
+import Map from '../components/Map';
 
 
 export default function HikeScreen(props) {
@@ -182,6 +183,7 @@ export default function HikeScreen(props) {
                     {hike.summary}
                 </Text>
                 <CommentsBox isPastInitialRender={isPastInitialRender} hike={hike} navigation={props.navigation} setModalVisibleState={setModalVisibleState} />
+                <Map name={hike.name} summary={hike.summary} latitude={hike.latitude} longitude={hike.longitude} />
             </ScrollView>
         </View>
     );
