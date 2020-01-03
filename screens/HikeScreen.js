@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import styles from '../constants/MainStyles';
 import CommentsBox from '../components/CommentsBox';
+import CommentModal from '../components/CommentModal';
 import { NavigationActions } from 'react-navigation';
 import Map from '../components/Map';
 
@@ -126,45 +127,7 @@ export default function HikeScreen(props) {
 
     return (
         <View style={styles.container}>
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={modalVisibleState}
-            onRequestClose={() => {
-              alert('Modal has been closed.');
-            }}>
-            <TouchableOpacity activeOpacity={1} style={{marginTop: 22, height: "100%", backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => {
-                    setModalVisibleState(false);
-                  }}>
-              <View style={{backgroundColor: 'white', borderRadius: 5, padding: 20, width: '90%', margin: 20}}>
-                <Text style={{textAlign: 'center'}}>Comment:</Text>
-                <TextInput
-                  style={{
-                    padding: 10,
-                    marginTop: 20,
-                    textAlign: 'center',
-                  }}
-                  onChangeText={comment => setCommentState(comment)}
-                  value={commentState}
-                />
-                <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                  <Button
-                    title="Post"
-                    onPress={() => {
-                      commentPOST({ content: commentState, hike: hike._id })
-                      .then(() => _updateHike());
-                      setModalVisibleState(!modalVisibleState);
-                    }}></Button>
-                  <Button
-                    title="Cancel"
-                    onPress={() => {
-                      setModalVisibleState(!modalVisibleState);
-                    }}>
-                  </Button>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </Modal>
+          <CommentModal setModalVisibleState={setModalVisibleState} modalVisibleState={modalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateHike} hike={hike} />
 
             <ScrollView
             keyboardShouldPersistTaps='never'
