@@ -24,9 +24,56 @@ export default function LoginScreen(props) {
         confirm: '',
       })
 
+    const [validateState, setValidateState] = useState({
+        allFields: true,
+        validEmail: true,
+        confirmMatch: true,
+    })
+
+    const signUp = async () => {
+        const { username, email, password, confirm } = textState;
+        console.log(email.match(/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/g))
+        if (username === '' || email === '' || password === '') {
+            alert('All fields must be filled.');
+            setValidateState({ ...validateState, allFields: false, })
+            return;
+        }
+        else if (email.match(/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/g) === null) {
+            alert('Please enter a valid email.')
+            setValidateState({ ...validateState, validEmail: false, })
+            return;
+        }
+        else if (password !== confirm) {
+            alert('Passwords must match!')
+            setValidateState({ ...validateState, confirmMatch: false, })
+            return;
+        }
+        else {
+            fetch(`https://stump-around.herokuapp.com/api/register`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({ name: username, email, password }),
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                alert('Account created successfully');
+                props.navigation.navigate("Login");
+                }
+            )
+            .catch((error) => {
+                console.error(error);
+                alert('Add failed');
+            });
+        }
+    }
+
     const signUpButton = (
         <TouchableOpacity>
-            <Text onPress={() => props.navigation.navigate("Login")} style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
+            <Text onPress={() => signUp()} style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
                 Sign up
             </Text>
         </TouchableOpacity>
