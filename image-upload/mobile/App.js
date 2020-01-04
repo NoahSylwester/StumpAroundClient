@@ -1,14 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
 import { View, Text, Image, Button } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker from './node_modules/react-native-image-picker';
 
 export default class App extends React.Component {
   state = {
