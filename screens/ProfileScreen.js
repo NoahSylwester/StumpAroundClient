@@ -32,6 +32,9 @@ export default function ProfileScreen(props) {
   const _retrieveId = async () => {
     try {
       const username = await AsyncStorage.getItem('username');
+      const token = await AsyncStorage.getItem('token');
+      const email = await AsyncStorage.getItem('email');
+      console.log(username, token, email);
       if (username !== null) {
         setUsernameState(username);
         return;
@@ -56,8 +59,12 @@ export default function ProfileScreen(props) {
   };
 
   const _updateUser = async () => {
-    fetch(`https://stump-around.herokuapp.com/user/${usernameState}`, {
-        method: 'GET',
+    const token = await AsyncStorage.getItem('token');
+    fetch(`https://stump-around.herokuapp.com/user/secure`, {
+        method: 'POST',
+        headers: {
+          'x-access-token': token,
+        }
       })
       .then((response) => response.json())
       .then((responseJson) => {
@@ -81,17 +88,17 @@ export default function ProfileScreen(props) {
   useEffect(() => {
     if (isPastInitialRender.current === true) {
       _updateUser();
-      console.log('HERE', props.navigation.state.params);
-      console.log(props.navigation.state);
     }
     isPastInitialRender.current = true;
   }, [usernameState, props.navigation.state]);
 
   const photoPUT = async (data) => {
+    const token = await AsyncStorage.getItem('token');
     fetch(`https://stump-around.herokuapp.com/photo`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'x-access-token': token,
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(data),
@@ -103,11 +110,13 @@ export default function ProfileScreen(props) {
       });
   };
   const bioPUT = async (data) => {
+    const token = await AsyncStorage.getItem('token');
     console.log(props.navigation.state);
     fetch(`https://stump-around.herokuapp.com/bio`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'x-access-token': token,
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(data),
