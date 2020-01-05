@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
         marginLeft: '15%',
     },
     commentsContainer: {
+      width: '100%',
       padding: 20,
       paddingTop: 0,
       paddingBottom: 0,
