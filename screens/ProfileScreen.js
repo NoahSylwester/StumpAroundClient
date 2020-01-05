@@ -17,6 +17,7 @@ import {
 import styles from '../constants/MainStyles';
 import CommentModal from '../components/CommentModal';
 import CommentsBox from '../components/CommentsBox';
+import FriendsBox from '../components/FriendsBox';
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -179,6 +180,7 @@ export default function ProfileScreen(props) {
             onPress={() => setModalVisibleState(true)}
             style={styles.commentButton}
           ></Button>
+          <FriendsBox user={{...userState, friends: userState.friends || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
           <Text style={styles.hikesTitle}>
               Favorite Hikes
           </Text>

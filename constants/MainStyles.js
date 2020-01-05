@@ -190,6 +190,36 @@ const styles = StyleSheet.create({
     userLink: {
         color: 'green',
     },
+    friendsContainer: {
+      width: '50%',
+      maxHeight: 200,
+      padding: 20,
+      paddingTop: 0,
+      paddingBottom: 0,
+      margin: 20,
+      borderColor: 'black',
+      borderWidth: 0.5,
+      borderRadius: 5,
+    },
+    friend: {
+      padding: 5,
+      // borderColor: 'black',
+      // borderWidth: 0.5,
+      // borderRadius: 3,
+    },
+    friendHeader: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: 2,
+    },
+    friendPhoto: {
+      marginRight: 5,
+      marginBottom: 5,
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+  },
   });
   
   export default styles;
