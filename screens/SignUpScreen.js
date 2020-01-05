@@ -134,24 +134,3 @@ export default function LoginScreen(props) {
 LoginScreen.navigationOptions = {
   header: null,
 };
-
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//   },
-//   body: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   contentContainer: {
-//     paddingTop: 200,
-//   },
-//   title: {
-//     fontSize: 30,
-//     textAlign: 'center',
-//   },
-// });

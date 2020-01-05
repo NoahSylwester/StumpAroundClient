@@ -126,23 +126,3 @@ LoginScreen.navigationOptions = {
   header: null,
 };
 
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//   },
-//   body: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   contentContainer: {
-//     paddingTop: 230,
-//   },
-//   appTitle: {
-//     fontSize: 30,
-//     textAlign: 'center',
-//   },
-// });
