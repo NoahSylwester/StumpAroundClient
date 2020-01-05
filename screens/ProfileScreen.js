@@ -181,6 +181,14 @@ export default function ProfileScreen(props) {
                 style={styles.commentButton}
               ></Button>
           </View>
+          <Button
+                title="Logout" 
+                onPress={async () => {
+                  await AsyncStorage.clear();
+                  props.navigation.navigate('Auth');
+                }}
+                style={styles.commentButton}
+          ></Button>
         </View>
       </ScrollView>
     </View>
