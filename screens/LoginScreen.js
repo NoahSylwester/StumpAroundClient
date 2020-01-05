@@ -19,6 +19,7 @@ export default function LoginScreen(props) {
 
     const [textState, setTextState] = useState({
         username: '',
+        email: '',
         password: '',
       });
 
@@ -29,7 +30,7 @@ export default function LoginScreen(props) {
     );
 
     const signInButton = (
-      <TouchableOpacity onPress={() => signIn(textState.username)}>
+      <TouchableOpacity onPress={() => signIn()}>
         <Text style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
           Sign in
         </Text>
@@ -37,8 +38,11 @@ export default function LoginScreen(props) {
       // <Button title="Sign in" onPress={() => signIn(textState.username)} color="#00B100" />
   );
 
-    const _storeData = async (username) => {
+    const _storeData = async (username, email, token, id) => {
       try {
+        await AsyncStorage.setItem('token', token);
+        await AsyncStorage.setItem('email', email);
+        await AsyncStorage.setItem('id', id);
         await AsyncStorage.setItem('username', username);
       } catch (error) {
         console.log(error);
@@ -46,13 +50,39 @@ export default function LoginScreen(props) {
       }
     };
 
-    const signIn = (input) => {
-      let username = input;
-      if (username !== undefined) {
-        username = "Bigfoot"
+    const signIn = () => {
+      let username = textState.username;
+      let email = textState.email;
+      let password = textState.password;
+      if (username === '') {
+        username = "Bigfoot";
       }
-      _storeData(username);
-      props.navigation.navigate("Main")
+      if (email === '') {
+        email = "Basketball@nba.com";
+      }
+        fetch(`http://stump-around.herokuapp.com/api/authenticate`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          if (responseJson.error !== undefined) {
+            alert(responseJson.error);
+          }
+          else {
+            _storeData(username, email, responseJson.token, responseJson.userId);
+            props.navigation.navigate("Main")
+          }
+        }
+        )
+        .catch((error) => {
+            console.error(error);
+            alert('Add failed');
+        });
     }
 
     return (
@@ -69,9 +99,9 @@ export default function LoginScreen(props) {
                 </Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={username => setTextState({...textState, username})}
-                    placeholder={'Username'}
-                    value={textState.username}
+                    onChangeText={email => setTextState({...textState, email})}
+                    placeholder={'Email'}
+                    value={textState.email}
                 />
                 <TextInput
                     style={styles.textInput}
