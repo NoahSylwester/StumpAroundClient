@@ -15,6 +15,7 @@ import styles from '../constants/MainStyles';
 
 export default function CommentsBox(props) {
 
+    // console.log(props.hike);
     return (
         <View style={styles.commentsContainer}>
             <Text style={styles.commentsTitle}>

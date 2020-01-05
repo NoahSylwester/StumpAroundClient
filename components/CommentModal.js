@@ -27,6 +27,8 @@ export default function BioModal(props) {
         // _updateHike
         // hike
 
+        // when passed to profile think of hike as profile
+
         <Modal
             animationType="fade"
             transparent={true}
