@@ -93,6 +93,7 @@ export default function LoginScreen(props) {
                     </Text>
                     <TextInput
                         style={styles.textInput}
+                        autoCapitalize='none'
                         id="username"
                         onChangeText={username => setTextState({ ...textState, username })}
                         placeholder={'Username'}
@@ -100,6 +101,7 @@ export default function LoginScreen(props) {
                     />
                     <TextInput
                         style={styles.textInput}
+                        autoCapitalize='none'
                         id="email"
                         onChangeText={email => setTextState({ ...textState, email })}
                         placeholder={'Email'}
