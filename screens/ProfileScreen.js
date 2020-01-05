@@ -15,6 +15,8 @@ import {
   TextInput,
 } from 'react-native';
 import styles from '../constants/MainStyles';
+import CommentModal from '../components/CommentModal';
+import CommentsBox from '../components/CommentsBox';
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -28,6 +30,8 @@ export default function ProfileScreen(props) {
   const isPastInitialRender = useRef(false);
   const [modalVisibleState, setModalVisibleState] = useState(false);
   const [editBioState, setEditBioState] = useState(userState.bio);
+  const [commentsModalVisibleState, setCommentsModalVisibleState] = useState(false);
+  const [commentState, setCommentState] = useState('');
 
   const _retrieveId = async () => {
     try {
@@ -73,7 +77,7 @@ export default function ProfileScreen(props) {
         });
         _storeData(responseJson._id);
         setEditBioState(responseJson.bio);
-
+        
         }
       )
       .catch((error) => {
@@ -128,9 +132,29 @@ export default function ProfileScreen(props) {
       });
   };
 
+  const commentPOST = async (data) => {
+    const userId = await AsyncStorage.getItem('id');
+    const newData = { ...data, user: userId };
+    // console.log(newData);
+    fetch(`https://stump-around.herokuapp.com/profileComment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(newData),
+      })
+      .then((response) => response.json())
+      .then((responseJson) => console.log('responseJson'))
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <BioModal modalVisibleState={modalVisibleState} setModalVisibleState={setModalVisibleState} setEditBioState={setEditBioState} editBioState={editBioState} bioPUT={bioPUT} userState={userState} _updateUser={_updateUser} />
+      <CommentModal setModalVisibleState={setCommentsModalVisibleState} modalVisibleState={commentsModalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.profileContainer}>
@@ -159,7 +183,7 @@ export default function ProfileScreen(props) {
               Favorite Hikes
           </Text>
           <FavoriteHikes userState={userState} navigation={props.navigation} />
-          <View style={styles.commentsContainer}>
+          {/* <View style={styles.commentsContainer}>
               <Text style={styles.commentsTitle}>
                 Comments
               </Text>
@@ -180,7 +204,8 @@ export default function ProfileScreen(props) {
                 onPress={() => alert('pressed')}
                 style={styles.commentButton}
               ></Button>
-          </View>
+          </View> */}
+          <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} />
           <Button
                 title="Logout" 
                 onPress={async () => {
