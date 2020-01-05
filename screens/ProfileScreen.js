@@ -183,28 +183,6 @@ export default function ProfileScreen(props) {
               Favorite Hikes
           </Text>
           <FavoriteHikes userState={userState} navigation={props.navigation} />
-          {/* <View style={styles.commentsContainer}>
-              <Text style={styles.commentsTitle}>
-                Comments
-              </Text>
-              <View style={styles.comment}>
-                <View style={styles.commentHeader}>
-                  <Text>
-                    [comment header]
-                  </Text>
-                </View>
-                <View style={styles.commentBody}>
-                  <Text>
-                    [comment body]
-                  </Text>
-                </View>
-              </View>
-              <Button 
-                title="New Comment" 
-                onPress={() => alert('pressed')}
-                style={styles.commentButton}
-              ></Button>
-          </View> */}
           <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} />
           <Button
                 title="Logout" 

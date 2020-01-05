@@ -14,6 +14,8 @@ import {
   TextInput,
 } from 'react-native';
 import styles from '../constants/MainStyles';
+import CommentModal from '../components/CommentModal';
+import CommentsBox from '../components/CommentsBox';
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -24,6 +26,9 @@ export default function ClickedProfileScreen(props) {
   const [usernameState, setUsernameState] = useState('');
   const [userState, setUserState] = useState(props.navigation.getParam('user',{}));
   const isPastInitialRender = useRef(false);
+  const [commentsModalVisibleState, setCommentsModalVisibleState] = useState(false);
+  const [commentState, setCommentState] = useState('');
+  const [modalVisibleState, setModalVisibleState] = useState(false);
 
   const _updateUser = async () => {
     fetch(`https://stump-around.herokuapp.com/user/${userState.name}`, {
@@ -49,8 +54,28 @@ export default function ClickedProfileScreen(props) {
     isPastInitialRender.current = true;
   }, [userState]);
 
+  const commentPOST = async (data) => {
+    const userId = await AsyncStorage.getItem('id');
+    const newData = { ...data, user: userId };
+    // console.log(newData);
+    fetch(`https://stump-around.herokuapp.com/profileComment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(newData),
+      })
+      .then((response) => response.json())
+      .then((responseJson) => console.log('responseJson'))
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <View style={styles.container}>
+      <CommentModal setModalVisibleState={setCommentsModalVisibleState} modalVisibleState={commentsModalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
       <ScrollView contentContainerStyle={styles.clickedProfileContentContainer}>
         <View style={styles.profileContainer}>
           {/* <Image source={{ uri: "https://image.businessinsider.com/5a8c83d342e1cc57810ba9ee?width=1100&format=jpeg&auto=webp"}} style={styles.photo} /> */}
@@ -68,28 +93,7 @@ export default function ClickedProfileScreen(props) {
             Favorite Hikes
           </Text>
           <FavoriteHikes userState={userState} navigation={props.navigation} />
-          <View style={styles.commentsContainer}>
-              <Text style={styles.commentsTitle}>
-                Comments
-              </Text>
-              <View style={styles.comment}>
-                <View style={styles.commentHeader}>
-                  <Text>
-                    [comment header]
-                  </Text>
-                </View>
-                <View style={styles.commentBody}>
-                  <Text>
-                    [comment body]
-                  </Text>
-                </View>
-              </View>
-              <Button 
-                title="New Comment" 
-                onPress={() => alert('pressed')}
-                style={styles.commentButton}
-              ></Button>
-          </View>
+          <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} />
         </View>
       </ScrollView>
     </View>
