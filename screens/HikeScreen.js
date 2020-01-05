@@ -132,7 +132,8 @@ export default function HikeScreen(props) {
             <ScrollView
             keyboardShouldPersistTaps='never'
             style={styles.hikePageBody}
-            contentContainerStyle={styles.hikePageContentContainer}>
+            contentContainerStyle={styles.hikePageContentContainer}
+            >
                 {/* eventually source will be props.photo */}
                 <Image source={{ uri: hike.photo }} style={{width: '100%', height: 300, resizeMode: 'cover'}} />
                 <Text style={styles.hikeTitle}>
@@ -141,7 +142,7 @@ export default function HikeScreen(props) {
                 <Text style={styles.hikeLength}>
                     Length: {hike.length}
                 </Text>
-                <Button title="Add to favorites" onPress={() => {addHikeToFavorites(hike._id)}} color="blue" />
+                <Button color="#00B100" title="Add to favorites" onPress={() => {addHikeToFavorites(hike._id)}} />
                 <Text style={styles.summary}>
                     {hike.summary}
                 </Text>

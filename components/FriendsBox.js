@@ -27,7 +27,7 @@ export default function FriendsBox(props) {
                             <Image source={{ uri: element.photo }} style={styles.friendPhoto} />
                             <View>
                                 <TouchableOpacity onPress={() => props.navigation.navigate('ClickedProfile', { user: element })}>
-                                    <Text style={styles.userLink}>
+                                    <Text style={styles.friendLink}>
                                         {element.name}
                                     </Text>
                                 </TouchableOpacity>

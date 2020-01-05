@@ -49,13 +49,16 @@ export default function HikesScreen(props) {
 
     return (
                 <View style={styles.container}>
+                    <Text style={styles.hikesPageTitle}>
+                          Hikes
+                    </Text>
                     <ScrollView
                         keyboardShouldPersistTaps='never'
                         style={styles.hikePageBody}
-                        contentContainerStyle={styles.contentContainer}>
-                        <Text style={styles.pageTitle}>
+                        contentContainerStyle={styles.hikesPageContentContainer}>
+                        {/* <Text style={styles.pageTitle}>
                           Hikes
-                        </Text>
+                        </Text> */}
                         {dataState.hikes.map((hike, i) => (
                             <View style={styles.hikeContainer} key={i}>
                                 <Image source={{uri: hike.photo}} style={{ width: '100%', height: 200 }} />

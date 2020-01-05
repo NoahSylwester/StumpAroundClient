@@ -46,6 +46,7 @@ export default function CommentsBox(props) {
                 )
             }) : <View />}
             <Button
+                color='#00B100'
                 title="New Comment"
                 onPress={() => props.setModalVisibleState(true)}
                 style={styles.commentButton}

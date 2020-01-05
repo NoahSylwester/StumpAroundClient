@@ -93,7 +93,7 @@ export default function LoginScreen(props) {
             // contentContainerStyle={styles.contentContainer}
             >
               <View style={styles.formBox}>
-                <Image source={require('../assets/images/logoalt.png')} style={styles.logo} />
+                <Image source={require('../assets/images/stump.png')} style={styles.logo} />
                 <Text style={styles.title}>
                     StumpAround
                 </Text>
