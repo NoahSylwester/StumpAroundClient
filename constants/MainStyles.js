@@ -24,9 +24,18 @@ const styles = StyleSheet.create({
       fontSize: 50,
       textAlign: 'center',
     },
+    hikesPageTitle: {
+      marginTop: 60,
+      marginBottom: 30,
+      fontSize: 50,
+      textAlign: 'center',
+    },
     hikePageContentContainer: {
         paddingTop: 50,
         justifyContent: 'space-between'
+    },
+    hikesPageContentContainer: {
+      justifyContent: 'space-between'
     },
     contentContainer: {
         paddingTop: 230,
@@ -44,6 +53,8 @@ const styles = StyleSheet.create({
       marginTop: 30,
       width: 200,
       height: 200,
+      // borderColor: "#001a13",
+      // borderWidth: 2,
       borderRadius: 100,
     },
     username: {
@@ -54,9 +65,9 @@ const styles = StyleSheet.create({
     commentPhoto: {
         marginRight: 5,
         marginBottom: 5,
-        width: 30,
-        height: 30,
-        borderRadius: 15,
+        width: 50,
+        height: 50,
+        borderRadius: 25,
     },
     bio: {
       padding: 20,
@@ -102,9 +113,9 @@ const styles = StyleSheet.create({
       paddingTop: 0,
       paddingBottom: 0,
       margin: 20,
-      borderColor: 'green',
+      borderColor: 'black',
       borderWidth: 0.5,
-      borderRadius: 5,
+      // borderRadius: 5,
     },
     hikeTitle: {
         padding: 10,
@@ -151,15 +162,16 @@ const styles = StyleSheet.create({
         marginLeft: '15%',
     },
     commentsContainer: {
+      width: '100%',
       padding: 20,
       paddingTop: 0,
       paddingBottom: 0,
-      margin: 20,
-      borderColor: 'black',
-      borderWidth: 0.5,
-      borderRadius: 5,
+      // borderColor: 'black',
+      // borderWidth: 0.5,
+      // borderRadius: 5,
     },
     comment: {
+      marginTop: 4,
       padding: 5,
       borderColor: 'black',
       borderWidth: 0.5,
@@ -173,7 +185,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
     },
     commentBody: {
-      padding: 2,
+      padding: 5,
     },
     commentsTitle: {
       textAlign: 'center',
@@ -187,8 +199,43 @@ const styles = StyleSheet.create({
         fontSize: 10,
     },
     userLink: {
-        color: 'green',
+        fontSize: 16,
+        color: '#00B100',
     },
+    friendLink: {
+      fontSize: 16,
+      color: '#00B100',
+  },
+    friendsContainer: {
+      width: '50%',
+      maxHeight: 250,
+      padding: 20,
+      paddingTop: 0,
+      paddingBottom: 0,
+      margin: 20,
+      borderColor: 'black',
+      borderWidth: 0.5,
+      borderRadius: 5,
+    },
+    friend: {
+      padding: 5,
+      // borderColor: 'black',
+      // borderWidth: 0.5,
+      // borderRadius: 3,
+    },
+    friendHeader: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: 2,
+    },
+    friendPhoto: {
+      marginRight: 5,
+      marginBottom: 5,
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+  },
   });
   
   export default styles;

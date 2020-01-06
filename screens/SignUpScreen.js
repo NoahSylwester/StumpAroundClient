@@ -87,7 +87,7 @@ export default function LoginScreen(props) {
             // contentContainerStyle={styles.contentContainer}
             >
                 <View style={styles.formBox}>
-                <Image source={require('../assets/images/logoalt.png')} style={styles.logoSignUp} />
+                <Image source={require('../assets/images/stump.png')} style={styles.logoSignUp} />
                     <Text style={styles.title}>
                         Sign up
                     </Text>

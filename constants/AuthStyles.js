@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     logo: {
       position: 'absolute',
       top: -150,
-      width: '30%',
+      width: '50%',
       resizeMode: 'contain'
     },
     logoSignUp: {
       position: 'absolute',
       top: -180,
-      width: '30%',
+      width: '50%',
       resizeMode: 'contain'
     },
     body: {

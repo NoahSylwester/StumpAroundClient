@@ -17,6 +17,7 @@ import {
 import styles from '../constants/MainStyles';
 import CommentModal from '../components/CommentModal';
 import CommentsBox from '../components/CommentsBox';
+import FriendsBox from '../components/FriendsBox';
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -44,6 +45,7 @@ export default function ProfileScreen(props) {
         return;
       }
       else {
+        setUsernameState(null);
         console.log('No async storage for "username"');
       }
     } catch (error) {
@@ -64,6 +66,7 @@ export default function ProfileScreen(props) {
 
   const _updateUser = async () => {
     const token = await AsyncStorage.getItem('token');
+    console.log('token', token)
     fetch(`https://stump-around.herokuapp.com/user/secure`, {
         method: 'POST',
         headers: {
@@ -72,6 +75,7 @@ export default function ProfileScreen(props) {
       })
       .then((response) => response.json())
       .then((responseJson) => {
+        // console.log(responseJson);
         setUserState({
           ...responseJson,
         });
@@ -160,7 +164,8 @@ export default function ProfileScreen(props) {
         <View style={styles.profileContainer}>
           {/* <Image source={{ uri: "https://image.businessinsider.com/5a8c83d342e1cc57810ba9ee?width=1100&format=jpeg&auto=webp"}} style={styles.photo} /> */}
           <Image source={{ uri: userState.photo }} style={styles.photo} />
-          <Button 
+          <Button
+            color='#00B100'
             title="Change photo" 
             onPress={() => props.navigation.navigate("Camera")}
             style={styles.commentButton}
@@ -174,23 +179,26 @@ export default function ProfileScreen(props) {
           <Text style={styles.bio}>
             {userState.bio}
           </Text>
-          <Button 
+          <Button
+            color='#00B100'
             title="Edit bio" 
             onPress={() => setModalVisibleState(true)}
             style={styles.commentButton}
           ></Button>
+          <FriendsBox user={{...userState, friends: userState.friends || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
           <Text style={styles.hikesTitle}>
               Favorite Hikes
           </Text>
           <FavoriteHikes userState={userState} navigation={props.navigation} />
           <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} />
           <Button
-                title="Logout" 
-                onPress={async () => {
-                  await AsyncStorage.clear();
-                  props.navigation.navigate('Auth');
-                }}
-                style={styles.commentButton}
+            color='#00B100'
+            title="Logout" 
+            onPress={async () => {
+              await AsyncStorage.clear();
+              props.navigation.navigate('Auth');
+            }}
+            style={styles.commentButton}
           ></Button>
         </View>
       </ScrollView>
