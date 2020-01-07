@@ -9,8 +9,10 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
-  Button
+  Button,
+  Alert,
 } from 'react-native';
+import Loading from '../components/Loading';
 
 import { MonoText } from '../components/StyledText';
 import styles from '../constants/AuthStyles';
@@ -24,6 +26,8 @@ export default function LoginScreen(props) {
         confirm: '',
       })
 
+    const [loading, setLoading] = useState(false);
+      
     const [validateState, setValidateState] = useState({
         allFields: true,
         validEmail: true,
@@ -31,20 +35,30 @@ export default function LoginScreen(props) {
     })
 
     const signUp = async () => {
+        setLoading(true);
         const { username, email, password, confirm } = textState;
         console.log(email.match(/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/g))
         if (username === '' || email === '' || password === '') {
-            alert('All fields must be filled.');
+            Alert.alert('Error', 'All fields must be filled.',
+            [
+                {text: 'Ok', onPress: () => setLoading(false)},
+            ]);
             setValidateState({ ...validateState, allFields: false, })
             return;
         }
         else if (email.match(/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/g) === null) {
-            alert('Please enter a valid email.')
+            Alert.alert('Error', 'Please enter a valid email.',
+            [
+                {text: 'Ok', onPress: () => setLoading(false)},
+            ]);
             setValidateState({ ...validateState, validEmail: false, })
             return;
         }
         else if (password !== confirm) {
-            alert('Passwords must match!')
+            Alert.alert('Error', 'Passwords must match!',
+            [
+                {text: 'Ok', onPress: () => setLoading(false)},
+            ]);
             setValidateState({ ...validateState, confirmMatch: false, })
             return;
         }
@@ -60,13 +74,22 @@ export default function LoginScreen(props) {
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson);
-                alert('Account created successfully');
-                props.navigation.navigate("Login");
+                Alert.alert('Success', 'Account created successfully!',
+                [
+                    {text: 'Ok', onPress: () => {
+                        setLoading(false);
+                        props.navigation.navigate("Login");
+                    }
+                    },
+                ]);
                 }
             )
             .catch((error) => {
                 console.error(error);
-                alert('Add failed');
+                Alert.alert('Error', 'Add failed. Try again later.',
+                [
+                    {text: 'Ok', onPress: () => setLoading(false)},
+                ]);
             });
         }
     }
@@ -81,6 +104,7 @@ export default function LoginScreen(props) {
 
     return (
       <ImageBackground source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')} style={{width: '100%', height: '100%'}}>
+          <Loading loading={loading} setLoading={setLoading} />
             <View
                 keyboardShouldPersistTaps='never'
                 style={styles.body}
