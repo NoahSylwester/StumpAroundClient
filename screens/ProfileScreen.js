@@ -23,6 +23,7 @@ import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import FavoriteHikes from '../components/FavoriteHikes';
 import BioModal from '../components/BioModal';
+import CameraModal from '../components/CameraModal';
 
 export default function ProfileScreen(props) {
 
@@ -33,6 +34,7 @@ export default function ProfileScreen(props) {
   const [editBioState, setEditBioState] = useState(userState.bio);
   const [commentsModalVisibleState, setCommentsModalVisibleState] = useState(false);
   const [commentState, setCommentState] = useState('');
+  const [cameraModalVisibleState, setCameraModalVisibleState] = useState(false);
 
   const _retrieveId = async () => {
     try {
@@ -159,6 +161,7 @@ export default function ProfileScreen(props) {
     <View style={styles.container}>
       <BioModal modalVisibleState={modalVisibleState} setModalVisibleState={setModalVisibleState} setEditBioState={setEditBioState} editBioState={editBioState} bioPUT={bioPUT} userState={userState} _updateUser={_updateUser} />
       <CommentModal setModalVisibleState={setCommentsModalVisibleState} modalVisibleState={commentsModalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
+      <CameraModal modalVisibleState={cameraModalVisibleState} setModalVisibleState={setCameraModalVisibleState} />
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.profileContainer}>
@@ -167,7 +170,7 @@ export default function ProfileScreen(props) {
           <Button
             color='#00B100'
             title="Change photo" 
-            onPress={() => props.navigation.navigate("Camera")}
+            onPress={() => setCameraModalVisibleState(true)}
             style={styles.commentButton}
           ></Button>
           <Text style={styles.username}>
