@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  AsyncStorage,
   View,
 } from 'react-native';
 import { Constants } from 'expo';
@@ -140,7 +141,7 @@ export default class CameraUpload extends Component {
     }
   };
 
- uploadImageAsync(pictureuri) {
+ uploadImageAsync = async (pictureuri) => {
   let apiUrl = 'http://stump-around.herokuapp.com/profileImageUpload';
 
     var data = new FormData();  
@@ -149,16 +150,19 @@ export default class CameraUpload extends Component {
       name: 'file',
       type: 'image/jpg'
     })
+    const token = await AsyncStorage.getItem('token');
 
     fetch(apiUrl, {  
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
+        'x-access-token': token,
       },
       method: 'POST',
       body: data
     }).then(
       response => {
+        this.props.setUserState(response);
         this.props.setModalVisibleState(false);
         console.log('success')
         console.log(response)
