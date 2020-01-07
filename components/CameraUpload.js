@@ -159,12 +159,15 @@ export default class CameraUpload extends Component {
       body: data
     }).then(
       response => {
+        this.props.setModalVisibleState(false);
         console.log('success')
         console.log(response)
       }
       ).catch(err => {
-      console.log('error')
-      console.log(err)
+        this.props.setModalVisibleState(false);
+        console.log('error')
+        console.log(err)
+
     } )
 
 

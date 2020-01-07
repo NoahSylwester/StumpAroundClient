@@ -19,11 +19,11 @@ export default function CameraModal(props) {
         onRequestClose={() => {
           alert('Modal has been closed.');
         }}>
-        <TouchableOpacity activeOpacity={1} style={{marginTop: 22, height: "100%", backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => {
+        <TouchableOpacity activeOpacity={1} style={{height: "100%", backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => {
                 props.setModalVisibleState(false);
               }}>
-          <View style={{backgroundColor: 'white', borderRadius: 5, padding: 20, width: '90%', margin: 20}}>
-            <CameraUpload />
+          <View style={{backgroundColor: 'white', borderRadius: 5, padding: 20, width: '90%', }}>
+            <CameraUpload setModalVisibleState={props.setModalVisibleState} />
             <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
               <Button
                 title="Cancel"
