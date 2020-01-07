@@ -54,27 +54,27 @@ export default class CameraExample extends React.Component {
 
   tempSendPhoto = async () => {
     console.log(this.state.captures);
-    const data = new FormData();
+  //   const data = new FormData();
 
-    data.append('name', 'avatar');
-    data.append('fileData', {
-     uri : response.uri,
-     type: response.type,
-     name: response.fileName
-    });
+  //   data.append('name', 'avatar');
+  //   data.append('fileData', {
+  //    uri : response.uri,
+  //    type: response.type,
+  //    name: response.fileName
+  //   });
 
-    const config = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-      body: data,
-    };
+  //   const config = {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'multipart/form-data',
+  //     },
+  //     body: data,
+  //   };
 
-    fetch("http://localhost:3000/upload", config).then((checkStatusAndGetJSONResponse)=>{
-      console.log(checkStatusAndGetJSONResponse);
-    }).catch((err)=>{console.log(err)});
+  //   fetch("http://localhost:3000/upload", config).then((checkStatusAndGetJSONResponse)=>{
+  //     console.log(checkStatusAndGetJSONResponse);
+  //   }).catch((err)=>{console.log(err)});
   };
 
   componentWillMount() {
