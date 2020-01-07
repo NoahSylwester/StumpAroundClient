@@ -11,7 +11,9 @@ import {
   Image,
   Button,
   AsyncStorage,
+  Alert,
 } from 'react-native';
+import Loading from '../components/Loading';
 import styles from '../constants/AuthStyles';
 
 
@@ -22,6 +24,8 @@ export default function LoginScreen(props) {
         email: '',
         password: '',
       });
+
+    const [loading, setLoading] = useState(false);
 
     const signUpButton = (
         <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
@@ -51,6 +55,7 @@ export default function LoginScreen(props) {
     };
 
     const signIn = () => {
+      setLoading(true);
       let username = textState.username;
       let email = textState.email;
       let password = textState.password;
@@ -71,22 +76,30 @@ export default function LoginScreen(props) {
         .then((response) => response.json())
         .then((responseJson) => {
           if (responseJson.error !== undefined) {
-            alert(responseJson.error);
+            Alert.alert('Error logging in', responseJson.error,
+            [
+              {text: 'Ok', onPress: () => setLoading(false)},
+            ]);
           }
           else {
             _storeData(username, email, responseJson.token, responseJson.userId);
-            props.navigation.navigate("Main")
+            setLoading(false);
+            props.navigation.navigate("Main");
           }
         }
         )
         .catch((error) => {
             console.error(error);
-            alert('Add failed');
+            Alert.alert('Error logging in', "An error occurred. Try again later.",
+            [
+              {text: 'Ok', onPress: () => setLoading(false)},
+            ]);
         });
     }
 
     return (
       <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/images/katie-moum-GsVvcyoX6VY-unsplash.jpg')}>
+        <Loading loading={loading} setLoading={setLoading} />
             <View
             keyboardShouldPersistTaps='never'
             style={styles.loginPageBody}
