@@ -161,12 +161,13 @@ export default function ProfileScreen(props) {
     <View style={styles.container}>
       <BioModal modalVisibleState={modalVisibleState} setModalVisibleState={setModalVisibleState} setEditBioState={setEditBioState} editBioState={editBioState} bioPUT={bioPUT} userState={userState} _updateUser={_updateUser} />
       <CommentModal setModalVisibleState={setCommentsModalVisibleState} modalVisibleState={commentsModalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
-      <CameraModal modalVisibleState={cameraModalVisibleState} setModalVisibleState={setCameraModalVisibleState} setUserState={setUserState} />
+      <CameraModal modalVisibleState={cameraModalVisibleState} setModalVisibleState={setCameraModalVisibleState} setUserState={setUserState} userState={userState}/>
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.profileContainer}>
           {/* <Image source={{ uri: "https://image.businessinsider.com/5a8c83d342e1cc57810ba9ee?width=1100&format=jpeg&auto=webp"}} style={styles.photo} /> */}
           <Image source={{ uri: userState.photo }} style={styles.photo} />
+          {/* <Button title="query" onPress={()=>console.log(userState)} /> */}
           <Button
             color='#00B100'
             title="Change photo" 

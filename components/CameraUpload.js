@@ -161,13 +161,14 @@ export default class CameraUpload extends Component {
       method: 'POST',
       body: data
     }).then(
-      response => {
-        this.props.setUserState(response);
+      response => response.json()
+      ).then((responseJson) => {
+        console.log(responseJson.photo)
+        this.props.setUserState({ ...this.props.userState, photo: responseJson.photo });
         this.props.setModalVisibleState(false);
         console.log('success')
-        console.log(response)
-      }
-      ).catch(err => {
+      })
+      .catch(err => {
         this.props.setModalVisibleState(false);
         console.log('error')
         console.log(err)
