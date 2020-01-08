@@ -23,7 +23,7 @@ export default function CameraModal(props) {
                 props.setModalVisibleState(false);
               }}>
           <View style={{backgroundColor: 'white', borderRadius: 5, padding: 20, width: '90%', }}>
-            <CameraUpload setModalVisibleState={props.setModalVisibleState} />
+            <CameraUpload setModalVisibleState={props.setModalVisibleState} setUserState={props.setUserState} />
             <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
               <Button
                 title="Cancel"

@@ -161,7 +161,7 @@ export default function ProfileScreen(props) {
     <View style={styles.container}>
       <BioModal modalVisibleState={modalVisibleState} setModalVisibleState={setModalVisibleState} setEditBioState={setEditBioState} editBioState={editBioState} bioPUT={bioPUT} userState={userState} _updateUser={_updateUser} />
       <CommentModal setModalVisibleState={setCommentsModalVisibleState} modalVisibleState={commentsModalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
-      <CameraModal modalVisibleState={cameraModalVisibleState} setModalVisibleState={setCameraModalVisibleState} />
+      <CameraModal modalVisibleState={cameraModalVisibleState} setModalVisibleState={setCameraModalVisibleState} setUserState={setUserState} />
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.profileContainer}>
