@@ -11,6 +11,8 @@ import HikesScreen from '../screens/HikesScreen';
 import HikeScreen from '../screens/HikeScreen';
 import CameraScreen from '../screens/camerascreen';
 import ClickedProfileScreen from '../screens/ClickedProfileScreen';
+import StumpsScreen from '../screens/StumpsScreen';
+import StumpScreen from '../screens/StumpScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -135,14 +137,33 @@ HikesStack.navigationOptions = {
   ),
 };
 
+const StumpsStack = createStackNavigator(
+  {
+    Stumps: StumpsScreen,
+    Stump: StumpScreen,
+  },
+  config
+);
+
+StumpsStack.navigationOptions = {
+  tabBarLabel: 'Stumps',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+  ),
+};
+
+StumpsStack.path = '';
+
+
 
 const tabNavigator = createBottomTabNavigator({
   ProfileStack,
   // SignUpStack,
-  SettingsStack,
+  // SettingsStack,
   // LoginStack,
   HikesStack,
-  CameraStack,
+  StumpsStack,
+  // CameraStack,
 });
 
 tabNavigator.path = '';
