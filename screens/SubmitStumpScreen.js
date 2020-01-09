@@ -161,7 +161,7 @@ export default function StumpScreen(props) {
           );
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} >
             <Text style={styles.hikesPageTitle}>
                 Submit a Stump
             </Text>
