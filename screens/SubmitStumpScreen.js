@@ -14,6 +14,7 @@ import {
   TextInput,
   Modal,
 } from 'react-native';
+import { Constants } from 'expo';
 import styles from '../constants/MainStyles';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -130,6 +131,11 @@ export default function StumpScreen(props) {
             name: 'file',
             type: 'image/jpg'
           })
+          data.append('data', {
+            ...textState,
+            tags,
+            ...coordinates,
+        })
           const token = await AsyncStorage.getItem('token');
           
       
@@ -140,11 +146,7 @@ export default function StumpScreen(props) {
               'x-access-token': token,
             },
             method: 'POST',
-            body: {
-                ...textState,
-                tags,
-                ...coordinates,
-            }
+            body: data
           }).then(
             response => response.json()
             ).then((responseJson) => {
@@ -161,7 +163,7 @@ export default function StumpScreen(props) {
           );
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} >
             <Text style={styles.hikesPageTitle}>
                 Submit a Stump
             </Text>
