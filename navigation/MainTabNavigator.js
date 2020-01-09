@@ -12,6 +12,7 @@ import HikeScreen from '../screens/HikeScreen';
 import CameraScreen from '../screens/camerascreen';
 import ClickedProfileScreen from '../screens/ClickedProfileScreen';
 import StumpsScreen from '../screens/StumpsScreen';
+import SubmitStumpScreen from '../screens/SubmitStumpScreen';
 import StumpScreen from '../screens/StumpScreen';
 
 const config = Platform.select({
@@ -139,6 +140,7 @@ HikesStack.navigationOptions = {
 
 const StumpsStack = createStackNavigator(
   {
+    Submit: SubmitStumpScreen,
     Stumps: StumpsScreen,
     Stump: StumpScreen,
   },
