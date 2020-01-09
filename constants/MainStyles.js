@@ -236,6 +236,61 @@ const styles = StyleSheet.create({
       height: 60,
       borderRadius: 30,
   },
+  renderContainer: {
+    borderRadius: 3,
+    elevation: 2,
+    marginTop: 30,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
+    shadowRadius: 5,
+    width: '100%',
+  },
+  renderImageContainer: {
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    overflow: 'hidden',
+  },
+  renderImage: {
+    borderRadius: 3,
+    // elevation: 2,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      height: 4,
+      width: 4,
+    },
+    shadowRadius: 5,
+      width: '100%',
+      height: 300,
+      resizeMode: 'cover'
+    },
+    submitStumpButtonWrapper: {
+      marginTop: 30,
+    },
+    tagContainer: {
+      minHeight: 60,
+      marginTop: 20,
+      marginBottom: 10,
+      padding: 10, 
+      flexDirection: 'row', 
+      justifyContent: 'center', 
+      flexWrap: 'wrap' 
+    },
+    tagWrapper: { 
+      textAlign: 'center',
+      justifyContent: 'center',
+      borderRadius: 5,
+      margin: 5,
+      padding: 5,
+      backgroundColor: "#00B100",
+    },
+    tagText: {
+      color: 'white',
+    },
   });
   
   export default styles;
