@@ -63,7 +63,7 @@ export default function LoginScreen(props) {
             return;
         }
         else {
-            fetch(`https://stump-around.herokuapp.com/api/register`, {
+            fetch(`http://stump-around.herokuapp.com/api/register`, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
