@@ -236,6 +236,10 @@ const styles = StyleSheet.create({
       height: 60,
       borderRadius: 30,
   },
+  submitPageContentContainer: {
+    // paddingTop: 50,
+    justifyContent: 'space-between'
+  },
   renderContainer: {
     borderRadius: 3,
     elevation: 2,
@@ -264,9 +268,9 @@ const styles = StyleSheet.create({
       width: 4,
     },
     shadowRadius: 5,
-      width: '100%',
-      height: 300,
-      resizeMode: 'cover'
+    width: '100%',
+    height: 300,
+    resizeMode: 'cover'
     },
     submitStumpButtonWrapper: {
       marginTop: 30,
@@ -287,6 +291,13 @@ const styles = StyleSheet.create({
       margin: 5,
       padding: 5,
       backgroundColor: "#00B100",
+      // shadowColor: 'rgba(0,0,0,1)',
+      // shadowOpacity: 0.2,
+      // shadowOffset: {
+      //   height: 0,
+      //   width: 0,
+      // },
+      // shadowRadius: 5,
     },
     tagText: {
       color: 'white',

@@ -109,7 +109,7 @@ export default function StumpScreen(props) {
         }
       };
 
-    const stumpPOST = async () => {
+    const stumpCreationRequest = async () => {
         if (coordinates.latitude === null || coordinates.longitude === null) {
             return alert('Please enable location permissions to submit stumps.');
         }
@@ -122,35 +122,72 @@ export default function StumpScreen(props) {
         if (image === null) {
             return alert('Please upload a picture for your stump.');
         }
+        const stumpId = await stumpPOST();
+        console.log(stumpId);
+        if (stumpId.error === undefined) {
+          await stumpPhotoPUT(stumpId);
+        }
+    };
 
-        let apiUrl = 'http://stump-around.herokuapp.com/stump';
+    const stumpPOST = async () => {
+      let apiUrl = 'http://stump-around.herokuapp.com/stump/';
+          const data = {
+            name: textState.name,
+            summary: textState.summary,
+            ...coordinates,
+            tags,
+          }
+          console.log(data)
+          const token = await AsyncStorage.getItem('token');
+          fetch(apiUrl, {  
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'x-access-token': token,
+            },
+            method: 'POST',
+            body: JSON.stringify(data)
+          }).then(
+            response => {
+              console.log(response)
+              return response.json();
+            }
+            ).then((responseJson) => {
+              console.log(responseJson)
+              return responseJson;
+            })
+            .catch(err => {
+              console.log('error')
+              console.log(err)
+            })
+    }
+
+    const stumpPhotoPUT = async (stumpId) => {
+      let apiUrl = 'http://stump-around.herokuapp.com/stump/image/' + stumpId;
       
           var data = new FormData();  
           data.append('file', {  
             uri: image,
             name: 'file',
-            type: 'image/jpg'
+            type: 'image/jpeg'
           })
-          data.append('data', {
-            ...textState,
-            tags,
-            ...coordinates,
-        })
           const token = await AsyncStorage.getItem('token');
-          
-      
+          console.log('prePUT');
           fetch(apiUrl, {  
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'multipart/form-data',
               'x-access-token': token,
             },
-            method: 'POST',
+            method: 'PUT',
             body: data
           }).then(
-            response => response.json()
+            response => {
+              console.log(response)
+              return response.json();
+            }
             ).then((responseJson) => {
-              console.log('success')
+              console.log(responseJson)
             })
             .catch(err => {
               console.log('error')
@@ -170,7 +207,7 @@ export default function StumpScreen(props) {
             <ScrollView
                 keyboardShouldPersistTaps='never'
                 style={styles.hikePageBody}
-                contentContainerStyle={styles.hikePageContentContainer}
+                contentContainerStyle={styles.submitPageContentContainer}
             >
                 {image ? _renderImage : <Image source={require('../assets/images/angelina-hoeppner-w79t8zUj2Yo-unsplash.jpg')} style={styles.renderImage} />}
                 {uploading ? _maybeRenderUploadingOverlay : <View />}
@@ -235,7 +272,7 @@ export default function StumpScreen(props) {
                 <View style={styles.submitStumpButtonWrapper}>
                     <Button 
                         color='#00B100'
-                        onPress={stumpPOST}
+                        onPress={stumpCreationRequest}
                         title="Submit your stump"
                     />
                 </View>

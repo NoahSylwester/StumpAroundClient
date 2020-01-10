@@ -15,12 +15,26 @@ import styles from '../constants/MainStyles';
 
 export default function CommentsBox(props) {
 
+    const commentGET = (comment) => {
+        fetch(`https://stump-around.herokuapp.com/comment/${comment._id}`, {
+            method: 'GET',
+          })
+          .then((response) => response.json())
+          .then((responseJson) => {
+              // setReplies(responseJson);
+              // console.log('res1', responseJson);
+            }
+          )
+          .catch((error) => {
+            console.error(error);
+          });
+    }
     // console.log(props.hike);
     return (
         <View style={styles.commentsContainer}>
             <Text style={styles.commentsTitle}>
                 Comments
-                  </Text>
+            </Text>
             {props.isPastInitialRender.current ? props.hike.comments.slice().reverse().map((element, i) => {
                 return (
                     <View style={styles.comment} key={i}>
@@ -37,11 +51,11 @@ export default function CommentsBox(props) {
                                 </Text>
                             </View>
                         </View>
-                        <View style={styles.commentBody}>
+                        <TouchableOpacity onPress={commentGET} activeOpacity={1} style={styles.commentBody}>
                             <Text>
                                 {element.content}
                             </Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 )
             }) : <View />}
