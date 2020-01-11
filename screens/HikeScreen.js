@@ -146,8 +146,8 @@ export default function HikeScreen(props) {
                 <Text style={styles.summary}>
                     {hike.summary}
                 </Text>
-                <CommentsBox isPastInitialRender={isPastInitialRender} hike={hike} navigation={props.navigation} setModalVisibleState={setModalVisibleState} />
                 <Map name={hike.name} summary={hike.summary} latitude={hike.latitude} longitude={hike.longitude} />
+                <CommentsBox isPastInitialRender={isPastInitialRender} hike={hike} navigation={props.navigation} setModalVisibleState={setModalVisibleState} />
             </ScrollView>
         </View>
     );
