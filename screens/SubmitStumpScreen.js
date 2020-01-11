@@ -1,4 +1,3 @@
-import * as WebBrowser from 'expo-web-browser';
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Image,
@@ -13,12 +12,14 @@ import {
   ActivityIndicator,
   TextInput,
   Modal,
+  Alert,
 } from 'react-native';
 import { Constants } from 'expo';
 import styles from '../constants/MainStyles';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from "expo-location";
+import Loading from '../components/Loading';
 
 export default function StumpScreen(props) {
 
@@ -37,6 +38,7 @@ export default function StumpScreen(props) {
         altitude: null,
     })
     const [locationPermission, setLocationPermission] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     _getLocationAsync = async () => {
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -110,6 +112,7 @@ export default function StumpScreen(props) {
       };
 
     const stumpCreationRequest = async () => {
+      setLoading(true);
         if (coordinates.latitude === null || coordinates.longitude === null) {
             return alert('Please enable location permissions to submit stumps.');
         }
@@ -124,7 +127,25 @@ export default function StumpScreen(props) {
         }
         const stumpId = await stumpPOST();
         const response = await stumpPhotoPUT(stumpId);
-        return response;
+        console.log(response);
+        if (response.success !== 1 ) {
+          Alert.alert('Error', "There was an error submitting your stump. Please try again later.",
+          [
+            {text: 'Ok', onPress: () => {
+              setLoading(false);
+              props.navigation.navigate('Stumps');
+            }},
+          ]);
+        }
+        else {
+          Alert.alert('Stump Around!', "Your stump was successfully created!",
+          [
+            {text: 'Ok', onPress: () => {
+              setLoading(false);
+              props.navigation.navigate('Stumps');
+            }},
+          ]);
+        }
     };
 
     const stumpPOST = async () => {
@@ -176,6 +197,7 @@ export default function StumpScreen(props) {
 
     return (
         <View style={styles.container} >
+          <Loading loading={loading} setLoading={setLoading} />
             <Text style={styles.hikesPageTitle}>
                 Submit a Stump
             </Text>
