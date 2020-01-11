@@ -123,10 +123,8 @@ export default function StumpScreen(props) {
             return alert('Please upload a picture for your stump.');
         }
         const stumpId = await stumpPOST();
-        console.log(stumpId);
-        if (stumpId.error === undefined) {
-          await stumpPhotoPUT(stumpId);
-        }
+        const response = await stumpPhotoPUT(stumpId);
+        return response;
     };
 
     const stumpPOST = async () => {
@@ -137,9 +135,8 @@ export default function StumpScreen(props) {
             ...coordinates,
             tags,
           }
-          console.log(data)
           const token = await AsyncStorage.getItem('token');
-          fetch(apiUrl, {  
+          const response = await fetch(apiUrl, {  
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
@@ -147,19 +144,8 @@ export default function StumpScreen(props) {
             },
             method: 'POST',
             body: JSON.stringify(data)
-          }).then(
-            response => {
-              console.log(response)
-              return response.json();
-            }
-            ).then((responseJson) => {
-              console.log(responseJson)
-              return responseJson;
-            })
-            .catch(err => {
-              console.log('error')
-              console.log(err)
-            })
+          })
+          return response.json();
     }
 
     const stumpPhotoPUT = async (stumpId) => {
@@ -172,8 +158,7 @@ export default function StumpScreen(props) {
             type: 'image/jpeg'
           })
           const token = await AsyncStorage.getItem('token');
-          console.log('prePUT');
-          fetch(apiUrl, {  
+          const response = await fetch(apiUrl, {  
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'multipart/form-data',
@@ -181,18 +166,8 @@ export default function StumpScreen(props) {
             },
             method: 'PUT',
             body: data
-          }).then(
-            response => {
-              console.log(response)
-              return response.json();
-            }
-            ).then((responseJson) => {
-              console.log(responseJson)
-            })
-            .catch(err => {
-              console.log('error')
-              console.log(err)
-            })
+          });
+          return response.json();
         };
 
     const _renderImage = (

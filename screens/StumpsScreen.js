@@ -41,9 +41,15 @@ export default function StumpsScreen(props) {
 
     return (
               <View style={styles.container}>
-                  <Text style={styles.hikesPageTitle}>
+                  <Text style={styles.stumpsPageTitle}>
                         Stumps
                   </Text>
+                  <Button 
+                    title="Submit a Stump"
+                    onPress={() => props.navigation.navigate('Submit')}
+                    style={styles.stumpsButton}
+                    color='#00B100'
+                  />
                   <ScrollView
                       keyboardShouldPersistTaps='never'
                       style={styles.hikePageBody}

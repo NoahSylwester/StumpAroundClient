@@ -236,6 +236,15 @@ const styles = StyleSheet.create({
       height: 60,
       borderRadius: 30,
   },
+  stumpsPageTitle: {
+    marginTop: 60,
+    marginBottom: 0,
+    fontSize: 50,
+    textAlign: 'center',
+  },
+  stumpsButton: {
+    margin: 5,
+  },
   submitPageContentContainer: {
     // paddingTop: 50,
     justifyContent: 'space-between'

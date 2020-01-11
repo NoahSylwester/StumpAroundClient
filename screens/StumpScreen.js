@@ -13,7 +13,10 @@ import {
   Modal,
 } from 'react-native';
 import styles from '../constants/MainStyles';
-
+import CommentsBox from '../components/CommentsBox';
+import CommentModal from '../components/CommentModal';
+import { NavigationActions } from 'react-navigation';
+import Map from '../components/Map';
 
 
 export default function StumpScreen(props) {
@@ -90,7 +93,7 @@ export default function StumpScreen(props) {
       const userId = await AsyncStorage.getItem('id');
       const newData = { ...data, user: userId };
       // console.log(newData);
-      fetch(`https://stump-around.herokuapp.com/comment`, {
+      fetch(`https://stump-around.herokuapp.com/stumpComment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -98,8 +101,12 @@ export default function StumpScreen(props) {
           },
           body: JSON.stringify(newData),
         })
-        .then((response) => response.json())
-        .then((responseJson) => console.log('responseJson'))
+        .then((response) => {
+          console.log(response);
+          return response.json()
+        }
+        )
+        .then((responseJson) => console.log(responseJson))
         .catch((error) => {
           console.error(error);
         });
@@ -124,7 +131,7 @@ export default function StumpScreen(props) {
 
     return (
         <View style={styles.container}>
-          <CommentModal setModalVisibleState={setModalVisibleState} modalVisibleState={modalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateStump={_updateStump} hike={stump} />
+          <CommentModal setModalVisibleState={setModalVisibleState} modalVisibleState={modalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateStump} hike={stump} />
 
             <ScrollView
             keyboardShouldPersistTaps='never'
