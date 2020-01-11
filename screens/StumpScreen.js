@@ -138,15 +138,41 @@ export default function StumpScreen(props) {
             style={styles.hikePageBody}
             contentContainerStyle={styles.hikePageContentContainer}
             >
-                {/* eventually source will be props.photo */}
                 <Image source={{ uri: stump.photo }} style={{width: '100%', height: 300, resizeMode: 'cover'}} />
                 <Text style={styles.hikeTitle}>
                     {stump.name}
                 </Text>
+                <View style={styles.friend}>
+                      <View style={styles.friendHeader}>
+                          <Image source={{ uri: stump.user.photo }} style={styles.friendPhoto} />
+                          <View>
+                              <TouchableOpacity onPress={() => props.navigation.navigate('ClickedProfile', { user: stump.user })}>
+                                  <Text style={styles.friendLink}>
+                                      {stump.user.name}
+                                  </Text>
+                              </TouchableOpacity>
+                          </View>
+                      </View>
+                  </View>
                 {/* <Button color="#00B100" title="Add to favorites" onPress={() => {addHikeToFavorites(stump._id)}} /> */}
                 <Text style={styles.summary}>
                     {stump.summary}
                 </Text>
+                <View style={styles.tagContainer}>
+                        {stump.tags.length !== 0 ? stump.tags.map((element, i) => {
+                            return (
+                                <TouchableOpacity
+                                    activeOpacity={1}
+                                    key={i}
+                                    style={styles.tagWrapper}
+                                >
+                                    <Text style={styles.tagText}>
+                                        {element}
+                                    </Text>
+                                </TouchableOpacity>
+                            )
+                        }) : <View style={{justifyContent: 'center'}}><Text>No tags.</Text></View>}
+                    </View>
                 <CommentsBox isPastInitialRender={isPastInitialRender} hike={stump} navigation={props.navigation} setModalVisibleState={setModalVisibleState} />
                 <Map name={stump.name} summary={stump.summary} latitude={stump.latitude} longitude={stump.longitude} />
             </ScrollView>
