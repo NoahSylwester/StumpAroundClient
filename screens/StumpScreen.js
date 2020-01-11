@@ -173,8 +173,8 @@ export default function StumpScreen(props) {
                             )
                         }) : <View style={{justifyContent: 'center'}}><Text>No tags.</Text></View>}
                     </View>
+                    <Map name={stump.name} summary={stump.summary} latitude={stump.latitude} longitude={stump.longitude} />
                 <CommentsBox isPastInitialRender={isPastInitialRender} hike={stump} navigation={props.navigation} setModalVisibleState={setModalVisibleState} />
-                <Map name={stump.name} summary={stump.summary} latitude={stump.latitude} longitude={stump.longitude} />
             </ScrollView>
         </View>
     );
