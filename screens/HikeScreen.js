@@ -15,6 +15,7 @@ import {
 import styles from '../constants/MainStyles';
 import CommentsBox from '../components/CommentsBox';
 import CommentModal from '../components/CommentModal';
+import ReplyModal from '../components/ReplyModal';
 import { NavigationActions } from 'react-navigation';
 import Map from '../components/Map';
 
@@ -31,6 +32,8 @@ export default function HikeScreen(props) {
 
     const [hike, setHike] = useState(props.navigation.getParam('hike',{}));
     const [modalVisibleState, setModalVisibleState] = useState(false);
+    const [replyModalVisibleState, setReplyModalVisibleState] = useState(false);
+    const [replyData, setReplyData] = useState({});
     const [commentState, setCommentState] = useState('');
     const isPastInitialRender = useRef(false);
     const [ProfileKey, setProfileKey] = useState('');
@@ -108,6 +111,21 @@ export default function HikeScreen(props) {
         });
     };
 
+    const replyPOST = async (data) => {
+      // data should have property content, repliedTo, stump||hike||profile
+      // {content: '', repliedTo: props.parent, [props.screen.type]: props.screen._id}
+      const userId = await AsyncStorage.getItem('id');
+      const newData = { ...data, user: userId };
+      const response = await fetch(`https://stump-around.herokuapp.com/reply`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(newData),
+          })
+      return response.json();
+  };
+
     const _updateHike = () => {
       isPastInitialRender.current = true;
       // console.log('id', hike._id);
@@ -128,6 +146,7 @@ export default function HikeScreen(props) {
     return (
         <View style={styles.container}>
           <CommentModal setModalVisibleState={setModalVisibleState} modalVisibleState={modalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateHike} hike={hike} />
+          <ReplyModal replyData={replyData} setReplyData={setReplyData} setModalVisibleState={setReplyModalVisibleState} modalVisibleState={replyModalVisibleState} setCommentState={setCommentState} commentState={commentState} replyPOST={replyPOST} _updateHike={_updateHike} hike={hike} />
 
             <ScrollView
             keyboardShouldPersistTaps='never'
@@ -147,7 +166,7 @@ export default function HikeScreen(props) {
                     {hike.summary}
                 </Text>
                 <Map name={hike.name} summary={hike.summary} latitude={hike.latitude} longitude={hike.longitude} />
-                <CommentsBox isPastInitialRender={isPastInitialRender} hike={hike} navigation={props.navigation} setModalVisibleState={setModalVisibleState} />
+                <CommentsBox isPastInitialRender={isPastInitialRender} hike={hike} navigation={props.navigation} setModalVisibleState={setModalVisibleState} screen={{ type: 'hike', _id: hike._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
             </ScrollView>
         </View>
     );

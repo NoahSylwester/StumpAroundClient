@@ -170,6 +170,12 @@ const styles = StyleSheet.create({
       // borderWidth: 0.5,
       // borderRadius: 5,
     },
+    commentContainer: {
+      borderRadius: 3,
+    },
+    commentReplies: {
+      marginLeft: 20,
+    },
     comment: {
       marginTop: 4,
       padding: 5,

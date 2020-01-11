@@ -23,6 +23,7 @@ import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import FavoriteHikes from '../components/FavoriteHikes';
 import BioModal from '../components/BioModal';
+import ReplyModal from '../components/ReplyModal';
 import CameraModal from '../components/CameraModal';
 
 export default function ProfileScreen(props) {
@@ -33,6 +34,8 @@ export default function ProfileScreen(props) {
   const [modalVisibleState, setModalVisibleState] = useState(false);
   const [editBioState, setEditBioState] = useState(userState.bio);
   const [commentsModalVisibleState, setCommentsModalVisibleState] = useState(false);
+  const [replyModalVisibleState, setReplyModalVisibleState] = useState(false);
+  const [replyData, setReplyData] = useState({});
   const [commentState, setCommentState] = useState('');
   const [cameraModalVisibleState, setCameraModalVisibleState] = useState(false);
 
@@ -102,23 +105,24 @@ export default function ProfileScreen(props) {
     isPastInitialRender.current = true;
   }, [usernameState, props.navigation.state]);
 
-  const photoPUT = async (data) => {
-    const token = await AsyncStorage.getItem('token');
-    fetch(`https://stump-around.herokuapp.com/photo`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': token,
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify(data),
-      })
-      .then((response) => response.json())
-      .then((responseJson) => console.log(responseJSON))
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  // const photoPUT = async (data) => {
+  //   const token = await AsyncStorage.getItem('token');
+  //   fetch(`https://stump-around.herokuapp.com/photo`, {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'x-access-token': token,
+  //         // 'Content-Type': 'application/x-www-form-urlencoded',
+  //       },
+  //       body: JSON.stringify(data),
+  //     })
+  //     .then((response) => response.json())
+  //     .then((responseJson) => console.log(responseJSON))
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
+
   const bioPUT = async (data) => {
     const token = await AsyncStorage.getItem('token');
     console.log(props.navigation.state);
@@ -157,10 +161,26 @@ export default function ProfileScreen(props) {
       });
   };
 
+  const replyPOST = async (data) => {
+    // data should have property content, repliedTo, stump||hike||profile
+    // {content: '', repliedTo: props.parent, [props.screen.type]: props.screen._id}
+    const userId = await AsyncStorage.getItem('id');
+    const newData = { ...data, user: userId };
+    const response = await fetch(`https://stump-around.herokuapp.com/reply`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newData),
+        })
+    return response.json();
+};
+
   return (
     <View style={styles.container}>
       <BioModal modalVisibleState={modalVisibleState} setModalVisibleState={setModalVisibleState} setEditBioState={setEditBioState} editBioState={editBioState} bioPUT={bioPUT} userState={userState} _updateUser={_updateUser} />
       <CommentModal setModalVisibleState={setCommentsModalVisibleState} modalVisibleState={commentsModalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
+      <ReplyModal replyData={replyData} setReplyData={setReplyData} setModalVisibleState={setReplyModalVisibleState} modalVisibleState={replyModalVisibleState} setCommentState={setCommentState} commentState={commentState} replyPOST={replyPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
       <CameraModal modalVisibleState={cameraModalVisibleState} setModalVisibleState={setCameraModalVisibleState} setUserState={setUserState} userState={userState}/>
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -194,7 +214,7 @@ export default function ProfileScreen(props) {
               Favorite Hikes
           </Text>
           <FavoriteHikes userState={userState} navigation={props.navigation} />
-          <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} />
+          <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} screen={{ type: 'profile', _id: userState._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
           <Button
             color='#00B100'
             title="Logout" 
