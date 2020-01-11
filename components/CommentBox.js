@@ -37,7 +37,7 @@ export default function CommentBox(props) {
     }
 
     useEffect(() => {
-        if (props.replyModalVisibleState === false && expanded === true) {
+        if (expanded === true) {
             _updateComment();
         }
     }, [props.replyModalVisibleState])

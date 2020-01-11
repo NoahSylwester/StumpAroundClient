@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import styles from '../constants/MainStyles';
 import CommentModal from '../components/CommentModal';
+import ReplyModal from '../components/ReplyModal';
 import CommentsBox from '../components/CommentsBox';
 import FriendsBox from '../components/FriendsBox';
 
@@ -30,6 +31,8 @@ export default function ClickedProfileScreen(props) {
   const [commentsModalVisibleState, setCommentsModalVisibleState] = useState(false);
   const [commentState, setCommentState] = useState('');
   const [modalVisibleState, setModalVisibleState] = useState(false);
+  const [replyModalVisibleState, setReplyModalVisibleState] = useState(false);
+  const [replyData, setReplyData] = useState({});
 
   const _updateUser = async () => {
     fetch(`https://stump-around.herokuapp.com/user/${userState.name}`, {
@@ -74,9 +77,25 @@ export default function ClickedProfileScreen(props) {
       });
   };
 
+  const replyPOST = async (data) => {
+    // data should have property content, repliedTo, stump||hike||profile
+    // {content: '', repliedTo: props.parent, [props.screen.type]: props.screen._id}
+    const userId = await AsyncStorage.getItem('id');
+    const newData = { ...data, user: userId };
+    const response = await fetch(`https://stump-around.herokuapp.com/reply`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newData),
+        })
+    return response.json();
+};
+
   return (
     <View style={styles.container}>
       <CommentModal setModalVisibleState={setCommentsModalVisibleState} modalVisibleState={commentsModalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
+      <ReplyModal replyData={replyData} setReplyData={setReplyData} setModalVisibleState={setReplyModalVisibleState} modalVisibleState={replyModalVisibleState} setCommentState={setCommentState} commentState={commentState} replyPOST={replyPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
       <ScrollView contentContainerStyle={styles.clickedProfileContentContainer}>
         <View style={styles.profileContainer}>
           {/* <Image source={{ uri: "https://image.businessinsider.com/5a8c83d342e1cc57810ba9ee?width=1100&format=jpeg&auto=webp"}} style={styles.photo} /> */}
@@ -95,7 +114,7 @@ export default function ClickedProfileScreen(props) {
             Favorite Hikes
           </Text>
           <FavoriteHikes userState={userState} navigation={props.navigation} />
-          <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} />
+          <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} screen={{ type: 'profile', _id: userState._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
         </View>
       </ScrollView>
     </View>
