@@ -15,6 +15,7 @@ import {
 import styles from '../constants/MainStyles';
 import CommentsBox from '../components/CommentsBox';
 import CommentModal from '../components/CommentModal';
+import ReplyModal from '../components/ReplyModal';
 import { NavigationActions } from 'react-navigation';
 import Map from '../components/Map';
 
@@ -31,6 +32,8 @@ export default function StumpScreen(props) {
 
     const [stump, setStump] = useState(props.navigation.getParam('stump',{}));
     const [modalVisibleState, setModalVisibleState] = useState(false);
+    const [replyModalVisibleState, setReplyModalVisibleState] = useState(false);
+    const [replyData, setReplyData] = useState({});
     const [commentState, setCommentState] = useState('');
     const isPastInitialRender = useRef(false);
     const [ProfileKey, setProfileKey] = useState('');
@@ -112,6 +115,21 @@ export default function StumpScreen(props) {
         });
     };
 
+    const replyPOST = async (data) => {
+      // data should have property content, repliedTo, stump||hike||profile
+      // {content: '', repliedTo: props.parent, [props.screen.type]: props.screen._id}
+      const userId = await AsyncStorage.getItem('id');
+      const newData = { ...data, user: userId };
+      const response = await fetch(`https://stump-around.herokuapp.com/reply`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(newData),
+          })
+      return response.json();
+  };
+
     const _updateStump = () => {
       isPastInitialRender.current = true;
       // console.log('id', hike._id);
@@ -132,6 +150,7 @@ export default function StumpScreen(props) {
     return (
         <View style={styles.container}>
           <CommentModal setModalVisibleState={setModalVisibleState} modalVisibleState={modalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateStump} hike={stump} />
+          <ReplyModal replyData={replyData} setReplyData={setReplyData} setModalVisibleState={setReplyModalVisibleState} modalVisibleState={replyModalVisibleState} setCommentState={setCommentState} commentState={commentState} replyPOST={replyPOST} _updateHike={_updateStump} hike={stump} />
 
             <ScrollView
             keyboardShouldPersistTaps='never'
@@ -174,7 +193,7 @@ export default function StumpScreen(props) {
                         }) : <View style={{justifyContent: 'center'}}><Text>No tags.</Text></View>}
                     </View>
                     <Map name={stump.name} summary={stump.summary} latitude={stump.latitude} longitude={stump.longitude} />
-                <CommentsBox isPastInitialRender={isPastInitialRender} hike={stump} navigation={props.navigation} setModalVisibleState={setModalVisibleState} />
+                <CommentsBox isPastInitialRender={isPastInitialRender} hike={stump} navigation={props.navigation} setModalVisibleState={setModalVisibleState} screen={{ type: 'stump', _id: stump._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
             </ScrollView>
         </View>
     );

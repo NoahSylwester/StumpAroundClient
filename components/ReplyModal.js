@@ -40,7 +40,7 @@ export default function BioModal(props) {
                     props.setModalVisibleState(false);
             }}>
               <View style={{backgroundColor: 'white', borderRadius: 5, padding: 20, width: '90%', margin: 20}}>
-                <Text style={{textAlign: 'center'}}>Comment:</Text>
+                <Text style={{textAlign: 'center'}}>Reply:</Text>
                 <TextInput
                   style={{
                     padding: 10,
@@ -55,9 +55,9 @@ export default function BioModal(props) {
                   <Button
                     title="Post"
                     onPress={() => {
-                      props.commentPOST({ content: props.commentState, hike: props.hike._id })
+                      props.replyPOST({ content: props.commentState, ...props.replyData })
                       .then(() => props._updateHike());
-                      props.setCommentState('')
+                      props.setCommentState('');
                       props.setModalVisibleState(!props.modalVisibleState);
                     }}></Button>
                   <Button
