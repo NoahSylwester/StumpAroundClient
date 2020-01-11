@@ -140,9 +140,9 @@ HikesStack.navigationOptions = {
 
 const StumpsStack = createStackNavigator(
   {
-    Submit: SubmitStumpScreen,
     Stumps: StumpsScreen,
     Stump: StumpScreen,
+    Submit: SubmitStumpScreen,
   },
   config
 );
