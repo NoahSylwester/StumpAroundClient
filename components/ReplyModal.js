@@ -56,9 +56,11 @@ export default function BioModal(props) {
                     title="Post"
                     onPress={() => {
                       props.replyPOST({ content: props.commentState, ...props.replyData })
-                      .then(() => props._updateHike());
-                      props.setCommentState('');
-                      props.setModalVisibleState(!props.modalVisibleState);
+                      .then(async () => {
+                        props._updateHike();
+                        props.setCommentState('');
+                        props.setModalVisibleState(!props.modalVisibleState);
+                      })
                     }}></Button>
                   <Button
                     title="Cancel"

@@ -30,7 +30,7 @@ export default function CommentsBox(props) {
             </Text>
             {props.isPastInitialRender.current ? props.hike.comments.slice().reverse().map((element, i) => {
                 return (
-                    <CommentBox isPastInitialRender={props.isPastInitialRender} parent={element._id} item={element} key={i} commentGET={commentGET} navigation={props.navigation} screen={props.screen} replyData={props.replyData} setReplyData={props.setReplyData} setReplyModalVisibleState={props.setReplyModalVisibleState} replyModalVisibleState={props.replyModalVisibleState} />
+                    <CommentBox isPastInitialRender={props.isPastInitialRender} parent={element._id} item={element} key={element._id} commentGET={commentGET} navigation={props.navigation} screen={props.screen} replyData={props.replyData} setReplyData={props.setReplyData} setReplyModalVisibleState={props.setReplyModalVisibleState} replyModalVisibleState={props.replyModalVisibleState} />
                     // <View style={styles.comment} key={i}>
                     //     <View style={styles.commentHeader}>
                     //         <Image source={{ uri: element.user.photo }} style={styles.commentPhoto} />
