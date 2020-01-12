@@ -18,6 +18,7 @@ import styles from '../constants/MainStyles';
 import CommentModal from '../components/CommentModal';
 import CommentsBox from '../components/CommentsBox';
 import FriendsBox from '../components/FriendsBox';
+import FriendsBoxActionable from '../components/FriendsBoxActionable';
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -174,7 +175,37 @@ export default function ProfileScreen(props) {
             body: JSON.stringify(newData),
         })
     return response.json();
-};
+  };
+
+  const acceptRequestPOST = async (_id) => {
+    const token = await AsyncStorage.getItem('token');
+    const response = await fetch(`https://stump-around.herokuapp.com/acceptRequest`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token,
+            },
+            body: JSON.stringify({_id}),
+        });
+    const responseJson = await response.json();
+    _updateUser();
+    alert(`Accepted friend request from ${responseJson.name}!`);
+  };
+
+  const friendDELETE = async (_id) => {
+    const token = await AsyncStorage.getItem('token');
+    const response = await fetch(`https://stump-around.herokuapp.com/removeFriend`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token,
+            },
+            body: JSON.stringify({_id}),
+        });
+    const responseJson = await response.json();
+    _updateUser();
+    alert(`Removed ${responseJson.name} from friends list.`);
+  };
 
   return (
     <View style={styles.container}>
@@ -209,7 +240,8 @@ export default function ProfileScreen(props) {
             onPress={() => setModalVisibleState(true)}
             style={styles.commentButton}
           ></Button>
-          <FriendsBox user={{...userState, friends: userState.friends || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
+          <FriendsBoxActionable title="Friend requests" buttonTitle="Accept" action={acceptRequestPOST} user={{...userState, friends: userState.receivedRequests || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
+          <FriendsBoxActionable title="Friends" buttonTitle="Remove" action={friendDELETE} user={{...userState, friends: userState.friends || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
           <Text style={styles.hikesTitle}>
               Favorite Hikes
           </Text>
