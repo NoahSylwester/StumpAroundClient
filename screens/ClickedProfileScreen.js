@@ -90,7 +90,22 @@ export default function ClickedProfileScreen(props) {
             body: JSON.stringify(newData),
         })
     return response.json();
-};
+  };
+
+  const sendRequestPOST = async (_id) => {
+
+    const token = await AsyncStorage.getItem('token');
+    const response = await fetch(`https://stump-around.herokuapp.com/sendRequest`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token,
+            },
+            body: JSON.stringify({_id}),
+        });
+    const responseJson = await response.json();
+    alert(`Sent friend request to ${responseJson.name}!`);
+  }
 
   return (
     <View style={styles.container}>
@@ -110,6 +125,7 @@ export default function ClickedProfileScreen(props) {
             {userState.bio}
           </Text>
           <FriendsBox user={{...userState, friends: userState.friends || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
+          <Button title="Send friend request" onPress={() => sendRequestPOST(userState._id)} />
           <Text style={styles.hikesTitle}>
             Favorite Hikes
           </Text>
