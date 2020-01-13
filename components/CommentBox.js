@@ -48,7 +48,7 @@ export default function CommentBox(props) {
                 <View style={styles.commentHeader}>
                     <Image source={{ uri: item.user.photo }} style={styles.commentPhoto} />
                     <View>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('ClickedProfile', { user: item.user })}>
+                        <TouchableOpacity onPress={() => props.navigation.push('ClickedProfile', { user: item.user })}>
                             <Text style={styles.userLink}>
                                 {item.user.name}
                             </Text>

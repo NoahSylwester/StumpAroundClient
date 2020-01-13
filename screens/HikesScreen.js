@@ -63,7 +63,7 @@ export default function HikesScreen(props) {
                             <View style={styles.hikeContainer} key={i}>
                                 <Image source={{uri: hike.photo}} style={{ width: '100%', height: 200 }} />
                                 <View style={styles.hikeTag}>
-                                  <TouchableOpacity onPress={() => props.navigation.navigate('Hike', { hike: hike })}>
+                                  <TouchableOpacity onPress={() => props.navigation.push('Hike', { hike: hike })}>
                                     <Text style={styles.title}>
                                       {hike.name}
                                     </Text>

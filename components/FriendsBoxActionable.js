@@ -26,7 +26,7 @@ export default function FriendsBoxActionable(props) {
                         <View style={styles.friendHeader}>
                             <Image source={{ uri: element.photo }} style={styles.friendPhoto} />
                             <View style={{alignItems: 'flex-start'}}>
-                                <TouchableOpacity onPress={() => props.navigation.navigate('ClickedProfile', { user: element })}>
+                                <TouchableOpacity onPress={() => props.navigation.push('ClickedProfile', { user: element })}>
                                     <Text style={styles.friendLink}>
                                         {element.name}
                                     </Text>

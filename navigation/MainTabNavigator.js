@@ -24,6 +24,8 @@ const ProfileStack = createStackNavigator(
   {
     Profile: ProfileScreen,
     Hike: HikeScreen,
+    ClickedProfile: ClickedProfileScreen,
+    Stump: StumpScreen,
   },
   config
 );
@@ -127,6 +129,7 @@ const HikesStack = createStackNavigator(
     Hikes: HikesScreen,
     Hike: HikeScreen,
     ClickedProfile: ClickedProfileScreen,
+    Stump: StumpScreen,
   },
   config,
 );
@@ -143,6 +146,8 @@ const StumpsStack = createStackNavigator(
     Stumps: StumpsScreen,
     Stump: StumpScreen,
     Submit: SubmitStumpScreen,
+    ClickedProfile: ClickedProfileScreen,
+    Hike: HikeScreen,
   },
   config
 );
