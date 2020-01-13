@@ -61,7 +61,7 @@ export default function StumpsScreen(props) {
                           <View style={styles.hikeContainer} key={i}>
                               <Image source={{uri: stump.photo}} style={{ width: '100%', height: 200 }} />
                               <View style={styles.hikeTag}>
-                                <TouchableOpacity onPress={() => props.navigation.navigate('Stump', { stump: stump })}>
+                                <TouchableOpacity onPress={() => props.navigation.push('Stump', { stump: stump })}>
                                   <Text style={styles.title}>
                                     {stump.name}
                                   </Text>
