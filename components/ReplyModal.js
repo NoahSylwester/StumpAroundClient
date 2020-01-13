@@ -17,6 +17,15 @@ import styles from '../constants/MainStyles';
 
 export default function BioModal(props) {
 
+  const post = () => {
+    props.replyPOST({ content: props.commentState, ...props.replyData })
+    .then(async () => {
+      props._updateHike();
+      props.setCommentState('');
+      props.setModalVisibleState(!props.modalVisibleState);
+    })
+  }
+
     return (
 
         // setModalVisibleState
@@ -52,15 +61,14 @@ export default function BioModal(props) {
                   value={props.commentState}
                 />
                 <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                  <Button
+                <Button
                     title="Post"
                     onPress={() => {
-                      props.replyPOST({ content: props.commentState, ...props.replyData })
-                      .then(async () => {
-                        props._updateHike();
-                        props.setCommentState('');
-                        props.setModalVisibleState(!props.modalVisibleState);
-                      })
+                      props.commentState.length > 0 
+                      ?
+                      post()
+                      :
+                      alert('Comments must have content.')
                     }}></Button>
                   <Button
                     title="Cancel"

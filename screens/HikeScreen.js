@@ -159,7 +159,7 @@ export default function HikeScreen(props) {
                     {hike.name}
                 </Text>
                 <Text style={styles.hikeLength}>
-                    Length: {hike.length} mi.
+                    Length: {hike.length} mi
                 </Text>
                 <Button color="#00B100" title="Add to favorites" onPress={() => {addHikeToFavorites(hike._id)}} />
                 <Text style={styles.summary}>

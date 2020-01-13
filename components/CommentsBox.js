@@ -28,6 +28,12 @@ export default function CommentsBox(props) {
             <Text style={styles.commentsTitle}>
                 Comments
             </Text>
+            <Button
+                color='#00B100'
+                title="New Comment"
+                onPress={() => props.setModalVisibleState(true)}
+                style={styles.commentButton}
+            ></Button>
             {props.isPastInitialRender.current ? props.hike.comments.slice().reverse().map((element, i) => {
                 return (
                     <CommentBox isPastInitialRender={props.isPastInitialRender} parent={element._id} item={element} key={element._id} commentGET={commentGET} navigation={props.navigation} screen={props.screen} replyData={props.replyData} setReplyData={props.setReplyData} setReplyModalVisibleState={props.setReplyModalVisibleState} replyModalVisibleState={props.replyModalVisibleState} />
@@ -53,12 +59,6 @@ export default function CommentsBox(props) {
                     // </View>
                 )
             }) : <View />}
-            <Button
-                color='#00B100'
-                title="New Comment"
-                onPress={() => props.setModalVisibleState(true)}
-                style={styles.commentButton}
-            ></Button>
         </View>
     )
 }
