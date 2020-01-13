@@ -17,12 +17,11 @@ import {
 import styles from '../constants/MainStyles';
 import CommentModal from '../components/CommentModal';
 import CommentsBox from '../components/CommentsBox';
-import FriendsBox from '../components/FriendsBox';
 import FriendsBoxActionable from '../components/FriendsBoxActionable';
+import FavoriteHikesActionable from '../components/FavoriteHikesActionable';
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import FavoriteHikes from '../components/FavoriteHikes';
 import BioModal from '../components/BioModal';
 import ReplyModal from '../components/ReplyModal';
 import CameraModal from '../components/CameraModal';
@@ -200,11 +199,28 @@ export default function ProfileScreen(props) {
               'Content-Type': 'application/json',
               'x-access-token': token,
             },
-            body: JSON.stringify({_id}),
+            body: JSON.stringify({ _id }),
         });
     const responseJson = await response.json();
     _updateUser();
     alert(`Removed ${responseJson.name} from friends list.`);
+  };
+
+  const favoriteDELETE = async (hikeId) => {
+    const token = await AsyncStorage.getItem('token');
+    const response = await fetch(`https://stump-around.herokuapp.com/favorite`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token,
+            },
+            body: JSON.stringify({ hikeId }),
+        });
+    const responseJson = await response.json();
+    console.log(response);
+    console.log(responseJson);
+    _updateUser();
+    alert(`Removed hike from favorites.`);
   };
 
   return (
@@ -245,7 +261,7 @@ export default function ProfileScreen(props) {
           <Text style={styles.hikesTitle}>
               Favorite Hikes
           </Text>
-          <FavoriteHikes userState={userState} navigation={props.navigation} />
+          <FavoriteHikesActionable action={favoriteDELETE} userState={userState} navigation={props.navigation} />
           <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} screen={{ type: 'profile', _id: userState._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
           <Button
             color='#00B100'
