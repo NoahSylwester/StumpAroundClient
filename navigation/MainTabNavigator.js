@@ -1,7 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import { Foundation, FontAwesome } from '@expo/vector-icons';
 
 import TabBarIcon from '../components/TabBarIcon';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -34,12 +33,10 @@ const ProfileStack = createStackNavigator(
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon.I
+    <TabBarIcon.MI
       focused={focused}
       name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+        'person'
       }
     />
   ),
@@ -172,7 +169,7 @@ const tabNavigator = createBottomTabNavigator({
   HikesStack,
   StumpsStack,
   // CameraStack,
-});
+}, { tabBarOptions: { activeTintColor: '#00B100' } });
 
 tabNavigator.path = '';
 
