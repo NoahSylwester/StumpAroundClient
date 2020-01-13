@@ -251,7 +251,7 @@ export default function StumpScreen(props) {
                         style={{...styles.summary, textAlign: 'center', fontSize: 15 }}
                         autoCapitalize='none'
                         id="tag"
-                        onChangeText={tag => tag.length >= 3 && tag.length <= 25 ? setTextState({ ...textState, tag }) : alert('Tag must be between three and twenty-five characters.')}
+                        onChangeText={tag => tag.length <= 25 ? setTextState({ ...textState, tag }) : alert('Tag must be between three and twenty-five characters.')}
                         placeholder={'New tag'}
                         value={textState.tag}
                     />
@@ -259,7 +259,13 @@ export default function StumpScreen(props) {
                         color='#00B100'
                         title="Add tag"
                         onPress={() => {
-                            if (textState.tag !== '') {
+                            if (textState.tag === '') {
+                              return;
+                            }
+                            else if (textState.tag.length < 3) {
+                              alert('Tag must be between three and twenty-five characters.');
+                            }
+                            else {
                                 setTags([...tags, textState.tag]);
                                 setTextState({ ...textState, tag: '' })
                             }
