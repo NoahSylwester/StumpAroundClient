@@ -17,6 +17,13 @@ import styles from '../constants/MainStyles';
 
 export default function BioModal(props) {
 
+    const post = () => {
+      props.commentPOST({ content: props.commentState, hike: props.hike._id })
+      .then(() => props._updateHike());
+      props.setCommentState('')
+      props.setModalVisibleState(!props.modalVisibleState);
+    }
+
     return (
 
         // setModalVisibleState
@@ -55,10 +62,11 @@ export default function BioModal(props) {
                   <Button
                     title="Post"
                     onPress={() => {
-                      props.commentPOST({ content: props.commentState, hike: props.hike._id })
-                      .then(() => props._updateHike());
-                      props.setCommentState('')
-                      props.setModalVisibleState(!props.modalVisibleState);
+                      props.commentState.length > 0 
+                      ?
+                      post()
+                      :
+                      alert('Comments must have content.')
                     }}></Button>
                   <Button
                     title="Cancel"

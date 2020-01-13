@@ -250,8 +250,8 @@ export default function StumpScreen(props) {
                     <TextInput
                         style={{...styles.summary, textAlign: 'center', fontSize: 15 }}
                         autoCapitalize='none'
-                        id="summary"
-                        onChangeText={tag => setTextState({ ...textState, tag })}
+                        id="tag"
+                        onChangeText={tag => tag.length >= 3 && tag.length <= 25 ? setTextState({ ...textState, tag }) : alert('Tag must be between three and twenty-five characters.')}
                         placeholder={'New tag'}
                         value={textState.tag}
                     />

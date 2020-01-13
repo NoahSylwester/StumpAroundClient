@@ -69,7 +69,7 @@ export default function HikesScreen(props) {
                                     </Text>
                                   </TouchableOpacity>
                                   <Text style={styles.section}>
-                                      Length: {hike.length}
+                                      Length: {hike.length} mi
                                   </Text>
                                   <Text style={styles.section}>
                                       {hike.location}
