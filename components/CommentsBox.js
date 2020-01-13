@@ -31,10 +31,11 @@ export default function CommentsBox(props) {
             <Button
                 color='#00B100'
                 title="New Comment"
-                onPress={() => props.setModalVisibleState(true)}
+                onPress={props.hike.comments === 'denied' ? () => alert('Only friends can add comments.') : () => props.setModalVisibleState(true)}
                 style={styles.commentButton}
             ></Button>
-            {props.isPastInitialRender.current ? props.hike.comments.slice().reverse().map((element, i) => {
+            {props.hike.comments !== 'denied' ?
+            props.isPastInitialRender.current ? props.hike.comments.slice().reverse().map((element, i) => {
                 return (
                     <CommentBox isPastInitialRender={props.isPastInitialRender} parent={element._id} item={element} key={element._id} commentGET={commentGET} navigation={props.navigation} screen={props.screen} replyData={props.replyData} setReplyData={props.setReplyData} setReplyModalVisibleState={props.setReplyModalVisibleState} replyModalVisibleState={props.replyModalVisibleState} />
                     // <View style={styles.comment} key={i}>
@@ -58,7 +59,14 @@ export default function CommentsBox(props) {
                     //     </TouchableOpacity>
                     // </View>
                 )
-            }) : <View />}
+            }) : <View />
+        :
+        <View style={styles.commentContainer}>
+            <Text style={{ textAlign: 'center' }}>
+                Only friends can view profile comments.
+            </Text>
+        </View>
+        }
         </View>
     )
 }

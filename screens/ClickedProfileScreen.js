@@ -35,11 +35,17 @@ export default function ClickedProfileScreen(props) {
   const [replyData, setReplyData] = useState({});
 
   const _updateUser = async () => {
-    fetch(`https://stump-around.herokuapp.com/user/${userState.name}`, {
-        method: 'GET',
+    const token = await AsyncStorage.getItem('token');
+    fetch(`https://stump-around.herokuapp.com/user/${userState._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token,
+        },
       })
       .then((response) => response.json())
       .then((responseJson) => {
+        console.log(responseJson);
         setUserState({
           ...responseJson,
         });
