@@ -1,9 +1,9 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome, Foundation } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 
-export default function TabBarIcon(props) {
+function I(props) {
   return (
     <Ionicons
       name={props.name}
@@ -13,3 +13,16 @@ export default function TabBarIcon(props) {
     />
   );
 }
+
+function F(props) {
+  return (
+    <Foundation
+      name={props.name}
+      size={26}
+      style={{ marginBottom: -3 }}
+      color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+    />
+  );
+}
+
+export default TabBarIcon = { I, F };

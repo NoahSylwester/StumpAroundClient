@@ -1,6 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { Foundation, FontAwesome } from '@expo/vector-icons';
 
 import TabBarIcon from '../components/TabBarIcon';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -33,7 +34,7 @@ const ProfileStack = createStackNavigator(
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <TabBarIcon.I
       focused={focused}
       name={
         Platform.OS === 'ios'
@@ -137,7 +138,7 @@ const HikesStack = createStackNavigator(
 HikesStack.navigationOptions = {
   tabBarLabel: 'Hikes',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon.F focused={focused} name={'trees'} />
   ),
 };
 
@@ -155,7 +156,7 @@ const StumpsStack = createStackNavigator(
 StumpsStack.navigationOptions = {
   tabBarLabel: 'Stumps',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon.F focused={focused} name={'foot'} />
   ),
 };
 

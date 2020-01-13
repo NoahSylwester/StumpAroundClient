@@ -66,19 +66,19 @@ export default function HikeScreen(props) {
     };
 
     const addHikeToFavorites = async (hikeId) => {
-      const userId = await AsyncStorage.getItem('id');
+      const token = await AsyncStorage.getItem('token');
       fetch(`https://stump-around.herokuapp.com/favorite`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
+          'x-access-token': token,
         },
-        body: JSON.stringify({ hikeId, userId }),
+        body: JSON.stringify({ hikeId }),
       })
       .then((response) => response.json())
       .then((responseJson) => {
           // setHike(responseJson);
-          console.log('res2', responseJson);
+          // console.log('res2', responseJson);
           alert('Added to favorites');
           _retrieveKey();
         }
