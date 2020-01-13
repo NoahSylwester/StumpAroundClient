@@ -17,7 +17,8 @@ export default function FavoriteHikes(props) {
 
     return (
             <ScrollView style={styles.hikesContainer}>
-                {props.userState.hikes && props.userState.hikes.length !== 0 ? props.userState.hikes.slice().reverse().map((hike, i) => {
+                {props.userState.hikes !== 'denied' ?
+                props.userState.hikes && props.userState.hikes.length !== 0 ? props.userState.hikes.slice().reverse().map((hike, i) => {
                     return (
                         <View style={styles.hikeContainer} key={i}>
                             <Image source={{ uri: hike.photo }} style={{ width: '100%', height: 200 }} />
@@ -36,7 +37,19 @@ export default function FavoriteHikes(props) {
                             </View>
                         </View>
                     )
-                }) : <Text style={{ textAlign: 'center' }}>No favorites yet.</Text>}
+                }) : 
+                <View style={ styles.hikeContainer } key={1}>
+                    <Text style={{ textAlign: 'center', marginTop: 18 }}>
+                        No favorites yet.
+                    </Text>
+                </View>
+            :
+            <View style={ styles.hikeContainer } key={1}>
+                <Text style={{ textAlign: 'center', marginTop: 18 }}>
+                    Favorite hikes can only be viewed by friends.
+                </Text>
+            </View>
+            }
 
             </ScrollView>
     )

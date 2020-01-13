@@ -37,7 +37,11 @@ export default function FavoriteHikesActionable(props) {
                             </View>
                         </View>
                     )
-                }) : <Text style={{ textAlign: 'center' }}>No favorites yet.</Text>}
+                }) : <View style={ styles.hikeContainer } key={1}>
+                        <Text style={{ textAlign: 'center', marginTop: 18 }}>
+                            No favorites yet.
+                        </Text>
+                    </View>}
 
             </ScrollView>
     )
