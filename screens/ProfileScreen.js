@@ -19,6 +19,7 @@ import CommentModal from '../components/CommentModal';
 import CommentsBox from '../components/CommentsBox';
 import FriendsBoxActionable from '../components/FriendsBoxActionable';
 import FavoriteHikesActionable from '../components/FavoriteHikesActionable';
+import FavoriteStumpsActionable from '../components/FavoriteStumpsActionable';
 
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -223,6 +224,23 @@ export default function ProfileScreen(props) {
     alert(`Removed hike from favorites.`);
   };
 
+  const favoriteStumpDELETE = async (stumpId) => {
+    const token = await AsyncStorage.getItem('token');
+    const response = await fetch(`https://stump-around.herokuapp.com/favorite/stump`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token,
+            },
+            body: JSON.stringify({ stumpId }),
+        });
+    const responseJson = await response.json();
+    console.log(response);
+    console.log(responseJson);
+    _updateUser();
+    alert(`Removed stump from favorites.`);
+  };
+
   return (
     <View style={styles.container}>
       <BioModal modalVisibleState={modalVisibleState} setModalVisibleState={setModalVisibleState} setEditBioState={setEditBioState} editBioState={editBioState} bioPUT={bioPUT} userState={userState} _updateUser={_updateUser} />
@@ -256,12 +274,19 @@ export default function ProfileScreen(props) {
             onPress={() => setModalVisibleState(true)}
             style={styles.commentButton}
           ></Button>
+          {(userState.receivedRequests !== undefined) && (userState.receivedRequests.length !== 0)
+          ?
           <FriendsBoxActionable title="Friend requests" buttonTitle="Accept" action={acceptRequestPOST} user={{...userState, friends: userState.receivedRequests || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
+          : <View />}
           <FriendsBoxActionable title="Friends" buttonTitle="Remove" action={friendDELETE} user={{...userState, friends: userState.friends || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
           <Text style={styles.hikesTitle}>
               Favorite Hikes
           </Text>
           <FavoriteHikesActionable action={favoriteDELETE} userState={userState} navigation={props.navigation} />
+          <Text style={styles.hikesTitle}>
+              Favorite Stumps
+          </Text>
+          <FavoriteStumpsActionable action={favoriteStumpDELETE} userState={userState} navigation={props.navigation} />
           <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} screen={{ type: 'profile', _id: userState._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
           <Button
             color='#00B100'
