@@ -22,6 +22,7 @@ import FriendsBox from '../components/FriendsBox';
 import { MonoText } from '../components/StyledText';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import FavoriteHikes from '../components/FavoriteHikes';
+import FavoriteStumps from '../components/FavoriteStumps';
 
 export default function ClickedProfileScreen(props) {
 
@@ -136,6 +137,10 @@ export default function ClickedProfileScreen(props) {
             Favorite Hikes
           </Text>
           <FavoriteHikes userState={userState} navigation={props.navigation} />
+          <Text style={styles.hikesTitle}>
+            Favorite Stumps
+          </Text>
+          <FavoriteStumps userState={userState} navigation={props.navigation} />
           <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} screen={{ type: 'profile', _id: userState._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
         </View>
       </ScrollView>

@@ -38,56 +38,56 @@ export default function StumpScreen(props) {
     const isPastInitialRender = useRef(false);
     const [ProfileKey, setProfileKey] = useState('');
 
-    // useEffect(() => {
-    //       console.log('***');
-    //       console.log(ProfileKey);
-    //       console.log('***');
-    //       const setParamsAction = NavigationActions.setParams({
-    //         params: { value: Math.random() },
-    //         key: ProfileKey,
-    //       });
-    //       props.navigation.dispatch(setParamsAction);
-    // }, [ProfileKey])
+    useEffect(() => {
+          console.log('***');
+          console.log(ProfileKey);
+          console.log('***');
+          const setParamsAction = NavigationActions.setParams({
+            params: { value: Math.random() },
+            key: ProfileKey,
+          });
+          props.navigation.dispatch(setParamsAction);
+    }, [ProfileKey])
 
-    // const _retrieveKey = async () => {
-    //   try {
-    //     const key = await AsyncStorage.getItem('ProfileKey');
-    //     if (key !== null) {
-    //       setProfileKey(key);
-    //       return;
-    //     }
-    //     else {
-    //       console.log('No async storage for "ProfileKey"');
-    //     }
-    //   } catch (error) {
-    //     // Error retrieving data
-    //     console.log(error);
-    //   }
-    // };
+    const _retrieveKey = async () => {
+      try {
+        const key = await AsyncStorage.getItem('ProfileKey');
+        if (key !== null) {
+          setProfileKey(key);
+          return;
+        }
+        else {
+          console.log('No async storage for "ProfileKey"');
+        }
+      } catch (error) {
+        // Error retrieving data
+        console.log(error);
+      }
+    };
 
-    // const addHikeToFavorites = async (hikeId) => {
-    //   const userId = await AsyncStorage.getItem('id');
-    //   fetch(`https://stump-around.herokuapp.com/favorite`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //       // 'Content-Type': 'application/x-www-form-urlencoded',
-    //     },
-    //     body: JSON.stringify({ hikeId, userId }),
-    //   })
-    //   .then((response) => response.json())
-    //   .then((responseJson) => {
-    //       // setHike(responseJson);
-    //       console.log('res2', responseJson);
-    //       alert('Added to favorites');
-    //       _retrieveKey();
-    //     }
-    //   )
-    //   .catch((error) => {
-    //     console.error(error);
-    //     alert('Add failed');
-    //   });
-    // }
+    const addStumpToFavorites = async (stumpId) => {
+      const token = await AsyncStorage.getItem('token');
+      fetch(`https://stump-around.herokuapp.com/favorite/stump`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token,
+        },
+        body: JSON.stringify({ stumpId }),
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+          // setHike(responseJson);
+          // console.log('res2', responseJson);
+          alert('Added to favorites');
+          _retrieveKey();
+        }
+      )
+      .catch((error) => {
+        console.error(error);
+        alert('Add failed');
+      });
+    }
 
 
     useEffect(() => {_updateStump();}, []);
@@ -173,7 +173,7 @@ export default function StumpScreen(props) {
                           </View>
                       </View>
                   </View>
-                {/* <Button color="#00B100" title="Add to favorites" onPress={() => {addHikeToFavorites(stump._id)}} /> */}
+                <Button color="#00B100" title="Add to favorites" onPress={() => {addStumpToFavorites(stump._id)}} />
                 <Text style={styles.summary}>
                     {stump.summary}
                 </Text>

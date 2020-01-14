@@ -13,26 +13,23 @@ import {
 } from 'react-native';
 import styles from '../constants/MainStyles';
 
-export default function FavoriteHikes(props) {
+export default function FavoriteStumps(props) {
 
     return (
             <ScrollView style={styles.hikesContainer}>
-                {props.userState.hikes !== 'denied' ?
-                props.userState.hikes && props.userState.hikes.length !== 0 ? props.userState.hikes.slice().reverse().map((hike, i) => {
+                {props.userState.stumps !== 'denied' ?
+                props.userState.stumps && props.userState.stumps.length !== 0 ? props.userState.stumps.slice().reverse().map((stump, i) => {
                     return (
-                        <View style={styles.hikeContainer} key={hike._id}>
-                            <Image source={{ uri: hike.photo }} style={{ width: '100%', height: 200 }} />
+                        <View style={styles.hikeContainer} key={stump._id}>
+                            <Image source={{ uri: stump.photo }} style={{ width: '100%', height: 200 }} />
                             <View style={styles.hikeTag}>
-                                <TouchableOpacity onPress={() => props.navigation.push('Hike', { hike: hike })}>
+                                <TouchableOpacity onPress={() => props.navigation.push('Stump', { stump: stump })}>
                                     <Text style={styles.title}>
-                                        {hike.name}
+                                        {stump.name}
                                     </Text>
                                 </TouchableOpacity>
                                 <Text style={styles.section}>
-                                    Length: {hike.length} mi
-                                </Text>
-                                <Text style={styles.section}>
-                                    {hike.location}
+                                    {stump.location}
                                 </Text>
                             </View>
                         </View>
@@ -46,7 +43,7 @@ export default function FavoriteHikes(props) {
             :
             <View style={ styles.hikeContainer } key={1}>
                 <Text style={{ textAlign: 'center', marginTop: 18 }}>
-                    Favorite hikes can only be viewed by friends.
+                    Favorite stumps can only be viewed by friends.
                 </Text>
             </View>
             }

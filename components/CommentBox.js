@@ -45,7 +45,7 @@ export default function CommentBox(props) {
     return (
         <View style={styles.commentContainer}>
             <View style={styles.comment}>
-                <View style={styles.commentHeader}>
+                <View style={{...styles.commentHeader, position: 'relative'}}>
                     <Image source={{ uri: item.user.photo }} style={styles.commentPhoto} />
                     <View>
                         <TouchableOpacity onPress={() => props.navigation.push('ClickedProfile', { user: item.user })}>
@@ -57,6 +57,15 @@ export default function CommentBox(props) {
                             {item.date_created}
                         </Text>
                     </View>
+                    <TouchableOpacity onPress={expandGET} style={{position: 'absolute', right: 2}}>
+                        <Text style={{color: 'dodgerblue', fontSize: 17}}>
+                            {item.replies.length !== 0 
+                            ?
+                            `Replies (${item.replies.length})`
+                            :
+                            ''}
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity onPress={expandGET} activeOpacity={1} style={styles.commentBody}>
                     <Text>
