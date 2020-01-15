@@ -52,7 +52,7 @@ export default function ProfileScreen(props) {
       }
       else {
         setUsernameState(null);
-        console.log('No async storage for "username"');
+        // console.log('No async storage for "username"');
       }
     } catch (error) {
       // Error retrieving data
