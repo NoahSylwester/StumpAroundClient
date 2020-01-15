@@ -4,6 +4,7 @@ import {
   Modal,
   ActivityIndicator,
   StyleSheet,
+  Image,
 } from 'react-native';
 
 export default Loader = (props) => {
@@ -16,8 +17,11 @@ export default Loader = (props) => {
       onRequestClose={() => {console.log('Modal closed')}}>
       <View style={styles.modalBackground}>
         <View style={styles.activityIndicatorWrapper}>
-          <ActivityIndicator
-            animating={props.loading} />
+          <Image
+            style={{ height: 200, width: 200 }}
+            source={require('../assets/images/loading.gif')}
+            // animating={props.loading}
+            />
         </View>
       </View>
     </Modal>
