@@ -20,7 +20,7 @@ export default function FavoriteHikes(props) {
                 {props.userState.hikes !== 'denied' ?
                 props.userState.hikes && props.userState.hikes.length !== 0 ? props.userState.hikes.slice().reverse().map((hike, i) => {
                     return (
-                        <View style={styles.hikeContainer} key={hike._id}>
+                        <View style={styles.hikeContainer} key={hike._id || i}>
                             <Image source={{ uri: hike.photo }} style={{ width: '100%', height: 200 }} />
                             <View style={styles.hikeTag}>
                                 <TouchableOpacity onPress={() => props.navigation.push('Hike', { hike: hike })}>
