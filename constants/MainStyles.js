@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     hikesPageTitle: {
       marginTop: 60,
-      marginBottom: 30,
+      marginBottom: 0,
       fontSize: 50,
       textAlign: 'center',
     },
