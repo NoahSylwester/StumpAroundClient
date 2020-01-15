@@ -18,9 +18,9 @@ export default function FavoriteStumps(props) {
     return (
             <ScrollView style={styles.hikesContainer}>
                 {props.userState.stumps !== 'denied' ?
-                props.userState.stumps && props.userState.stumps.length !== 0 ? props.userState.stumps.slice().reverse().map((stump, i) => {
+                (props.userState.stumps && props.userState.stumps.length !== 0 ? props.userState.stumps.slice().reverse().map((stump, i) => {
                     return (
-                        <View style={styles.hikeContainer} key={stump._id + i}>
+                        <View style={styles.hikeContainer} key={stump._id || i}>
                             <Image source={{ uri: stump.photo }} style={{ width: '100%', height: 200 }} />
                             <View style={styles.hikeTag}>
                                 <TouchableOpacity onPress={() => props.navigation.push('Stump', { stump: stump })}>
@@ -39,7 +39,7 @@ export default function FavoriteStumps(props) {
                     <Text style={{ textAlign: 'center', marginTop: 18 }}>
                         No favorites yet.
                     </Text>
-                </View>
+                </View>)
             :
             <View style={ styles.hikeContainer } key={'123asdd'}>
                 <Text style={{ textAlign: 'center', marginTop: 18 }}>

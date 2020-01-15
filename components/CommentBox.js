@@ -54,7 +54,7 @@ export default function CommentBox(props) {
                             </Text>
                         </TouchableOpacity>
                         <Text style={styles.commentDate}>
-                            {item.date_created}
+                            {item.date_created && (new Date(item.date_created)).toUTCString()}
                         </Text>
                     </View>
                     <TouchableOpacity onPress={expandGET} style={{position: 'absolute', right: 2}}>

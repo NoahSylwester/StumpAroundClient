@@ -46,6 +46,7 @@ export default function BioModal(props) {
                 marginTop: 20,
                 textAlign: 'center',
               }}
+              multiline={true}
               onChangeText={bio => props.setEditBioState(bio)}
               value={props.editBioState}
             />
