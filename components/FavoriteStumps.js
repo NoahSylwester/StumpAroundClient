@@ -20,7 +20,7 @@ export default function FavoriteStumps(props) {
                 {props.userState.stumps !== 'denied' ?
                 props.userState.stumps && props.userState.stumps.length !== 0 ? props.userState.stumps.slice().reverse().map((stump, i) => {
                     return (
-                        <View style={styles.hikeContainer} key={stump._id}>
+                        <View style={styles.hikeContainer} key={stump._id + i}>
                             <Image source={{ uri: stump.photo }} style={{ width: '100%', height: 200 }} />
                             <View style={styles.hikeTag}>
                                 <TouchableOpacity onPress={() => props.navigation.push('Stump', { stump: stump })}>
@@ -35,13 +35,13 @@ export default function FavoriteStumps(props) {
                         </View>
                     )
                 }) : 
-                <View style={ styles.hikeContainer } key={1}>
+                <View style={ styles.hikeContainer } key={'123aasdd'}>
                     <Text style={{ textAlign: 'center', marginTop: 18 }}>
                         No favorites yet.
                     </Text>
                 </View>
             :
-            <View style={ styles.hikeContainer } key={1}>
+            <View style={ styles.hikeContainer } key={'123asdd'}>
                 <Text style={{ textAlign: 'center', marginTop: 18 }}>
                     Favorite stumps can only be viewed by friends.
                 </Text>

@@ -32,6 +32,7 @@ export default function FriendsBoxActionable(props) {
                                     </Text>
                                 </TouchableOpacity>
                                 <Button style={{fontSize: 10}} title={props.buttonTitle} onPress={() => props.action(element._id)} />
+                                {props.deny ? <Button style={{fontSize: 10}} color="red" title={'Deny'} onPress={() => props.denyAction(element._id)} />: <View />}
                             </View>
                         </View>
                     </View>

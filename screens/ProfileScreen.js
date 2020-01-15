@@ -192,6 +192,21 @@ export default function ProfileScreen(props) {
     alert(`Accepted friend request from ${responseJson.name}!`);
   };
 
+  const requestDELETE = async (_id) => {
+    const token = await AsyncStorage.getItem('token');
+    const response = await fetch(`https://stump-around.herokuapp.com/removeRequest`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token,
+            },
+            body: JSON.stringify({ _id }),
+        });
+    const responseJson = await response.json();
+    _updateUser();
+    alert(`Removed request.`);
+  };
+
   const friendDELETE = async (_id) => {
     const token = await AsyncStorage.getItem('token');
     const response = await fetch(`https://stump-around.herokuapp.com/removeFriend`, {
@@ -207,7 +222,7 @@ export default function ProfileScreen(props) {
     alert(`Removed ${responseJson.name} from friends list.`);
   };
 
-  const favoriteDELETE = async (hikeId) => {
+  const favoriteHikeDELETE = async (hikeId) => {
     const token = await AsyncStorage.getItem('token');
     const response = await fetch(`https://stump-around.herokuapp.com/favorite`, {
             method: 'DELETE',
@@ -276,13 +291,13 @@ export default function ProfileScreen(props) {
           ></Button>
           {(userState.receivedRequests !== undefined) && (userState.receivedRequests.length !== 0)
           ?
-          <FriendsBoxActionable title="Friend requests" buttonTitle="Accept" action={acceptRequestPOST} user={{...userState, friends: userState.receivedRequests || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
+          <FriendsBoxActionable title="Friend requests" deny denyAction={requestDELETE} buttonTitle="Accept" action={acceptRequestPOST} user={{...userState, friends: userState.receivedRequests || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
           : <View />}
           <FriendsBoxActionable title="Friends" buttonTitle="Remove" action={friendDELETE} user={{...userState, friends: userState.friends || [] }} isPastInitialRender={isPastInitialRender} navigation={props.navigation} />
           <Text style={styles.hikesTitle}>
               Favorite Hikes
           </Text>
-          <FavoriteHikesActionable action={favoriteDELETE} userState={userState} navigation={props.navigation} />
+          <FavoriteHikesActionable action={favoriteHikeDELETE} userState={userState} navigation={props.navigation} />
           <Text style={styles.hikesTitle}>
               Favorite Stumps
           </Text>
