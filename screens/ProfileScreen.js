@@ -278,7 +278,7 @@ export default function ProfileScreen(props) {
             {userState.name}
           </Text>
           <Text>
-            User since {userState.date_created && (new Date(userState.date_created)).toDateString()}
+            User since {userState.date_created && (new Date(userState.date_created)).toUTCString()}
           </Text>
           <Text style={styles.bio}>
             {userState.bio}
