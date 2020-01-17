@@ -149,6 +149,7 @@ export default function StumpScreen(props) {
     };
 
     const stumpPOST = async () => {
+      try {
       let apiUrl = 'http://stump-around.herokuapp.com/stump/';
           const data = {
             name: textState.name,
@@ -167,6 +168,12 @@ export default function StumpScreen(props) {
             body: JSON.stringify(data)
           })
           return response.json();
+        }
+        catch (err) {
+          console.log(err);
+          setLoading(false);
+          alert('Something went wrong.')
+        }
     }
 
     const stumpPhotoPUT = async (stumpId) => {
