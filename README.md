@@ -1,6 +1,6 @@
 # StumpAround
 
-![logo](./assets/images/logo.png)
+![logo](./assets/images/stump.png)
 
 ## A React Native social media app for the PNW
 
