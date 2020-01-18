@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
     },
+    hikesPage: {
+      flex: 1,
+      // backgroundColor: '#001a13',
+    },
     body: {
         flex: 1,
         backgroundColor: '#fff',
@@ -29,13 +33,15 @@ const styles = StyleSheet.create({
       marginBottom: 0,
       fontSize: 50,
       textAlign: 'center',
+      // color: '#001a13',
     },
     hikePageContentContainer: {
         paddingTop: 50,
         justifyContent: 'space-between'
     },
     hikesPageContentContainer: {
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      // backgroundColor: '#001a13',
     },
     contentContainer: {
         paddingTop: 230,
@@ -109,11 +115,11 @@ const styles = StyleSheet.create({
     hikesContainer: {
       width: '100%',
       maxHeight: 300,
-      padding: 20,
+      // padding: 20,
       paddingTop: 0,
       paddingBottom: 0,
       margin: 20,
-      borderColor: 'black',
+      borderColor: '#001a13',
       borderWidth: 0.5,
       // borderRadius: 5,
     },
@@ -132,11 +138,20 @@ const styles = StyleSheet.create({
     },
     hikeContainer: {
       flex: 1,
+      // marginBottom: 20,
+      borderColor: '#001a13',
+      borderWidth: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+    },
+    hikelessContainer: {
+      flex: 1,
       marginBottom: 20,
       justifyContent: 'center',
       alignItems: 'center',
       position: 'relative',
-  },
+    },
     hikeTag: {
       backgroundColor: 'rgba(0, 0, 0, 0.4)',
       position: 'absolute',
@@ -179,7 +194,7 @@ const styles = StyleSheet.create({
     comment: {
       marginTop: 4,
       padding: 5,
-      borderColor: 'black',
+      borderColor: '#001a13',
       borderWidth: 0.5,
       borderRadius: 3,
     },
@@ -187,7 +202,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 2,
-        borderBottomColor: 'black',
+        borderBottomColor: '#001a13',
         borderBottomWidth: 0.5,
     },
     commentBody: {
@@ -206,11 +221,11 @@ const styles = StyleSheet.create({
     },
     userLink: {
         fontSize: 16,
-        color: '#00B100',
+        color: '#24d36fff',
     },
     friendLink: {
       fontSize: 16,
-      color: '#00B100',
+      color: '#24d36fff',
   },
     friendsContainer: {
       width: '50%',
@@ -219,7 +234,7 @@ const styles = StyleSheet.create({
       paddingTop: 0,
       paddingBottom: 0,
       margin: 20,
-      borderColor: 'black',
+      borderColor: '#001a13',
       borderWidth: 0.5,
       borderRadius: 5,
     },

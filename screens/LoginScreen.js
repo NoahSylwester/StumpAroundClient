@@ -28,14 +28,14 @@ export default function LoginScreen(props) {
     const [loading, setLoading] = useState(false);
 
     const signUpButton = (
-        <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
+        <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: '#24d36fff', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
             Sign up
         </Text>
     );
 
     const signInButton = (
       <TouchableOpacity onPress={() => signIn()}>
-        <Text style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
+        <Text style={{ padding: 10, fontSize: 18, color: '#24d36fff', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
           Sign in
         </Text>
       </TouchableOpacity>

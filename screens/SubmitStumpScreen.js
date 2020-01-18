@@ -217,8 +217,8 @@ export default function StumpScreen(props) {
                 {uploading ? _maybeRenderUploadingOverlay : <View />}
              <View>
                 <StatusBar barStyle="default" />
-                <Button color='#00B100' onPress={_pickImage} title="Select from camera roll" />
-                <Button color='#00B100' onPress={_takePhoto} title="Take a photo" />
+                <Button color='#24d36fff' onPress={_pickImage} title="Select from camera roll" />
+                <Button color='#24d36fff' onPress={_takePhoto} title="Take a photo" />
             </View>
                 <TextInput
                     style={styles.hikeTitle}
@@ -263,7 +263,7 @@ export default function StumpScreen(props) {
                         value={textState.tag}
                     />
                     <Button
-                        color='#00B100'
+                        color='#24d36fff'
                         title="Add tag"
                         onPress={() => {
                             if (textState.tag === '') {
@@ -281,7 +281,7 @@ export default function StumpScreen(props) {
                 </View>
                 <View style={styles.submitStumpButtonWrapper}>
                     <Button 
-                        color='#00B100'
+                        color='#24d36fff'
                         onPress={stumpCreationRequest}
                         title="Submit your stump"
                     />

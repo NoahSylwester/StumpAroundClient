@@ -169,7 +169,11 @@ const tabNavigator = createBottomTabNavigator({
   HikesStack,
   StumpsStack,
   // CameraStack,
-}, { tabBarOptions: { activeTintColor: '#00B100' } });
+}, { tabBarOptions: { 
+    activeTintColor: '#24d36fff',
+    // activeBackgroundColor: '#001a13',
+    // inactiveBackgroundColor: '#001a13',
+      } });
 
 tabNavigator.path = '';
 

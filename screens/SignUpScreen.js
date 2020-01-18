@@ -96,7 +96,7 @@ export default function LoginScreen(props) {
 
     const signUpButton = (
         <TouchableOpacity>
-            <Text onPress={() => signUp()} style={{ padding: 10, fontSize: 18, color: '#00B100', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
+            <Text onPress={() => signUp()} style={{ padding: 10, fontSize: 18, color: '#24d36fff', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
                 Sign up
             </Text>
         </TouchableOpacity>

@@ -58,19 +58,19 @@ export default function HikesSearchModal(props) {
               <View style={{backgroundColor: 'white', borderRadius: 5, padding: 20, width: '90%', margin: 20}}>
                 <Text style={{textAlign: 'center'}}>Search Field:</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Button title="name" color={props.fieldState === 'name' ? '#00B100' : 'grey'} onPress={() => props.setFieldState('name')} />
-                    <Button title="location" color={props.fieldState === 'location' ? '#00B100' : 'grey'} onPress={() => props.setFieldState('location')} />
-                    <Button title="tags" color={props.fieldState === 'tags' ? '#00B100' : 'grey'} onPress={() => props.setFieldState('tags')} />
+                    <Button title="name" color={props.fieldState === 'name' ? '#24d36fff' : 'grey'} onPress={() => props.setFieldState('name')} />
+                    <Button title="location" color={props.fieldState === 'location' ? '#24d36fff' : 'grey'} onPress={() => props.setFieldState('location')} />
+                    <Button title="tags" color={props.fieldState === 'tags' ? '#24d36fff' : 'grey'} onPress={() => props.setFieldState('tags')} />
                 </View>
                 <Text style={{textAlign: 'center'}}>Sort by:</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Button title="name" color={props.sortState.field === 'name' ? '#00B100' : 'grey'} onPress={() => props.setSortState({ ...props.sortState, field: 'name' })} />
-                    <Button title="location" color={props.sortState.field === 'location' ? '#00B100' : 'grey'} onPress={() => props.setSortState({ ...props.sortState, field: 'location' })} />
+                    <Button title="name" color={props.sortState.field === 'name' ? '#24d36fff' : 'grey'} onPress={() => props.setSortState({ ...props.sortState, field: 'name' })} />
+                    <Button title="location" color={props.sortState.field === 'location' ? '#24d36fff' : 'grey'} onPress={() => props.setSortState({ ...props.sortState, field: 'location' })} />
                 </View>
                 <Text style={{textAlign: 'center'}}>Sort by:</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Button title="ascending" color={props.sortState.order === 'ascending' ? '#00B100' : 'grey'} onPress={() => props.setSortState({ ...props.sortState, order: 'ascending' })} />
-                    <Button title="descending" color={props.sortState.order === 'descending' ? '#00B100' : 'grey'} onPress={() => props.setSortState({ ...props.sortState, order: 'descending' })} />
+                    <Button title="ascending" color={props.sortState.order === 'ascending' ? '#24d36fff' : 'grey'} onPress={() => props.setSortState({ ...props.sortState, order: 'ascending' })} />
+                    <Button title="descending" color={props.sortState.order === 'descending' ? '#24d36fff' : 'grey'} onPress={() => props.setSortState({ ...props.sortState, order: 'descending' })} />
                 </View>
                 <Text style={{textAlign: 'center'}}>Search Term:</Text>
                 <TextInput

@@ -38,13 +38,13 @@ export default function FavoriteHikes(props) {
                         </View>
                     )
                 }) : 
-                <View style={ styles.hikeContainer } key={1}>
+                <View style={ styles.hikelessContainer } key={1}>
                     <Text style={{ textAlign: 'center', marginTop: 18 }}>
                         No favorites yet.
                     </Text>
                 </View>
             :
-            <View style={ styles.hikeContainer } key={1}>
+            <View style={ styles.hikelessContainer } key={1}>
                 <Text style={{ textAlign: 'center', marginTop: 18 }}>
                     Favorite hikes can only be viewed by friends.
                 </Text>

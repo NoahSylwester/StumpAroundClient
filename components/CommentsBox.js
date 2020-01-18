@@ -29,7 +29,7 @@ export default function CommentsBox(props) {
                 Comments
             </Text>
             <Button
-                color='#00B100'
+                color='#24d36fff'
                 title="New Comment"
                 onPress={props.hike.comments === 'denied' ? () => alert('Only friends can add comments.') : () => props.setModalVisibleState(true)}
                 style={styles.commentButton}

@@ -34,7 +34,7 @@ export default function FavoriteStumpsActionable(props) {
                             </View>
                         </View>
                     )
-                }) : <View style={ styles.hikeContainer } key={1}>
+                }) : <View style={ styles.hikelessContainer } key={1}>
                         <Text style={{ textAlign: 'center', marginTop: 18 }}>
                             No favorites yet.
                         </Text>

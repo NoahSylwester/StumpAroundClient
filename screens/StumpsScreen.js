@@ -122,13 +122,13 @@ export default function StumpsScreen(props) {
                     title="Search Stumps"
                     onPress={() => setModalVisibleState(true)}
                     style={styles.stumpsButton}
-                    color='#00B100'
+                    color='#24d36fff'
                   />
                   <Button 
                     title="Submit a Stump"
                     onPress={() => props.navigation.navigate('Submit')}
                     style={styles.stumpsButton}
-                    color='#00B100'
+                    color='#24d36fff'
                   />
                   <ScrollView
                       keyboardShouldPersistTaps='never'

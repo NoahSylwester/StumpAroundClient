@@ -35,13 +35,13 @@ export default function FavoriteStumps(props) {
                         </View>
                     )
                 }) : 
-                <View style={ styles.hikeContainer } key={'123aasdd'}>
+                <View style={ styles.hikelessContainer } key={'123aasdd'}>
                     <Text style={{ textAlign: 'center', marginTop: 18 }}>
                         No favorites yet.
                     </Text>
                 </View>)
             :
-            <View style={ styles.hikeContainer } key={'123asdd'}>
+            <View style={ styles.hikelessContainer } key={'123asdd'}>
                 <Text style={{ textAlign: 'center', marginTop: 18 }}>
                     Favorite stumps can only be viewed by friends.
                 </Text>
