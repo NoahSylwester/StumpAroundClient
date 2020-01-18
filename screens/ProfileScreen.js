@@ -269,7 +269,7 @@ export default function ProfileScreen(props) {
           <Image source={{ uri: userState.photo }} style={styles.photo} />
           {/* <Button title="query" onPress={()=>console.log(userState)} /> */}
           <Button
-            color='#00B100'
+            color='#24d36fff'
             title="Change photo" 
             onPress={() => setCameraModalVisibleState(true)}
             style={styles.commentButton}
@@ -284,7 +284,7 @@ export default function ProfileScreen(props) {
             {userState.bio}
           </Text>
           <Button
-            color='#00B100'
+            color='#24d36fff'
             title="Edit bio" 
             onPress={() => setModalVisibleState(true)}
             style={styles.commentButton}
@@ -304,7 +304,7 @@ export default function ProfileScreen(props) {
           <FavoriteStumpsActionable action={favoriteStumpDELETE} userState={userState} navigation={props.navigation} />
           <CommentsBox isPastInitialRender={isPastInitialRender} hike={{...userState, comments: userState.profileComments || [] }} navigation={props.navigation} setModalVisibleState={setCommentsModalVisibleState} screen={{ type: 'profile', _id: userState._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
           <Button
-            color='#00B100'
+            color='#24d36fff'
             title="Logout" 
             onPress={async () => {
               await AsyncStorage.clear();

@@ -131,7 +131,7 @@ export default function HikesScreen(props) {
     
 
     return (
-                <View style={styles.container}>
+                <View style={styles.hikesPage}>
                     <HikesSearchModal randomGET={randomGET} modalVisibleState={modalVisibleState} setModalVisibleState={setModalVisibleState} searchTermState={searchTermState} setSearchTermState={setSearchTermState} fieldState={fieldState} setFieldState={setFieldState} sortState={sortState} setSortState={setSortState} hikesGET={hikesGET} />
                     <Text style={styles.hikesPageTitle}>
                           Hikes
@@ -140,7 +140,7 @@ export default function HikesScreen(props) {
                       title="Search Hikes"
                       onPress={() => setModalVisibleState(true)}
                       style={styles.stumpsButton}
-                      color='#00B100'
+                      color='#24d36fff'
                     />
                     <ScrollView
                         keyboardShouldPersistTaps='never'

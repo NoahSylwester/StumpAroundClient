@@ -74,7 +74,7 @@ export default function CommentBox(props) {
                 </TouchableOpacity>
             </View>
             <View style={styles.commentReplies}>
-                {expanded ? <Button title="Reply" color="#00B100" onPress={() => setDataAndOpenModal({ repliedTo: props.parent, [props.screen.type]: props.screen._id })} /> : <View />}
+                {expanded ? <Button title="Reply" color="#24d36fff" onPress={() => setDataAndOpenModal({ repliedTo: props.parent, [props.screen.type]: props.screen._id })} /> : <View />}
                 {expanded ? ( item.replies.length !== 0 ?
                     item.replies.slice().reverse().map((element, i) => {
                         return(
