@@ -4,4 +4,8 @@ StumpAround is a user-friendly mobile application for Pacific Northwest nature e
 
 **Noah Sylwester, Renée Petit, Fearghus Tyler and Misael Gaspar**
 
+Check out our landing page at
 https://stump-around.netlify.com/
+
+Or view the app in your browser or phone at
+https://expo.io/@noahsylwester/StumpAround
