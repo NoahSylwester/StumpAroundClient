@@ -161,7 +161,7 @@ export default function StumpScreen(props) {
                 <Text style={styles.hikeTitle}>
                     {stump.name}
                 </Text>
-                <Button color="#00B100" title="Add to favorites" onPress={() => {addStumpToFavorites(stump._id)}} />
+                <Button color='#24d36fff' title="Add to favorites" onPress={() => {addStumpToFavorites(stump._id)}} />
                 <View style={styles.friend}>
                       <View style={styles.friendHeader}>
                           <Image source={{ uri: stump.user.photo }} style={styles.friendPhoto} />
