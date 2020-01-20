@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     },
     profileContainer: {
+      // backgroundColor: "#001a13",
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
