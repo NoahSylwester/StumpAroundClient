@@ -45,7 +45,7 @@ export default function Map(props) {
         <TouchableOpacity onPress={() => setDisplay(true)}>
           <Text 
             style={styles.clickText}
-            color='#00B100'
+            color='#24d36fff'
           >
             See in Maps
           </Text>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   clickText: {
     fontSize: 20,
-    color: '#00B100'
+    color: '#24d36fff'
   },
   wrapper: {
     alignItems: 'center',
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   wrapperText: {
     fontSize: 20,
-    color: '#00B100',
+    color: '#24d36fff',
     marginBottom: 5,
   }
 });
