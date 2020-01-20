@@ -13,7 +13,7 @@ export default function Map(props) {
         <TouchableOpacity onPress={() => setDisplay(false)}>
           <Text 
             style={styles.wrapperText}
-            color='#00B100'
+            color='#24d36fff'
           >
             Hide Maps
           </Text>
