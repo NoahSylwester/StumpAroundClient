@@ -11,6 +11,13 @@ API repo: https://github.com/NoahSylwester/StumpAroundAPI
 
 Landing page: https://stump-around.netlify.com/
 
+### Technologies used
+
+- React Native
+- Express.js
+- Google Maps
+- Expo
+
 ### Credits
 
 - **Noah Sylwester, Renée Petit, Fearghus Tyler and Misael Gaspar**
