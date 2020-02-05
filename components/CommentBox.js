@@ -78,9 +78,7 @@ export default function CommentBox(props) {
                 {expanded ? ( item.replies.length !== 0 ?
                     item.replies.slice().reverse().map((element, i) => {
                         return(
-                            // <View>
                                 <CommentBox key={element._id} isPastInitialRender={props.isPastInitialRender} parent={element._id} item={element} commentGET={props.commentGET} navigation={props.navigation} screen={props.screen} replyData={props.replyData} setReplyData={props.setReplyData} setReplyModalVisibleState={props.setReplyModalVisibleState} replyModalVisibleState={props.replyModalVisibleState} />
-                            // </View>
                         )
                     })
                     :

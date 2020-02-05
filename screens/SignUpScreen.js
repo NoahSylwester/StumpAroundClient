@@ -67,7 +67,6 @@ export default function LoginScreen(props) {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: JSON.stringify({ name: username, email, password }),
             })
@@ -108,7 +107,6 @@ export default function LoginScreen(props) {
             <View
                 keyboardShouldPersistTaps='never'
                 style={styles.body}
-            // contentContainerStyle={styles.contentContainer}
             >
                 <View style={styles.formBox}>
                 <Image source={require('../assets/images/stump.png')} style={styles.logoSignUp} />
@@ -148,7 +146,6 @@ export default function LoginScreen(props) {
                         value={textState.confirm}
                     />
                     {signUpButton}
-                    {/* <Button title="Sign up" onPress={() => props.navigation.navigate("Login")} color="#00B100" /> */}
                 </View>
             </View>
         </ImageBackground>

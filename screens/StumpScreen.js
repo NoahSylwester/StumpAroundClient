@@ -77,8 +77,6 @@ export default function StumpScreen(props) {
       })
       .then((response) => response.json())
       .then((responseJson) => {
-          // setHike(responseJson);
-          // console.log('res2', responseJson);
           alert('Added to favorites');
           _retrieveKey();
         }
@@ -95,12 +93,10 @@ export default function StumpScreen(props) {
     const commentPOST = async (data) => {
       const userId = await AsyncStorage.getItem('id');
       const newData = { ...data, user: userId };
-      // console.log(newData);
       fetch(`https://stump-around.herokuapp.com/stumpComment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: JSON.stringify(newData),
         })
@@ -132,14 +128,12 @@ export default function StumpScreen(props) {
 
     const _updateStump = () => {
       isPastInitialRender.current = true;
-      // console.log('id', hike._id);
       fetch(`https://stump-around.herokuapp.com/stump/${stump._id}`, {
           method: 'GET',
         })
         .then((response) => response.json())
         .then((responseJson) => {
             setStump(responseJson);
-            // console.log('res1', responseJson);
           }
         )
         .catch((error) => {

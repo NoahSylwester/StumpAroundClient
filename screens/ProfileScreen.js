@@ -52,7 +52,6 @@ export default function ProfileScreen(props) {
       }
       else {
         setUsernameState(null);
-        // console.log('No async storage for "username"');
       }
     } catch (error) {
       // Error retrieving data
@@ -81,7 +80,6 @@ export default function ProfileScreen(props) {
       })
       .then((response) => response.json())
       .then((responseJson) => {
-        // console.log(responseJson);
         setUserState({
           ...responseJson,
         });
@@ -106,24 +104,6 @@ export default function ProfileScreen(props) {
     isPastInitialRender.current = true;
   }, [usernameState, props.navigation.state]);
 
-  // const photoPUT = async (data) => {
-  //   const token = await AsyncStorage.getItem('token');
-  //   fetch(`https://stump-around.herokuapp.com/photo`, {
-  //       method: 'PUT',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'x-access-token': token,
-  //         // 'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //       body: JSON.stringify(data),
-  //     })
-  //     .then((response) => response.json())
-  //     .then((responseJson) => console.log(responseJSON))
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-
   const bioPUT = async (data) => {
     const token = await AsyncStorage.getItem('token');
     console.log(props.navigation.state);
@@ -132,7 +112,6 @@ export default function ProfileScreen(props) {
         headers: {
           'Content-Type': 'application/json',
           'x-access-token': token,
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(data),
       })
@@ -146,12 +125,10 @@ export default function ProfileScreen(props) {
   const commentPOST = async (data) => {
     const userId = await AsyncStorage.getItem('id');
     const newData = { ...data, user: userId };
-    // console.log(newData);
     fetch(`https://stump-around.herokuapp.com/profileComment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(newData),
       })
@@ -265,9 +242,7 @@ export default function ProfileScreen(props) {
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.profileContainer}>
-          {/* <Image source={{ uri: "https://image.businessinsider.com/5a8c83d342e1cc57810ba9ee?width=1100&format=jpeg&auto=webp"}} style={styles.photo} /> */}
           <Image source={{ uri: userState.photo }} style={styles.photo} />
-          {/* <Button title="query" onPress={()=>console.log(userState)} /> */}
           <Button
             color='#24d36fff'
             title="Change photo" 

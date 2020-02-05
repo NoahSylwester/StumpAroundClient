@@ -38,26 +38,6 @@ export default function CommentsBox(props) {
             props.isPastInitialRender.current ? props.hike.comments.slice().reverse().map((element, i) => {
                 return (
                     <CommentBox isPastInitialRender={props.isPastInitialRender} parent={element._id} item={element} key={element._id} commentGET={commentGET} navigation={props.navigation} screen={props.screen} replyData={props.replyData} setReplyData={props.setReplyData} setReplyModalVisibleState={props.setReplyModalVisibleState} replyModalVisibleState={props.replyModalVisibleState} />
-                    // <View style={styles.comment} key={i}>
-                    //     <View style={styles.commentHeader}>
-                    //         <Image source={{ uri: element.user.photo }} style={styles.commentPhoto} />
-                    //         <View>
-                    //             <TouchableOpacity onPress={() => props.navigation.navigate('ClickedProfile', { user: element.user })}>
-                    //                 <Text style={styles.userLink}>
-                    //                     {element.user.name}
-                    //                 </Text>
-                    //             </TouchableOpacity>
-                    //             <Text style={styles.commentDate}>
-                    //                 {element.date_created}
-                    //             </Text>
-                    //         </View>
-                    //     </View>
-                    //     <TouchableOpacity onPress={commentGET} activeOpacity={1} style={styles.commentBody}>
-                    //         <Text>
-                    //             {element.content}
-                    //         </Text>
-                    //     </TouchableOpacity>
-                    // </View>
                 )
             }) : <View />
         :

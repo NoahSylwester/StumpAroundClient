@@ -68,12 +68,10 @@ export default function ClickedProfileScreen(props) {
   const commentPOST = async (data) => {
     const userId = await AsyncStorage.getItem('id');
     const newData = { ...data, user: userId };
-    // console.log(newData);
     fetch(`https://stump-around.herokuapp.com/profileComment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(newData),
       })
@@ -120,7 +118,6 @@ export default function ClickedProfileScreen(props) {
       <ReplyModal replyData={replyData} setReplyData={setReplyData} setModalVisibleState={setReplyModalVisibleState} modalVisibleState={replyModalVisibleState} setCommentState={setCommentState} commentState={commentState} replyPOST={replyPOST} _updateHike={_updateUser} hike={{...userState, comments: userState.profileComments }} />
       <ScrollView contentContainerStyle={styles.clickedProfileContentContainer}>
         <View style={styles.profileContainer}>
-          {/* <Image source={{ uri: "https://image.businessinsider.com/5a8c83d342e1cc57810ba9ee?width=1100&format=jpeg&auto=webp"}} style={styles.photo} /> */}
           <Image source={{ uri: userState.photo }} style={styles.photo} />
           <Text style={styles.username}>
             {userState.name}
