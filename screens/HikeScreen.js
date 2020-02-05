@@ -77,8 +77,6 @@ export default function HikeScreen(props) {
       })
       .then((response) => response.json())
       .then((responseJson) => {
-          // setHike(responseJson);
-          // console.log('res2', responseJson);
           alert('Added to favorites');
           _retrieveKey();
         }
@@ -95,12 +93,10 @@ export default function HikeScreen(props) {
     const commentPOST = async (data) => {
       const userId = await AsyncStorage.getItem('id');
       const newData = { ...data, user: userId };
-      // console.log(newData);
       fetch(`https://stump-around.herokuapp.com/comment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: JSON.stringify(newData),
         })
@@ -128,14 +124,12 @@ export default function HikeScreen(props) {
 
     const _updateHike = () => {
       isPastInitialRender.current = true;
-      // console.log('id', hike._id);
       fetch(`https://stump-around.herokuapp.com/hike/${hike._id}`, {
           method: 'GET',
         })
         .then((response) => response.json())
         .then((responseJson) => {
             setHike(responseJson);
-            // console.log('res1', responseJson);
           }
         )
         .catch((error) => {
@@ -153,7 +147,6 @@ export default function HikeScreen(props) {
             style={styles.hikePageBody}
             contentContainerStyle={styles.hikePageContentContainer}
             >
-                {/* eventually source will be props.photo */}
                 <Image source={{ uri: hike.photo }} style={{width: '100%', height: 300, resizeMode: 'cover'}} />
                 <Text style={styles.hikeTitle}>
                     {hike.name}

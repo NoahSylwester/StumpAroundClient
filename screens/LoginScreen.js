@@ -39,7 +39,6 @@ export default function LoginScreen(props) {
           Sign in
         </Text>
       </TouchableOpacity>
-      // <Button title="Sign in" onPress={() => signIn(textState.username)} color="#00B100" />
   );
 
     const _storeData = async (username, email, token, id) => {
@@ -69,7 +68,6 @@ export default function LoginScreen(props) {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify({ email, password }),
         })
@@ -103,7 +101,6 @@ export default function LoginScreen(props) {
             <View
             keyboardShouldPersistTaps='never'
             style={styles.loginPageBody}
-            // contentContainerStyle={styles.contentContainer}
             >
               <View style={styles.formBox}>
                 <Image source={require('../assets/images/stump.png')} style={styles.logo} />
@@ -125,7 +122,6 @@ export default function LoginScreen(props) {
                     value={textState.password}
                 />
                 {signInButton}
-                {/* <Button title="Sign in" onPress={() => signIn(textState.username)} color="#00B100" /> */}
                 <Text style={styles.bottomText}>
                     Don't have an account? {signUpButton}
                 </Text>

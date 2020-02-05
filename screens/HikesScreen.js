@@ -146,9 +146,6 @@ export default function HikesScreen(props) {
                         keyboardShouldPersistTaps='never'
                         style={styles.hikePageBody}
                         contentContainerStyle={styles.hikesPageContentContainer}>
-                        {/* <Text style={styles.pageTitle}>
-                          Hikes
-                        </Text> */}
                         {dataState.hikes.map((hike, i) => (
                             <View style={styles.hikeContainer} key={hike._id + i}>
                                 <Image source={{uri: hike.photo}} style={{ width: '100%', height: 200 }} />
