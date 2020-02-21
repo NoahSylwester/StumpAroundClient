@@ -18,6 +18,7 @@ export default function CommentBox(props) {
     const [item, setItem] = useState(props.item);
     const [expanded, setExpanded] = useState(false);
 
+    // retrieve data for specific comment on click
     const expandGET = async () => {
         const response = await props.commentGET(props.item);
         // console.log(response);
@@ -25,14 +26,15 @@ export default function CommentBox(props) {
         setExpanded(!expanded);
     }
 
+    // refresh comment
     const _updateComment  = async () => {
         const response = await props.commentGET(props.item);
         setItem(response);
     }
 
+    // configure individual reply data for modal, open modal
     const setDataAndOpenModal = async (data) => {
         props.setReplyData(data)
-        // console.log(data);
         props.setReplyModalVisibleState(true);
     }
 

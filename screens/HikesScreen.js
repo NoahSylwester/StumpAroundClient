@@ -17,6 +17,11 @@ import HikesSearchModal from '../components/HikesSearchModal';
 import { MonoText } from '../components/StyledText';
 
 
+/* 
+This is the screen that renders the gallery of hikes.
+*/
+
+
 export default function HikesScreen(props) {
 
     // props to be passed in:
@@ -39,6 +44,8 @@ export default function HikesScreen(props) {
       order: 'ascending',
      });
 
+
+    // get the gallery of hikes, handle searching
     const hikesGET = async () => {
       const response = await fetch(`https://stump-around.herokuapp.com/hikes/${fieldState}/${searchTermState}`, {
         method: 'GET',
@@ -110,6 +117,8 @@ export default function HikesScreen(props) {
       });
     }
 
+
+    // get a random sample of 10 from hikes database
     const randomGET = () => {
       fetch('https://stump-around.herokuapp.com/hikes/random', {
         method: 'GET',

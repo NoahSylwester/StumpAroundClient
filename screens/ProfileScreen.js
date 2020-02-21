@@ -27,6 +27,13 @@ import BioModal from '../components/BioModal';
 import ReplyModal from '../components/ReplyModal';
 import CameraModal from '../components/CameraModal';
 
+
+/* 
+This is the is the page for the current user's profile. YOUR profile,
+with edit privileges.
+*/
+
+
 export default function ProfileScreen(props) {
 
   const [usernameState, setUsernameState] = useState('');
@@ -40,6 +47,7 @@ export default function ProfileScreen(props) {
   const [commentState, setCommentState] = useState('');
   const [cameraModalVisibleState, setCameraModalVisibleState] = useState(false);
 
+  // take info fom async storage
   const _retrieveId = async () => {
     try {
       const username = await AsyncStorage.getItem('username');
@@ -59,6 +67,7 @@ export default function ProfileScreen(props) {
     }
   };
 
+  // store info in async storage
   const _storeData = async (id) => {
     try {
       await AsyncStorage.setItem('id', id);
@@ -69,6 +78,7 @@ export default function ProfileScreen(props) {
     }
   };
 
+  // refresh user
   const _updateUser = async () => {
     const token = await AsyncStorage.getItem('token');
     console.log('token', token)
@@ -93,17 +103,7 @@ export default function ProfileScreen(props) {
       });
   }
 
-  useEffect(() => {
-    _retrieveId();
-  }, []);
-
-  useEffect(() => {
-    if (isPastInitialRender.current === true) {
-      _updateUser();
-    }
-    isPastInitialRender.current = true;
-  }, [usernameState, props.navigation.state]);
-
+  // send request to update user bio
   const bioPUT = async (data) => {
     const token = await AsyncStorage.getItem('token');
     console.log(props.navigation.state);
@@ -122,6 +122,7 @@ export default function ProfileScreen(props) {
       });
   };
 
+  // add comment to profile
   const commentPOST = async (data) => {
     const userId = await AsyncStorage.getItem('id');
     const newData = { ...data, user: userId };
@@ -139,6 +140,7 @@ export default function ProfileScreen(props) {
       });
   };
 
+  // add reply to comment on profile
   const replyPOST = async (data) => {
     // data should have property content, repliedTo, stump||hike||profile
     // {content: '', repliedTo: props.parent, [props.screen.type]: props.screen._id}
@@ -154,6 +156,7 @@ export default function ProfileScreen(props) {
     return response.json();
   };
 
+  // accept pending friend request
   const acceptRequestPOST = async (_id) => {
     const token = await AsyncStorage.getItem('token');
     const response = await fetch(`https://stump-around.herokuapp.com/acceptRequest`, {
@@ -169,6 +172,7 @@ export default function ProfileScreen(props) {
     alert(`Accepted friend request from ${responseJson.name}!`);
   };
 
+  // ignore and delete friend request from pending
   const requestDELETE = async (_id) => {
     const token = await AsyncStorage.getItem('token');
     const response = await fetch(`https://stump-around.herokuapp.com/removeRequest`, {
@@ -184,6 +188,7 @@ export default function ProfileScreen(props) {
     alert(`Removed request.`);
   };
 
+  // delete friend from friends
   const friendDELETE = async (_id) => {
     const token = await AsyncStorage.getItem('token');
     const response = await fetch(`https://stump-around.herokuapp.com/removeFriend`, {
@@ -199,6 +204,7 @@ export default function ProfileScreen(props) {
     alert(`Removed ${responseJson.name} from friends list.`);
   };
 
+  // delete hike from favorites
   const favoriteHikeDELETE = async (hikeId) => {
     const token = await AsyncStorage.getItem('token');
     const response = await fetch(`https://stump-around.herokuapp.com/favorite`, {
@@ -216,6 +222,7 @@ export default function ProfileScreen(props) {
     alert(`Removed hike from favorites.`);
   };
 
+  // delete stump from favorites
   const favoriteStumpDELETE = async (stumpId) => {
     const token = await AsyncStorage.getItem('token');
     const response = await fetch(`https://stump-around.herokuapp.com/favorite/stump`, {
@@ -232,6 +239,17 @@ export default function ProfileScreen(props) {
     _updateUser();
     alert(`Removed stump from favorites.`);
   };
+
+  useEffect(() => {
+    _retrieveId();
+  }, []);
+
+  useEffect(() => {
+    if (isPastInitialRender.current === true) {
+      _updateUser();
+    }
+    isPastInitialRender.current = true;
+  }, [usernameState, props.navigation.state]);
 
   return (
     <View style={styles.container}>

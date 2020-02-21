@@ -21,6 +21,13 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Location from "expo-location";
 import Loading from '../components/Loading';
 
+
+/* 
+This screen renders components that handle information from users to create new
+stump entries.
+*/
+
+
 export default function StumpScreen(props) {
 
     const [image, setImage] = useState(null);
@@ -40,6 +47,7 @@ export default function StumpScreen(props) {
     const [locationPermission, setLocationPermission] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    // get location of user
     _getLocationAsync = async () => {
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== "granted") {
@@ -55,10 +63,6 @@ export default function StumpScreen(props) {
         });
       };
 
-    useEffect(() => {
-        _getLocationAsync()
-    }, []);
-
     const _maybeRenderUploadingOverlay = (
             <View
               style={[StyleSheet.absoluteFill, styles.maybeRenderUploading]}>
@@ -66,6 +70,7 @@ export default function StumpScreen(props) {
             </View>
           );
 
+    // user phone camera to take or select picture from camera roll
     const _takePhoto = async () => {
         const {
           status: cameraPerm
@@ -111,6 +116,10 @@ export default function StumpScreen(props) {
         }
       };
 
+
+    // handle stump creation click, validate info fields
+    // this is a bundled function of requests, to handle multiple requests more easily
+    // this way one request doesn't need to handle both json and an image file
     const stumpCreationRequest = async () => {
       setLoading(true);
         if (coordinates.latitude === null || coordinates.longitude === null) {
@@ -148,6 +157,7 @@ export default function StumpScreen(props) {
         }
     };
 
+    // post request for creating stump entry
     const stumpPOST = async () => {
       try {
       let apiUrl = 'http://stump-around.herokuapp.com/stump/';
@@ -176,6 +186,7 @@ export default function StumpScreen(props) {
         }
     }
 
+    // update stump with photo
     const stumpPhotoPUT = async (stumpId) => {
       let apiUrl = 'http://stump-around.herokuapp.com/stump/image/' + stumpId;
       
@@ -201,6 +212,10 @@ export default function StumpScreen(props) {
     const _renderImage = (
                 <Image source={{ uri: image }} style={styles.renderImage} />
           );
+
+    useEffect(() => {
+        _getLocationAsync()
+    }, []);
 
     return (
         <View style={styles.container} >

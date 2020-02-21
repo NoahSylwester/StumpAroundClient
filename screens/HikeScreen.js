@@ -20,6 +20,11 @@ import { NavigationActions } from 'react-navigation';
 import Map from '../components/Map';
 
 
+/* 
+This is the screen that renders individual hikes when clicked.
+*/
+
+
 export default function HikeScreen(props) {
 
     // props to be passed in:
@@ -38,6 +43,7 @@ export default function HikeScreen(props) {
     const isPastInitialRender = useRef(false);
     const [ProfileKey, setProfileKey] = useState('');
 
+    // extract profile key for updating user profile on favoriting hike
     useEffect(() => {
           console.log('***');
           console.log(ProfileKey);
@@ -65,6 +71,8 @@ export default function HikeScreen(props) {
       }
     };
 
+
+    // add hike to favorites array of user
     const addHikeToFavorites = async (hikeId) => {
       const token = await AsyncStorage.getItem('token');
       fetch(`https://stump-around.herokuapp.com/favorite`, {
@@ -88,8 +96,7 @@ export default function HikeScreen(props) {
     }
 
 
-    useEffect(() => {_updateHike();}, []);
-
+    // add comment entry to hike
     const commentPOST = async (data) => {
       const userId = await AsyncStorage.getItem('id');
       const newData = { ...data, user: userId };
@@ -107,6 +114,7 @@ export default function HikeScreen(props) {
         });
     };
 
+    // add reply entry to comment on hike
     const replyPOST = async (data) => {
       // data should have property content, repliedTo, stump||hike||profile
       // {content: '', repliedTo: props.parent, [props.screen.type]: props.screen._id}
@@ -122,6 +130,7 @@ export default function HikeScreen(props) {
       return response.json();
   };
 
+    // refresh hike
     const _updateHike = () => {
       isPastInitialRender.current = true;
       fetch(`https://stump-around.herokuapp.com/hike/${hike._id}`, {
@@ -136,6 +145,8 @@ export default function HikeScreen(props) {
           console.error(error);
         });
     }
+
+    useEffect(() => {_updateHike();}, []);
 
     return (
         <View style={styles.container}>

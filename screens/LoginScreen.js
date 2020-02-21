@@ -17,6 +17,12 @@ import Loading from '../components/Loading';
 import styles from '../constants/AuthStyles';
 
 
+/* 
+This is the login screen for accepting user credentials.
+Separate from the SignUpScreen.js, which handles new user data.
+*/
+
+
 export default function LoginScreen(props) {
 
     const [textState, setTextState] = useState({
@@ -27,12 +33,15 @@ export default function LoginScreen(props) {
 
     const [loading, setLoading] = useState(false);
 
+
+    // mini component for rendering signup button
     const signUpButton = (
         <Text onPress={() => props.navigation.navigate("SignUp")} style={{ color: '#24d36fff', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
             Sign up
         </Text>
     );
 
+    // mini component for rendering signin button
     const signInButton = (
       <TouchableOpacity onPress={() => signIn()}>
         <Text style={{ padding: 10, fontSize: 18, color: '#24d36fff', textShadowColor: 'black', textShadowRadius: 8, textShadowOffset: { width: 0, height: 0 } }}>
@@ -53,6 +62,7 @@ export default function LoginScreen(props) {
       }
     };
 
+    // handle signIn click
     const signIn = () => {
       setLoading(true);
       let username = textState.username;
