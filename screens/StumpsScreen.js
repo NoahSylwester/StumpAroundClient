@@ -17,6 +17,11 @@ import StumpsSearchModal from '../components/StumpsSearchModal';
 import { MonoText } from '../components/StyledText';
 
 
+/* 
+The screen that displays all stumps
+*/
+
+
 export default function StumpsScreen(props) {
 
 
@@ -31,6 +36,7 @@ export default function StumpsScreen(props) {
         order: 'ascending',
       });
 
+      // retrieve stumps from database, handle searches
       const stumpsGET = async () => {
         const response = await fetch(`https://stump-around.herokuapp.com/stumps/${fieldState}/${searchTermState}`, {
           method: 'GET',
@@ -92,6 +98,7 @@ export default function StumpsScreen(props) {
         });
       }
 
+    //retrieve random sample of stumps from database
     const randomGET = () => {
       fetch('https://stump-around.herokuapp.com/stumps/random', {
         method: 'GET',

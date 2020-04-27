@@ -20,6 +20,11 @@ import { NavigationActions } from 'react-navigation';
 import Map from '../components/Map';
 
 
+/* 
+A screen for rendering all data from a single stump
+*/
+
+
 export default function StumpScreen(props) {
 
     // props to be passed in:
@@ -38,17 +43,7 @@ export default function StumpScreen(props) {
     const isPastInitialRender = useRef(false);
     const [ProfileKey, setProfileKey] = useState('');
 
-    useEffect(() => {
-          console.log('***');
-          console.log(ProfileKey);
-          console.log('***');
-          const setParamsAction = NavigationActions.setParams({
-            params: { value: Math.random() },
-            key: ProfileKey,
-          });
-          props.navigation.dispatch(setParamsAction);
-    }, [ProfileKey])
-
+    // take profile key from asyn storage
     const _retrieveKey = async () => {
       try {
         const key = await AsyncStorage.getItem('ProfileKey');
@@ -65,6 +60,7 @@ export default function StumpScreen(props) {
       }
     };
 
+    // add stump to user favorites
     const addStumpToFavorites = async (stumpId) => {
       const token = await AsyncStorage.getItem('token');
       fetch(`https://stump-around.herokuapp.com/favorite/stump`, {
@@ -88,8 +84,7 @@ export default function StumpScreen(props) {
     }
 
 
-    useEffect(() => {_updateStump();}, []);
-
+    // add comment to stump page
     const commentPOST = async (data) => {
       const userId = await AsyncStorage.getItem('id');
       const newData = { ...data, user: userId };
@@ -111,6 +106,8 @@ export default function StumpScreen(props) {
         });
     };
 
+
+    // add reply to comment of stump
     const replyPOST = async (data) => {
       // data should have property content, repliedTo, stump||hike||profile
       // {content: '', repliedTo: props.parent, [props.screen.type]: props.screen._id}
@@ -126,6 +123,7 @@ export default function StumpScreen(props) {
       return response.json();
   };
 
+    // refresh stump
     const _updateStump = () => {
       isPastInitialRender.current = true;
       fetch(`https://stump-around.herokuapp.com/stump/${stump._id}`, {
@@ -140,6 +138,19 @@ export default function StumpScreen(props) {
           console.error(error);
         });
     }
+
+    useEffect(() => {
+      console.log('***');
+      console.log(ProfileKey);
+      console.log('***');
+      const setParamsAction = NavigationActions.setParams({
+        params: { value: Math.random() },
+        key: ProfileKey,
+      });
+      props.navigation.dispatch(setParamsAction);
+    }, [ProfileKey])
+
+    useEffect(() => {_updateStump();}, []);
 
     return (
         <View style={styles.container}>

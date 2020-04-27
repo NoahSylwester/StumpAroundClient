@@ -17,6 +17,7 @@ import styles from '../constants/MainStyles';
 
 export default function BioModal(props) {
 
+    // send post request to create post
     const post = () => {
       props.commentPOST({ content: props.commentState, hike: props.hike._id })
       .then(() => props._updateHike());

@@ -17,6 +17,7 @@ import styles from '../constants/MainStyles';
 
 export default function HikesSearchModal(props) {
   
+  // handle search submit
     const sendSearch = async () => {
       const noSearchTermGiven = async () => {
         alert('Please enter a search term.');

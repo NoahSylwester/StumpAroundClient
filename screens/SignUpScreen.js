@@ -17,6 +17,12 @@ import Loading from '../components/Loading';
 import { MonoText } from '../components/StyledText';
 import styles from '../constants/AuthStyles';
 
+
+/* 
+This page accepts and sends data from new users to create new profiles.
+*/
+
+
 export default function LoginScreen(props) {
 
     const [textState, setTextState] = useState({
@@ -34,6 +40,8 @@ export default function LoginScreen(props) {
         confirmMatch: true,
     })
 
+
+    // handle signUp click, validate info fields
     const signUp = async () => {
         setLoading(true);
         const { username, email, password, confirm } = textState;

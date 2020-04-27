@@ -16,13 +16,14 @@ import CommentBox from './CommentBox';
 
 export default function CommentsBox(props) {
 
+    // retrieve data for individual comment
     const commentGET = async (comment) => {
         const response = await fetch(`https://stump-around.herokuapp.com/comment/${comment._id}`, {
             method: 'GET',
           })
         return response.json();
     }
-    // console.log(props.hike);
+
     return (
         <View style={styles.commentsContainer}>
             <Text style={styles.commentsTitle}>

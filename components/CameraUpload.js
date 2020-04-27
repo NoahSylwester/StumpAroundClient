@@ -56,46 +56,7 @@ export default class CameraUpload extends Component {
     }
   };
 
-  // _maybeRenderImage = () => {
-  //   let {
-  //     image
-  //   } = this.state;
-
-  //   if (!image) {
-  //     return;
-  //   }
-
-  //   return (
-  //     <View
-  //       style={styles.maybeRenderContainer}>
-  //       <View
-  //         style={styles.maybeRenderImageContainer}>
-  //         {/* <Image source={{ uri: image }} style={styles.maybeRenderImage} /> */}
-  //       </View>
-
-  //       {/* <Text
-  //         onPress={this._copyToClipboard}
-  //         onLongPress={this._share}
-  //         style={styles.maybeRenderImageText}>
-  //         {image}
-  //       </Text> */}
-  //     </View>
-  //   );
-  // };
-
-  // _share = () => {
-  //   Share.share({
-  //     message: this.state.image,
-  //     title: 'Check out this photo',
-  //     url: this.state.image,
-  //   });
-  // };
-
-  // _copyToClipboard = () => {
-  //   Clipboard.setString(this.state.image);
-  //   alert('Copied image URL to clipboard');
-  // };
-
+  // take photo or select image from roll
   _takePhoto = async () => {
     const {
       status: cameraPerm
@@ -141,6 +102,7 @@ export default class CameraUpload extends Component {
     }
   };
 
+  // upload image to db
  uploadImageAsync = async (pictureuri) => {
   let apiUrl = 'http://stump-around.herokuapp.com/profileImageUpload';
 
@@ -175,9 +137,6 @@ export default class CameraUpload extends Component {
         console.log(err)
 
     } )
-
-
-
 
   }
 

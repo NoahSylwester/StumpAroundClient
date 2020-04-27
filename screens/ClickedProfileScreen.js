@@ -24,6 +24,13 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 import FavoriteHikes from '../components/FavoriteHikes';
 import FavoriteStumps from '../components/FavoriteStumps';
 
+
+/* 
+This is the screen that renders OTHER users' profiles when clicked.
+For the profile of the current user, see 'ProfileScreen.js'
+*/
+
+
 export default function ClickedProfileScreen(props) {
 
   const [usernameState, setUsernameState] = useState('');
@@ -35,6 +42,8 @@ export default function ClickedProfileScreen(props) {
   const [replyModalVisibleState, setReplyModalVisibleState] = useState(false);
   const [replyData, setReplyData] = useState({});
 
+
+  // refreshes user state
   const _updateUser = async () => {
     const token = await AsyncStorage.getItem('token');
     fetch(`https://stump-around.herokuapp.com/user/${userState._id}`, {
@@ -58,13 +67,7 @@ export default function ClickedProfileScreen(props) {
   }
 
 
-  useEffect(() => {
-    if (isPastInitialRender.current !== true) {
-      _updateUser();
-    }
-    isPastInitialRender.current = true;
-  }, [userState]);
-
+  // Creates a new post on profile. Separate from creating a reply. See below.
   const commentPOST = async (data) => {
     const userId = await AsyncStorage.getItem('id');
     const newData = { ...data, user: userId };
@@ -82,6 +85,8 @@ export default function ClickedProfileScreen(props) {
       });
   };
 
+
+  // Creates a new reply to a post on profile.
   const replyPOST = async (data) => {
     // data should have property content, repliedTo, stump||hike||profile
     // {content: '', repliedTo: props.parent, [props.screen.type]: props.screen._id}
@@ -97,6 +102,8 @@ export default function ClickedProfileScreen(props) {
     return response.json();
   };
 
+
+  // sends a friend request to clicked user
   const sendRequestPOST = async (_id) => {
 
     const token = await AsyncStorage.getItem('token');
@@ -111,6 +118,14 @@ export default function ClickedProfileScreen(props) {
     const responseJson = await response.json();
     alert(`Sent friend request to ${responseJson.name}!`);
   }
+
+  // fill user data after initial render
+  useEffect(() => {
+    if (isPastInitialRender.current !== true) {
+      _updateUser();
+    }
+    isPastInitialRender.current = true;
+  }, [userState]);
 
   return (
     <View style={styles.container}>
