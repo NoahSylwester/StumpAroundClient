@@ -81,7 +81,6 @@ export default function ProfileScreen(props) {
   // refresh user
   const _updateUser = async () => {
     const token = await AsyncStorage.getItem('token');
-    console.log('token', token)
     fetch(`https://stump-around.herokuapp.com/user/secure`, {
         method: 'POST',
         headers: {
@@ -106,7 +105,6 @@ export default function ProfileScreen(props) {
   // send request to update user bio
   const bioPUT = async (data) => {
     const token = await AsyncStorage.getItem('token');
-    console.log(props.navigation.state);
     fetch(`https://stump-around.herokuapp.com/bio`, {
         method: 'PUT',
         headers: {
@@ -216,8 +214,6 @@ export default function ProfileScreen(props) {
             body: JSON.stringify({ hikeId }),
         });
     const responseJson = await response.json();
-    console.log(response);
-    console.log(responseJson);
     _updateUser();
     alert(`Removed hike from favorites.`);
   };
@@ -234,8 +230,6 @@ export default function ProfileScreen(props) {
             body: JSON.stringify({ stumpId }),
         });
     const responseJson = await response.json();
-    console.log(response);
-    console.log(responseJson);
     _updateUser();
     alert(`Removed stump from favorites.`);
   };

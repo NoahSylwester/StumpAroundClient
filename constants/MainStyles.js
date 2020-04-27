@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
         paddingTop: 230,
     },
     appTitle: {
-    fontSize: 30,
-    textAlign: 'center',
+      fontSize: 30,
+      textAlign: 'center',
     },
     profileContainer: {
       // backgroundColor: "#001a13",
