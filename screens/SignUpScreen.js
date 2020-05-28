@@ -45,14 +45,13 @@ export default function LoginScreen(props) {
     const signUp = async () => {
         setLoading(true);
         const { username, email, password, confirm } = textState;
-        console.log(email.match(/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/g))
         if (username === '' || email === '' || password === '') {
             Alert.alert('Error', 'All fields must be filled.',
             [
                 {text: 'Ok', onPress: () => setLoading(false)},
             ]);
             setValidateState({ ...validateState, allFields: false, })
-            return;
+            return setLoading(false);
         }
         else if (email.match(/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/g) === null) {
             Alert.alert('Error', 'Please enter a valid email.',
@@ -60,7 +59,7 @@ export default function LoginScreen(props) {
                 {text: 'Ok', onPress: () => setLoading(false)},
             ]);
             setValidateState({ ...validateState, validEmail: false, })
-            return;
+            return setLoading(false);
         }
         else if (password !== confirm) {
             Alert.alert('Error', 'Passwords must match!',
@@ -68,7 +67,7 @@ export default function LoginScreen(props) {
                 {text: 'Ok', onPress: () => setLoading(false)},
             ]);
             setValidateState({ ...validateState, confirmMatch: false, })
-            return;
+            return setLoading(false);
         }
         else {
             fetch(`http://stump-around.herokuapp.com/api/register`, {
@@ -80,7 +79,7 @@ export default function LoginScreen(props) {
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
+                setLoading(false);
                 Alert.alert('Success', 'Account created successfully!',
                 [
                     {text: 'Ok', onPress: () => {
@@ -92,7 +91,7 @@ export default function LoginScreen(props) {
                 }
             )
             .catch((error) => {
-                console.error(error);
+                setLoading(false)
                 Alert.alert('Error', 'Add failed. Try again later.',
                 [
                     {text: 'Ok', onPress: () => setLoading(false)},
