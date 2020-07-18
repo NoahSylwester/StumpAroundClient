@@ -89,6 +89,7 @@ export default function ProfileScreen(props) {
       })
       .then((response) => response.json())
       .then((responseJson) => {
+        console.log('responseJson0')
         setUserState({
           ...responseJson,
         });
@@ -132,7 +133,7 @@ export default function ProfileScreen(props) {
         body: JSON.stringify(newData),
       })
       .then((response) => response.json())
-      .then((responseJson) => console.log('responseJson'))
+      .then((responseJson) => console.log('responseJson1'))
       .catch((error) => {
         console.error(error);
       });
