@@ -148,7 +148,7 @@ export default function HikeScreen(props) {
 
     useEffect(() => {_updateHike();}, []);
 
-    return (
+    return ( !hike ? <View key={i}/> :
         <View style={styles.container}>
           <CommentModal setModalVisibleState={setModalVisibleState} modalVisibleState={modalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateHike} hike={hike} />
           <ReplyModal replyData={replyData} setReplyData={setReplyData} setModalVisibleState={setReplyModalVisibleState} modalVisibleState={replyModalVisibleState} setCommentState={setCommentState} commentState={commentState} replyPOST={replyPOST} _updateHike={_updateHike} hike={hike} />
@@ -158,19 +158,19 @@ export default function HikeScreen(props) {
             style={styles.hikePageBody}
             contentContainerStyle={styles.hikePageContentContainer}
             >
-                <Image source={{ uri: hike.photo }} style={{width: '100%', height: 300, resizeMode: 'cover'}} />
+                <Image source={{ uri: hike && hike.photo }} style={{width: '100%', height: 300, resizeMode: 'cover'}} />
                 <Text style={styles.hikeTitle}>
-                    {hike.name}
+                    {hike && hike.name}
                 </Text>
                 <Text style={styles.hikeLength}>
-                    Length: {hike.length} mi
+                    Length: {hike && hike.length} mi
                 </Text>
-                <Button color="#24d36fff" title="Add to favorites" onPress={() => {addHikeToFavorites(hike._id)}} />
+                <Button color="#24d36fff" title="Add to favorites" onPress={() => {addHikeToFavorites(hike && hike._id)}} />
                 <Text style={styles.summary}>
-                    {hike.summary}
+                    {hike && hike.summary}
                 </Text>
-                <Map name={hike.name} summary={hike.summary} latitude={hike.latitude} longitude={hike.longitude} />
-                <CommentsBox isPastInitialRender={isPastInitialRender} hike={hike} navigation={props.navigation} setModalVisibleState={setModalVisibleState} screen={{ type: 'hike', _id: hike._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
+                <Map name={hike && hike.name} summary={hike && hike.summary} latitude={hike&& hike.latitude} longitude={hike && hike.longitude} />
+                <CommentsBox isPastInitialRender={isPastInitialRender} hike={hike} navigation={props.navigation} setModalVisibleState={setModalVisibleState} screen={{ type: 'hike', _id: hike && hike._id}} replyData={replyData} setReplyData={setReplyData} setReplyModalVisibleState={setReplyModalVisibleState} replyModalVisibleState={replyModalVisibleState} />
             </ScrollView>
         </View>
     );

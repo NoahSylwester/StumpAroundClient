@@ -152,7 +152,7 @@ export default function StumpScreen(props) {
 
     useEffect(() => {_updateStump();}, []);
 
-    return (
+    return ( !stump ? <View key={'stump'+i}/> :
         <View style={styles.container}>
           <CommentModal setModalVisibleState={setModalVisibleState} modalVisibleState={modalVisibleState} setCommentState={setCommentState} commentState={commentState} commentPOST={commentPOST} _updateHike={_updateStump} hike={stump} />
           <ReplyModal replyData={replyData} setReplyData={setReplyData} setModalVisibleState={setReplyModalVisibleState} modalVisibleState={replyModalVisibleState} setCommentState={setCommentState} commentState={commentState} replyPOST={replyPOST} _updateHike={_updateStump} hike={stump} />

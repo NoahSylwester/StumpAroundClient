@@ -15,12 +15,12 @@ import styles from '../constants/MainStyles';
 
 export default function FavoriteHikesActionable(props) {
 
-    return (
+    return ( 
             <ScrollView style={styles.hikesContainer}>
                 {props.userState.hikes && props.userState.hikes.length !== 0 ? props.userState.hikes.slice().reverse().map((hike, i) => {
-                    return (
+                    return ( !hike ? <View key={i}/> :
                         <View style={styles.hikeContainer} key={hike._id}>
-                            <Image source={{ uri: hike.photo }} style={{ width: '100%', height: 200 }} />
+                            <Image source={{ uri: hike && hike.photo }} style={{ width: '100%', height: 200 }} />
                             <View style={styles.hikeTag}>
                                 <TouchableOpacity onPress={() => props.navigation.push('Hike', { hike: hike })}>
                                     <Text style={styles.title}>

@@ -121,18 +121,22 @@ export default function StumpScreen(props) {
     // this is a bundled function of requests, to handle multiple requests more easily
     // this way one request doesn't need to handle both json and an image file
     const stumpCreationRequest = async () => {
-      setLoading(true);
+        setLoading(true);
         if (coordinates.latitude === null || coordinates.longitude === null) {
-            return alert('Please enable location permissions to submit stumps.');
+          setLoading(true);
+          return alert('Please enable location permissions to submit stumps.');
         }
         if (textState.name === '') {
-            return alert('Please enter a name for your stump.');
+          setLoading(true)
+          return alert('Please enter a name for your stump.');
         }
         if (textState.summary === '') {
-            return alert('Please enter a summary for your stump.');
+          setLoading(true)
+          return alert('Please enter a summary for your stump.');
         }
         if (image === null) {
-            return alert('Please upload a picture for your stump.');
+          setLoading(true)
+          return alert('Please upload a picture for your stump.');
         }
         const stumpId = await stumpPOST();
         const response = await stumpPhotoPUT(stumpId);
@@ -281,10 +285,7 @@ export default function StumpScreen(props) {
                         color='#24d36fff'
                         title="Add tag"
                         onPress={() => {
-                            if (textState.tag === '') {
-                              return;
-                            }
-                            else if (textState.tag.length < 3) {
+                            if (textState.tag.length < 3) {
                               alert('Tag must be between three and twenty-five characters.');
                             }
                             else {

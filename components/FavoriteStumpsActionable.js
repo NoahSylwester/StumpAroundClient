@@ -18,7 +18,7 @@ export default function FavoriteStumpsActionable(props) {
     return (
             <ScrollView style={styles.hikesContainer}>
                 {props.userState.stumps && props.userState.stumps.length !== 0 ? props.userState.stumps.slice().reverse().map((stump, i) => {
-                    return (
+                    return ( !stump ? <View key={'stump'+i}/> :
                         <View style={styles.hikeContainer} key={stump._id}>
                             <Image source={{ uri: stump.photo }} style={{ width: '100%', height: 200 }} />
                             <View style={styles.hikeTag}>

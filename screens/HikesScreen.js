@@ -155,9 +155,9 @@ export default function HikesScreen(props) {
                         keyboardShouldPersistTaps='never'
                         style={styles.hikePageBody}
                         contentContainerStyle={styles.hikesPageContentContainer}>
-                        {dataState.hikes.map((hike, i) => (
+                        {dataState.hikes.map((hike, i) => ( !hike ? <View key={i}/> :
                             <View style={styles.hikeContainer} key={hike._id + i}>
-                                <Image source={{uri: hike.photo}} style={{ width: '100%', height: 200 }} />
+                                <Image source={{uri: hike && hike.photo}} style={{ width: '100%', height: 200 }} />
                                 <View style={styles.hikeTag}>
                                   <TouchableOpacity onPress={() => props.navigation.push('Hike', { hike: hike })}>
                                     <Text style={styles.title}>

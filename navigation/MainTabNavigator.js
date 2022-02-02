@@ -171,9 +171,9 @@ const tabNavigator = createBottomTabNavigator({
   // CameraStack,
 }, { tabBarOptions: { 
     activeTintColor: '#24d36fff',
-    // style: {
-    //   backgroundColor: '#001a13',
-    // },
+    style: {
+      paddingBottom: 'env(safe-area-inset-bottom)'
+    },
     // activeBackgroundColor: '#001a13',
     // inactiveBackgroundColor: '#001a13',
       } });

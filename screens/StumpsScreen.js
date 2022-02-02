@@ -144,7 +144,7 @@ export default function StumpsScreen(props) {
                       {/* <Text style={styles.pageTitle}>
                         Stumps
                       </Text> */}
-                      {dataState.stumps.map((stump, i) => (
+                      {dataState.stumps.map((stump, i) => ( !stump ? <View key={'stump'+i}/> :
                           <View style={styles.hikeContainer} key={stump._id + i}>
                               <Image source={{uri: stump.photo}} style={{ width: '100%', height: 200 }} />
                               <View style={styles.hikeTag}>
