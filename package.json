@@ -30,7 +30,7 @@
     "expo-location": "~14.0.1",
     "expo-permissions": "~13.1.0",
     "expo-web-browser": "~10.1.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "multer": "^1.4.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
